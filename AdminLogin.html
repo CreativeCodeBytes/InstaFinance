@@ -58,12 +58,17 @@
             padding: 12px;
             font-size: 18px;
             border-radius: 10px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #7a7b84 0%, #764ba2 100%);
             border: none;
-            color: white;
+            color: rgb(18, 18, 18);
             font-weight: bold;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
+        a {
+              color: rgb(234, 144, 144);
+            text-decoration: underline;
+}
         .btn-login:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -110,7 +115,7 @@
                 Remember me
             </label>
         </div>
-        <button type="submit" class="btn btn-login">Log In</button>
+        <button type="submit" class="btn btn-login"><a href="Dashboard.html"> Log In</button></a>
         <div id="errorMessage" class="error-message">Invalid email or password. Please try again.</div>
     </form>
 
