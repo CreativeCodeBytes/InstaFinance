@@ -17,12 +17,13 @@
       font-family: Arial, sans-serif;
       background-color: #f4f4f4;
       color: #333;
+      line-height: 1.6;
     }
 
     /* Header */
     header {
       background: #1a202c;
-      padding: 15px 40px;
+      padding: 15px 20px;
       position: fixed;
       width: 100%;
       top: 0;
@@ -40,7 +41,7 @@
     }
 
     header .logo img {
-      height: 100px;
+      height: 60px;
       margin-right: 15px;
     }
 
@@ -57,7 +58,7 @@
     header .nav-links a {
       color: #fff;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 16px;
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: color 0.3s ease;
@@ -70,15 +71,16 @@
     /* Loan Application Form */
     .loan-application {
       background: url('topview.jpg') no-repeat center center/cover;
-      padding: 150px 10px;
+      padding: 120px 20px 60px;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
+      min-height: 100vh;
     }
 
     .form-container {
       background-color: #fff;
-      padding: 40px;
+      padding: 30px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       width: 100%;
@@ -89,17 +91,18 @@
       text-align: center;
       margin-bottom: 30px;
       color: #004D40;
-      font-size: 40px;
+      font-size: 32px;
     }
 
     h2 {
-      margin-top: 40px;
-      margin-bottom: 40px;
+      margin-top: 30px;
+      margin-bottom: 20px;
       padding: 5px;
       color: #00796B;
       text-align: center;
       background-color: #f0f0f0;
       border: 2px solid #ccc;
+      font-size: 24px;
     }
 
     .form-group {
@@ -110,6 +113,7 @@
       display: block;
       margin-bottom: 5px;
       color: #333;
+      font-weight: bold;
     }
 
     .form-group input,
@@ -124,6 +128,7 @@
 
     textarea {
       height: 80px;
+      resize: vertical;
     }
 
     .error {
@@ -144,7 +149,7 @@
       background-color: #004D40;
       color: #fff;
       padding: 12px 20px;
-      font-size: 16px;
+      font-size: 18px;
       border: none;
       border-radius: 5px;
       width: 100%;
@@ -202,12 +207,11 @@
       color: #fff;
       text-align: center;
       padding: 40px 20px;
-      margin-top: 50px;
     }
 
     footer .company-details {
       margin-bottom: 20px;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
 
     footer .contact-info {
@@ -218,7 +222,8 @@
     footer .contact-info a {
       color: #fff;
       text-decoration: none;
-      margin: 0 10px;
+      margin: 5px 0;
+      display: inline-block;
       transition: color 0.3s ease;
     }
 
@@ -240,28 +245,54 @@
     footer .social-icons a:hover {
       color: #fbbf24;
     }
+
+    /* Responsive styles */
     @media (max-width: 768px) {
       header {
-        flex-wrap: wrap;
-        padding: 10px 20px;
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      header .logo {
+        margin-bottom: 10px;
       }
 
       header .logo img {
-        height: 80px;
+        height: 50px;
       }
 
       header .nav-links {
         flex-direction: column;
-        margin-top: 10px;
+        align-items: center;
       }
-      footer .contact-info a {
-        display: block;
+
+      header .nav-links li {
         margin: 5px 0;
       }
 
-      .services-container {
-        flex-direction: column;
-        align-items: center;
+      .loan-application {
+        padding: 100px 10px 40px;
+      }
+
+      .form-container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      .submit-btn {
+        font-size: 16px;
+      }
+
+      footer .contact-info a {
+        display: block;
+        margin: 10px 0;
       }
     }
   </style>
@@ -278,7 +309,6 @@
       <li><a href="AdminLogin.html">Admin Login</a></li>
     </ul>
   </header>
-
 
   <section class="loan-application">
     <div class="form-container">
@@ -320,7 +350,8 @@
         </div>
         <div class="form-group">
           <label for="state">State <span class="required-symbol">*</span></label>
-          <select id="state" name="state" class="dropdown">
+          <select id="state" name="state" class="dropdown" required>
+            <option value="" disabled selected>Select State</option>
             <option value="" disabled selected>Select State</option>
             <option value="andhra-pradesh">Andhra Pradesh</option>
             <option value="arunachal-pradesh">Arunachal Pradesh</option>
@@ -354,20 +385,8 @@
         </div>
         <div class="form-group">
           <label for="nationality">Nationality <span class="required-symbol">*</span></label>
-          <select id="nationality" name="nationality" class="dropdown">
+          <select id="nationality" name="nationality" class="dropdown" required>
             <option value="" disabled selected>Select Nationality</option>
-            <option value="afghan">Afghan</option>
-            <option value="algerian">Algerian</option>
-            <option value="american">American</option>
-            <option value="argentine">Argentine</option>
-            <option value="australian">Australian</option>
-            <option value="austrian">Austrian</option>
-            <option value="bangladeshi">Bangladeshi</option>
-            <option value="belgian">Belgian</option>
-            <option value="brazilian">Brazilian</option>
-            <option value="british">British</option>
-            <option value="canadian">Canadian</option>
-            <option value="chilean">Chilean</option>
             <option value="chinese">Chinese</option>
             <option value="colombian">Colombian</option>
             <option value="cuban">Cuban</option>
@@ -380,36 +399,6 @@
             <option value="indian">Indian</option>
             <option value="indonesian">Indonesian</option>
             <option value="iranian">Iranian</option>
-            <option value="iraqi">Iraqi</option>
-            <option value="irish">Irish</option>
-            <option value="israeli">Israeli</option>
-            <option value="italian">Italian</option>
-            <option value="japanese">Japanese</option>
-            <option value="kenyan">Kenyan</option>
-            <option value="kuwaiti">Kuwaiti</option>
-            <option value="lebanese">Lebanese</option>
-            <option value="malaysian">Malaysian</option>
-            <option value="mexican">Mexican</option>
-            <option value="moroccan">Moroccan</option>
-            <option value="nigerian">Nigerian</option>
-            <option value="pakistani">Pakistan</option>
-            <option value="peruvian">Peruvian</option>
-            <option value="philippine">Philippine</option>
-            <option value="polish">Polish</option>
-            <option value="portuguese">Portuguese</option>
-            <option value="qatari">Qatari</option>
-            <option value="romanian">Romanian</option>
-            <option value="saudi-arabian">Saudi Arabian</option>
-            <option value="south-african">South African</option>
-            <option value="spanish">Spanish</option>
-            <option value="sri-lankan">Sri Lankan</option>
-            <option value="swedish">Swedish</option>
-            <option value="swiss">Swiss</option>
-            <option value="turkish">Turkish</option>
-            <option value="ukrainian">Ukrainian</option>
-            <option value="american">American</option>
-            <option value="vietnamese">Vietnamese</option>
-            <option value="yemeni">Yemeni</option>
           </select>
         </div>
 
@@ -461,12 +450,12 @@
 
         <h2>Declaration and Consent</h2>
         <div class="form-group">
-            <p>I hereby declare that the information provided is accurate to the best of my knowledge.</p>
-            <p>I consent to the processing of my personal and financial information for loan evaluation purposes.</p>
-            <div class="checkbox-group">
-                <input type="checkbox" id="agree" name="agree" class="custom-checkbox" required>
-                <label for="agree" class="custom-label">I Agree</label>
-            </div>
+          <p>I hereby declare that the information provided is accurate to the best of my knowledge.</p>
+          <p>I consent to the processing of my personal and financial information for loan evaluation purposes.</p>
+          <div class="checkbox-group">
+            <input type="checkbox" id="agree" name="agree" required>
+            <label for="agree">I Agree</label>
+          </div>
         </div>
         <button type="submit" class="submit-btn">Submit Application</button>
       </form>
@@ -479,7 +468,7 @@
       <p>Smart solutions for all your loan management needs.</p>
     </div>
     <div class="contact-info">
-      <a href="mailto:info@cybromatech.com">info@cybromatech.com</a>
+      <a href="mailto:info@instafinance.com">info@instafinance.com</a>
       <a href="tel:+919876543210">+91 98765 43210</a>
     </div>
     <div class="social-icons">
@@ -565,4 +554,3 @@
   </script>
 </body>
 </html>
-
