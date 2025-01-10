@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loan Application Form</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Resetting some basic styles */
     * {
@@ -19,7 +18,6 @@
       background-color: #f4f4f4;
       color: #333;
       line-height: 1.6;
-      padding-top: 80px; /* Add padding to account for fixed header */
     }
 
     /* Header */
@@ -43,7 +41,7 @@
     }
 
     header .logo img {
-      height: 50px;
+      height: 60px;
       margin-right: 15px;
     }
 
@@ -73,11 +71,11 @@
     /* Loan Application Form */
     .loan-application {
       background: url('topview.jpg') no-repeat center center/cover;
-      padding: 40px 20px;
+      padding: 120px 20px 60px;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      min-height: calc(100vh - 80px); /* Adjust for header height */
+      min-height: 100vh;
     }
 
     .form-container {
@@ -87,7 +85,6 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       width: 100%;
       max-width: 800px;
-      margin-top: 20px; /* Add some top margin */
     }
 
     h1 {
@@ -251,14 +248,9 @@
 
     /* Responsive styles */
     @media (max-width: 768px) {
-      body {
-        padding-top: 120px; /* Increase padding for mobile to account for stacked header */
-      }
-
       header {
         flex-direction: column;
         padding: 10px;
-        height: auto;
       }
 
       header .logo {
@@ -266,7 +258,7 @@
       }
 
       header .logo img {
-        height: 40px;
+        height: 50px;
       }
 
       header .nav-links {
@@ -279,7 +271,7 @@
       }
 
       .loan-application {
-        padding: 20px 10px;
+        padding: 100px 10px 40px;
       }
 
       .form-container {
@@ -287,11 +279,11 @@
       }
 
       h1 {
-        font-size: 24px;
+        font-size: 28px;
       }
 
       h2 {
-        font-size: 20px;
+        font-size: 22px;
       }
 
       .submit-btn {
@@ -360,6 +352,7 @@
           <label for="state">State <span class="required-symbol">*</span></label>
           <select id="state" name="state" class="dropdown" required>
             <option value="" disabled selected>Select State</option>
+            <option value="" disabled selected>Select State</option>
             <option value="andhra-pradesh">Andhra Pradesh</option>
             <option value="arunachal-pradesh">Arunachal Pradesh</option>
             <option value="assam">Assam</option>
@@ -394,18 +387,6 @@
           <label for="nationality">Nationality <span class="required-symbol">*</span></label>
           <select id="nationality" name="nationality" class="dropdown" required>
             <option value="" disabled selected>Select Nationality</option>
-            <option value="afghan">Afghan</option>
-            <option value="algerian">Algerian</option>
-            <option value="american">American</option>
-            <option value="argentine">Argentine</option>
-            <option value="australian">Australian</option>
-            <option value="austrian">Austrian</option>
-            <option value="bangladeshi">Bangladeshi</option>
-            <option value="belgian">Belgian</option>
-            <option value="brazilian">Brazilian</option>
-            <option value="british">British</option>
-            <option value="canadian">Canadian</option>
-            <option value="chilean">Chilean</option>
             <option value="chinese">Chinese</option>
             <option value="colombian">Colombian</option>
             <option value="cuban">Cuban</option>
@@ -418,36 +399,6 @@
             <option value="indian">Indian</option>
             <option value="indonesian">Indonesian</option>
             <option value="iranian">Iranian</option>
-            <option value="iraqi">Iraqi</option>
-            <option value="irish">Irish</option>
-            <option value="israeli">Israeli</option>
-            <option value="italian">Italian</option>
-            <option value="japanese">Japanese</option>
-            <option value="kenyan">Kenyan</option>
-            <option value="kuwaiti">Kuwaiti</option>
-            <option value="lebanese">Lebanese</option>
-            <option value="malaysian">Malaysian</option>
-            <option value="mexican">Mexican</option>
-            <option value="moroccan">Moroccan</option>
-            <option value="nigerian">Nigerian</option>
-            <option value="pakistani">Pakistani</option>
-            <option value="peruvian">Peruvian</option>
-            <option value="philippine">Philippine</option>
-            <option value="polish">Polish</option>
-            <option value="portuguese">Portuguese</option>
-            <option value="qatari">Qatari</option>
-            <option value="romanian">Romanian</option>
-            <option value="russian">Russian</option>
-            <option value="saudi-arabian">Saudi Arabian</option>
-            <option value="south-african">South African</option>
-            <option value="spanish">Spanish</option>
-            <option value="sri-lankan">Sri Lankan</option>
-            <option value="swedish">Swedish</option>
-            <option value="swiss">Swiss</option>
-            <option value="turkish">Turkish</option>
-            <option value="ukrainian">Ukrainian</option>
-            <option value="vietnamese">Vietnamese</option>
-            <option value="yemeni">Yemeni</option>
           </select>
         </div>
 
@@ -603,4 +554,3 @@
   </script>
 </body>
 </html>
-
