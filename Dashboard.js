@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (this.dataset.section === 'download') {
                 showDownload();
             } else if (this.dataset.section === 'notification') {
-                showNotification();
+                showNotificationSection();
             }
         });
     });
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showDashboard();
         updateTable(document.querySelector('.btn-group .btn.active').dataset.period);
         updateCharts();
-        showNotification('Form Saved successfully!');
+        showNotification('Form saved successfully!', 'success');
     });
 
     function showDashboard() {
@@ -207,12 +207,12 @@ document.addEventListener('DOMContentLoaded', function() {
             position: fixed;
             top: 20px;
             right: 20px;
-            background-color: #4CAF50;
-            color: white;
             padding: 15px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
         `;
         
         if (type === 'success') {
@@ -224,8 +224,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         document.body.appendChild(notification);
+        
+        // Trigger reflow to ensure the transition works
+        notification.offsetHeight;
+        
+        // Make the notification visible
+        notification.style.opacity = '1';
+
         setTimeout(() => {
-            notification.remove();
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                notification.remove();
+            }, 300); // Wait for the fade-out transition to complete
         }, 3000);
     }
 
@@ -279,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
         penaltyRules.push(newRule);
         updatePenaltyRulesTable();
         penaltyRuleForm.reset();
-        showNotification('Penalty rule saved successfully!');
+        showNotification('Penalty rule saved successfully!', 'success');
     });
 
     function updatePenaltyRulesTable() {
@@ -330,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (confirm('Are you sure you want to delete this rule?')) {
             penaltyRules = penaltyRules.filter(r => r.id != ruleId);
             updatePenaltyRulesTable();
-            showNotification('Penalty rule deleted successfully!');
+            showNotification('Penalty rule deleted successfully!', 'success');
         }
     }
 
@@ -391,22 +401,53 @@ document.addEventListener('DOMContentLoaded', function() {
             updateEnquiriesTable();
             // Save updated loanApplications to localStorage
             localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
-            showNotification('Application deleted successfully!');
+            showNotification('Application deleted successfully!', 'success');
         }
     }
 
     // Download button functionality
     downloadBtn.addEventListener('click', function() {
-        const loanSanctionContent = document.getElementById('loanSanction').innerHTML;
-        const blob = new Blob([loanSanctionContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'loan_sanction_letter.html';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        // Create a new jsPDF instance
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Add company logo
+        const logoImg = new Image();
+        logoImg.src = 'Logo.png'; // Replace with the actual path to your logo
+        doc.addImage(logoImg, 'PNG', 10, 10, 30, 30);
+
+    // Add company name
+        doc.setFontSize(30);
+        doc.setFont("helvetica", "bold");
+        doc.text("Insta Finance", 70, 25);
+    
+        // Get the content of the loan sanction letter
+        const loanSanctionContent = document.getElementById('loanSanction');
+    
+        // Set font size and type
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "normal");
+    
+        // Split the content into lines that fit within the PDF width
+        const lines = doc.splitTextToSize(loanSanctionContent.innerText, 180);
+    
+        // Add content to PDF
+        let yPos = 110;
+    lines.forEach(term => {
+        const lines = doc.splitTextToSize(term, 180);
+        lines.forEach(line => {
+            if (yPos > 280) {
+                doc.addPage();
+                yPos = 20;
+            }
+            doc.text(line, 14, yPos);
+            yPos += 5;
+        });
+        yPos += 5;
+        });
+    
+        // Save the PDF
+        doc.save('loan_sanction_letter.pdf');
     });
 
     // WhatsApp button functionality
@@ -416,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(whatsappUrl, '_blank');
     });
 
-    function showNotification() {
+    function showNotificationSection() {
         dashboardContent.style.display = 'none';
         formContent.style.display = 'none';
         penaltyContent.style.display = 'none';
@@ -434,13 +475,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (employeeName && templateType && templateContent) {
             // Here you would typically send this data to a server
             // For this example, we'll just show a success message
-            alert('Notification  saved and sent successfully!');
+            showNotification('Notification saved and sent successfully!', 'success');
             notificationForm.reset();
         } else {
             showNotification('Please fill in all fields', 'error');
         }
     });
-
 
     // Initialize the dashboard view
     showDashboard();
