@@ -54,7 +54,12 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        <span class="navbar-<cut_off_point>
+label="Toggle navigation">
+                        <span class="navbar-
+</cut_off_point>
+
+toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
@@ -181,7 +186,7 @@
                             <form id="penaltyRuleForm">
                                 <div class="mb-3">
                                     <label for="custName" class="form-label">Customer Name</label>
-                                    <input type="text" class="form-control" id="cutName" name="custName" required>
+                                    <input type="text" class="form-control" id="custName" name="custName" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="ruleName" class="form-label">Rule Name</label>
@@ -251,10 +256,11 @@
                                     <th>Loan Tenure</th>
                                     <th>EMI Schedule</th>
                                     <th>Address</th>
-                                    <th>Nationality</th>
                                     <th>State</th>
+                                    <th>District</th>
                                     <th>PAN</th>
-                                    <th>Action</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="enquiriesTableBody">
@@ -305,14 +311,14 @@
                             </table>
                         </div>
                     </div>
-                        <div class="button-container">
-                            <button id="download" class="btn btn-primary">Download</button>
-                            <button id="whatsApp" class="btn btn-success">WhatsApp</button>
-                        </div>
+                    <div class="button-container">
+                        <button id="download" class="btn btn-primary">Download</button>
+                        <button id="whatsApp" class="btn btn-success">WhatsApp</button>
+                    </div>
                 </div>
-            <!-- Download Section End -->
+                <!-- Download Section End -->
 
-            <!-- Notification Section -->
+                <!-- Notification Section -->
                 <div id="notificationContent" style="display: none;">
                     <h2>Notification Management</h2>
 
