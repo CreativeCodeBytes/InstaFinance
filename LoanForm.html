@@ -121,6 +121,7 @@
       border-bottom: 2px solid #fbbf24;
     }
 
+
     /* Loan Application Section */
     .loan-application {
       padding: 20px;
@@ -525,7 +526,7 @@
   <header>
     <div class="logo">
       <a href="index.html">
-      <img src="Logo.png" alt="Logo"></a>
+        <img src="Logo.png" alt="Logo"></a>
     </div>
   
     <!-- Navbar Links -->
@@ -799,6 +800,15 @@
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const menuBar = document.getElementById('menu-bar');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuBar.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+});
     // Data for towns or Talukas of each districts
     const townsData = {
       "Ahmednagar": ["Ahmednagar", "Shirdi", "Sangamner", "Kopargaon", "Rahata", "Shrirampur", "Pathardi", "Rahuri", "Shrigonda", "Jamkhed", "Newasa", "Karjat", "Akole", "Parner", "Shevgaon", "Nagar", "Bhingar", "Miri", "Puntamba", "Kolhar", "Takali Dhokeshwar", "Wadgaon Gupta"],
