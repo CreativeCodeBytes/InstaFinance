@@ -101,7 +101,7 @@
         <div class="company-name">Insta Finance</div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="loginEmail"  placeholder="Email ID" required>
-            <label for="email" >Contact No</label>          
+            <label for="email" >Email ID</label>          
             <i class="fas fa-envelope input-icon"></i>
         </div>
         <div class="form-floating mb-3">
@@ -135,7 +135,7 @@ if (loginForm) {
 
         if (user) {
             localStorage.setItem('loggedInUser', JSON.stringify(user));
-            window.location.href = 'dashboard.html';
+            window.location.href = 'Dashboard.html';
         } else {
             alert('Invalid credentials!');
         }
