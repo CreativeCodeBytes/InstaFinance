@@ -346,6 +346,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateEnquiriesTable() {
         enquiriesTableBody.innerHTML = '';
+        let loanApplications = JSON.parse(localStorage.getItem('loanApplications')) || [];
+    
         loanApplications.forEach((application, index) => {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -356,17 +358,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td>${application.tenure} months</td>
                 <td>${application.emiSchedule}</td>
                 <td>${application.address}</td>
-                <td>${application.nationality}</td>
                 <td>${application.state}</td>
+                <td>${application.district}</td>
+                <td>${application.town}</td>
                 <td>${application.pan}</td>
-                <td><button class="btn btn-sm btn-primary view-application" data-index="${index}">View</button></td>
-                <td><button class="btn btn-sm btn-danger delete-application" data-index="${index}">Delete</button></td>
+                <td>${application.refName1}</td>
+                <td>${application.guarantorAadhar}</td>
+                <td>${application.refcontact1}</td>
+                <td>${application.guarantorAddress}</td>
+                <td>${application.guarantorPan}</td>
+                  
+                <td>
+                    <img src="${application.photo}" alt="Photo" width="50" height="50">
+                    <img src="${application.aadhar}" alt="Aadhar" width="50" height="50">
+                    <img src="${application.panCard}" alt="PAN" width="50" height="50">
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-primary view-application" data-index="${index}">View</button>
+                    <button class="btn btn-sm btn-danger delete-application" data-index="${index}">Delete</button>
+                </td>
             `;
             enquiriesTableBody.appendChild(row);
         });
-        
-
-        // Add event listeners to view buttons
+    
+        // Add event listeners to buttons
         document.querySelectorAll('.view-application').forEach(btn => {
             btn.addEventListener('click', viewApplication);
         });
@@ -374,7 +389,6 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.addEventListener('click', deleteApplication);
         });
     }
-
     function viewApplication(e) {
         const index = e.target.dataset.index;
         const application = loanApplications[index];

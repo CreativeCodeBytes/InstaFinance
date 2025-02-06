@@ -811,14 +811,78 @@ document.addEventListener('DOMContentLoaded', function() {
 });
     // Data for towns or Talukas of each districts
     const townsData = {
-      "Ahmednagar": ["Ahmednagar", "Shirdi", "Sangamner", "Kopargaon", "Rahata", "Shrirampur", "Pathardi", "Rahuri", "Shrigonda", "Jamkhed", "Newasa", "Karjat", "Akole", "Parner", "Shevgaon", "Nagar", "Bhingar", "Miri", "Puntamba", "Kolhar", "Takali Dhokeshwar", "Wadgaon Gupta"],
+          "Ahmednagar": ["Ahmednagar", "Shirdi", "Sangamner", "Kopargaon", "Rahata", "Shrirampur", "Pathardi", "Rahuri", "Shrigonda", "Jamkhed", "Newasa", "Karjat", "Akole", "Parner", "Shevgaon", "Nagar", "Bhingar", "Miri", "Puntamba", "Kolhar", "Takali Dhokeshwar", "Wadgaon Gupta"],
 
-      "Akola": ["Akola", "Akot", "Balapur", "Patur", "Murtijapur", "Telhara", "Barshitakli"],
+          "Akola": ["Akola","Akot","Balapur","Patur","Murtijapur","Telhara","Barshitakli"],
 
-      "Amravati": ["Amravati", "Achalpur", "Daryapur", "Warud", "Chandur", "Anjangaon", "Morshi", "Chikhaldara", "Nandgaon Khandeshwar", "Teosa"],
+  "Amravati": ["Amravati", "Achalpur", "Daryapur", "Warud", "Chandur", "Anjangaon", "Morshi", "Chikhaldara", "Nandgaon Khandeshwar", "Teosa"],
 
-      // ... (other districts and their talukas)
-    };
+  "SambhajiNagar": ["SambhajiNagar", "Paithan", "Khuldabad", "Vaijapur", "Kannad", "Sillod", "Phulambri", "Soegaon", "Gangapur"],
+
+  "Beed": ["Beed", "Majalgaon", "Georai", "Patoda", "Kaij", "Wadwani", "Dharur", "Ambajogai", "Ashti", "Parli"],
+
+  "Bhandara": ["Bhandara", "Tumsar", "Sakoli", "Lakhani", "Mohadi", "Pauni", "Lakhandur"],
+
+  "Buldhana": ["Buldhana", "Chikhli", "Khamgaon", "Shegaon", "Deulgaon Raja", "Mehkar", "Nandura", "Sangrampur", "Jalgaon Jamod", "Malkapur", "Motala"],
+
+  "Chandrapur": ["Chandrapur", "Ballarpur", "Warora", "Rajura", "Brahmapuri", "Mul", "Chimur", "Pombhurna", "Korpana", "Gondpipri", "Sawali"],
+
+  "Dhule": ["Dhule", "Sakri", "Shirpur", "Dondaicha", "Shindkheda"],
+
+  "Gadchiroli": ["Gadchiroli", "Aheri", "Armori", "Chamorshi", "Mulchera", "Etapalli", "Bhamragad", "Kurkheda", "Dhanora", "Sironcha"],
+
+  "Gondia": ["Gondia", "Tirora", "Amgaon", "Deori", "Sadak Arjuni", "Salekasa", "Goregaon"],
+
+  "Hingoli": ["Hingoli", "Sengaon", "Basmath", "Kalamnuri", "Aundha Nagnath"],
+
+  "Jalgaon": ["Jalgaon", "Bhusawal", "Chopda", "Erandol", "Yawal", "Amalner", "Parola","Bhadgaon","Pachora", "Dharangaon", "Jamner", "Raver", "Bodwad"],
+
+  "Jalna": ["Jalna", "Ambad", "Badnapur", "Partur", "Mantha", "Ghansawangi", "Bhokardan", "Jafrabad"],
+
+  "Kolhapur": ["Kolhapur", "Ichalkaranji", "Gadhinglaj", "Kagal", "Shahuwadi", "Panhala", "Hatkanangale", "Karvir", "Radhanagari", "Ajra", "Chandgad", "Bhudargad"],
+
+  "Latur": ["Latur", "Udgir", "Ausa", "Nilanga", "Renapur", "Chakur", "Deoni", "Jalkot"],
+
+  "Mumbai City": ["Marine Lines", "Cuffe Parade", "Malabar Hill", "Fort", "Byculla", "Girgaon", "Tardeo"],
+
+  "Mumbai Suburban": ["Borivali", "Andheri", "Bandra", "Goregaon", "Malad", "Kandivali", "Dahisar", "Kurla", "Ghatkopar", "Powai", "Mulund"],
+
+  "Nagpur": ["Nagpur", "Hingna", "Kamptee", "Katol", "Kalameshwar", "Umred", "Mouda", "Saoner", "Ramtek", "Bhiwapur", "Parseoni", "Nagpur Rural"],
+
+  "Nanded": ["Nanded", "Biloli", "Degloor", "Hadgaon", "Mudkhed", "Ardhapur", "Himayatnagar", "Kinwat", "Kandhar", "Mahur", "Mukhed", "Loha"],
+
+  "Nandurbar": ["Nandurbar", "Shahada", "Taloda", "Akkalkuwa", "Akrani (Dhadgaon)", "Navapur"],
+  "Nashik": ["Nashik", "Malegaon", "Manmad", "Sinnar", "Igatpuri", "Kalwan", "Niphad", "Chandwad", "Trimbak", "Yeola", "Dindori", "Baglan (Satana)"],
+
+  "Osmanabad": ["Osmanabad", "Tuljapur", "Omerga", "Paranda", "Kalamb", "Bhoom", "Washi", "Lohara"],
+
+  "Palghar": ["Palghar", "Vasai", "Dahanu", "Boisar", "Jawhar", "Talasari", "Mokhada", "Vikramgad", "Wada"],
+
+  "Parbhani": ["Parbhani", "Pathri", "Purna", "Manwath", "Selu", "Jintur", "Sonpeth", "Gangakhed"],
+
+  "Pune": ["Pune", "Baramati", "Junnar", "Shirur", "Haveli", "Bhor", "Daund", "Indapur", "Khed", "Maval", "Mulshi", "Ambegaon", "Velhe"],
+
+  "Raigad": ["Raigad", "Alibag", "Panvel", "Uran", "Murud", "Khalapur", "Pen", "Karjat", "Roha", "Mangaon", "Mahad", "Shrivardhan", "Sudhagad (Pali)"],
+
+  "Ratnagiri": ["Ratnagiri", "Chiplun", "Dapoli", "Guhagar", "Sangameshwar", "Rajapur", "Khed", "Mandangad", "Lanja"],
+
+  "Sangli": ["Sangli", "Tasgaon", "Vita", "Islampur", "Miraj", "Kadegaon", "Jat", "Palus", "Khanapur", "Shirala", "Atpadi"],
+
+  "Satara": ["Satara", "Karad", "Mahabaleshwar", "Phaltan", "Wai", "Koregaon", "Khandala", "Patan", "Jaoli", "Man"],
+
+  "Sindhudurg": ["Sindhudurg", "Malvan", "Kudal", "Sawantwadi", "Vengurla", "Devgad", "Dodamarg", "Kankavli"],
+
+  "Solapur": ["Solapur", "Pandharpur", "Barshi", "Mangalwedha", "Akkalkot", "Sangole", "Karmala", "Madha", "Malshiras"],
+
+  "Thane": ["Thane", "Ulhasnagar", "Kalyan", "Bhiwandi", "Murbad", "Shahapur", "Ambernath", "Dombivli"],
+
+  "Wardha": ["Wardha", "Arvi", "Hinganghat", "Pulgaon", "Deoli", "Seloo", "Ashti", "Karanja"],
+
+  "Washim": ["Washim", "Risod", "Mangrulpir", "Karanja", "Malegaon", "Manora"],
+  
+  "Yavatmal": ["Yavatmal", "Pusad", "Darwha", "Digras", "Arni", "Ghatanji", "Ralegaon", "Wani", "Pandharkawada (Kelapur)", "Umarkhed", "Zari Jamni", "Ner"]
+      
+};
 
     // Populate towns based on the selected district
     function populateTowns() {
@@ -1055,7 +1119,13 @@ document.addEventListener('DOMContentLoaded', function() {
         loanAmount: document.getElementById('loanAmount').value,
         tenure: document.getElementById('tenure').value,
         emiSchedule: document.getElementById('emiSchedule').value,
-        status: 'Pending'
+        refName1: document.getElementById('refName1').value,
+        refRelationship1: document.getElementById('refRelationship1').value,
+        refContact1: document.getElementById('refContact1').value,
+        guarantorAddress: document.getElementById('guarantorAddress').value,
+        guarantorPan: document.getElementById('guarantorPan').value,
+        guarantorAadhar: document.getElementById('guarantorAadhar').value,
+        status: 'Pending',
       };
 
       // Get existing applications or initialize an empty array
@@ -1124,6 +1194,51 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
       document.body.appendChild(alertDiv);
     }
+
+    //just added
+    function convertImageToBase64(input, callback) {
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            callback(e.target.result);
+        };
+        reader.readAsDataURL(file);
+    } else {
+        callback(null);
+    }
+}
+    // Convert image inputs to Base64 and store them
+    convertImageToBase64(document.getElementById('photoUpload'), function (photoBase64) {
+        formData.photo = photoBase64;
+
+        convertImageToBase64(document.getElementById('aadharUpload'), function (aadharBase64) {
+            formData.aadhar = aadharBase64;
+
+            convertImageToBase64(document.getElementById('panUpload'), function (panBase64) {
+                formData.panCard = panBase64;
+
+                // convertImageToBase64(document.getElementById('incomeProof'), function (incomeBase64) {
+                //   formData.income = incomeBase64;
+
+                // Get existing applications or initialize an empty array
+                let loanApplications = JSON.parse(localStorage.getItem('loanApplications')) || [];
+                
+                // Add the new application
+                loanApplications.push(formData);
+                
+                // Save updated applications back to localStorage
+                localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
+
+                alert("Your loan application has been successfully submitted!");
+                document.getElementById('loanForm').reset();
+            });
+        });
+    });
+  // });
+
+
+
   </script>
 </body>
 </html>
