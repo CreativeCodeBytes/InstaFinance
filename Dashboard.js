@@ -345,6 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateEnquiriesTable() {
+        const enquiriesTableBody = document.getElementById('enquiriesTableBody');
         enquiriesTableBody.innerHTML = '';
         let loanApplications = JSON.parse(localStorage.getItem('loanApplications')) || [];
     
@@ -357,25 +358,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td>₹${application.loanAmount}</td>
                 <td>${application.tenure} months</td>
                 <td>${application.emiSchedule}</td>
-                <td>${application.address}</td>
-                <td>${application.state}</td>
-                <td>${application.district}</td>
-                <td>${application.town}</td>
-                <td>${application.pan}</td>
-                <td>${application.refName1}</td>
-                <td>${application.guarantorAadhar}</td>
-                <td>${application.refcontact1}</td>
-                <td>${application.guarantorAddress}</td>
-                <td>${application.guarantorPan}</td>
-                  
-                <td>
-                    <img src="${application.photo}" alt="Photo" width="50" height="50">
-                    <img src="${application.aadhar}" alt="Aadhar" width="50" height="50">
-                    <img src="${application.panCard}" alt="PAN" width="50" height="50">
-                </td>
+                <td>${application.status}</td>
                 <td>
                     <button class="btn btn-sm btn-primary view-application" data-index="${index}">View</button>
                     <button class="btn btn-sm btn-danger delete-application" data-index="${index}">Delete</button>
+                    <button class="btn btn-sm btn-success approve-application" data-index="${index}">Approve</button>
                 </td>
             `;
             enquiriesTableBody.appendChild(row);
@@ -388,34 +375,91 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.delete-application').forEach(btn => {
             btn.addEventListener('click', deleteApplication);
         });
+        document.querySelectorAll('.approve-application').forEach(btn => {
+            btn.addEventListener('click', approveApplication);
+        });
     }
+
     function viewApplication(e) {
         const index = e.target.dataset.index;
-        const application = loanApplications[index];
-        alert(`
-            Name: ${application.name}
-            Email: ${application.email}
-            Phone: ${application.phone}
-            Date of Birth: ${application.dob}
-            Gender: ${application.gender}
-            Address: ${application.address}
-            PAN: ${application.pan}
-            State: ${application.state}
-            Nationality: ${application.nationality}
-            Loan Amount: ₹${application.loanAmount}
-            Loan Tenure: ${application.tenure} months
-            EMI Schedule: ${application.emiSchedule}
-        `);
+        const application = JSON.parse(localStorage.getItem('loanApplications'))[index];
+        
+        const modalContent = `
+            <div class="modal fade" id="applicationModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Application Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Name:</strong> ${application.name}</p>
+                                    <p><strong>Email:</strong> ${application.email}</p>
+                                    <p><strong>Phone:</strong> ${application.phone}</p>
+                                    <p><strong>Date of Birth:</strong> ${application.dob}</p>
+                                    <p><strong>Gender:</strong> ${application.gender}</p>
+                                    <p><strong>Address:</strong> ${application.address}</p>
+                                    <p><strong>PAN:</strong> ${application.pan}</p>
+                                    <p><strong>Aadhar:</strong> ${application.aadhar}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>State:</strong> ${application.state}</p>
+                                    <p><strong>District:</strong> ${application.district}</p>
+                                    <p><strong>Town:</strong> ${application.town}</p>
+                                    <p><strong>Loan Amount:</strong> ₹${application.loanAmount}</p>
+                                    <p><strong>Loan Tenure:</strong> ${application.tenure} months</p>
+                                    <p><strong>EMI Schedule:</strong> ${application.emiSchedule}</p>
+                                    <p><strong>Status:</strong> ${application.status}</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <h6>Photo</h6>
+                                    <img src="${application.photoUpload}" alt="Photo" class="img-fluid">
+                                </div>
+                                <div class="col-md-4">
+                                    <h6>Aadhar</h6>
+                                    <img src="${application.aadharUpload}" alt="Aadhar" class="img-fluid">
+                                </div>
+                                <div class="col-md-4">
+                                    <h6>PAN</h6>
+                                    <img src="${application.panUpload}" alt="PAN" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalContent);
+        const modal = new bootstrap.Modal(document.getElementById('applicationModal'));
+        modal.show();
+
+        document.getElementById('applicationModal').addEventListener('hidden.bs.modal', function () {
+            this.remove();
+        });
     }
 
     function deleteApplication(e) {
         const index = e.target.dataset.index;
         if (confirm('Are you sure you want to delete this application?')) {
+            let loanApplications = JSON.parse(localStorage.getItem('loanApplications'));
             loanApplications.splice(index, 1);
-            updateEnquiriesTable();
-            // Save updated loanApplications to localStorage
             localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
-            showNotification('Application deleted successfully!', 'success');
+            updateEnquiriesTable();
+        }
+    }
+
+    function approveApplication(e) {
+        const index = e.target.dataset.index;
+        if (confirm('Are you sure you want to approve this application?')) {
+            let loanApplications = JSON.parse(localStorage.getItem('loanApplications'));
+            loanApplications[index].status = 'Approved';
+            localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
+            updateEnquiriesTable();
         }
     }
 

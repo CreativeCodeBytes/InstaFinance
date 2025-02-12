@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Application Form</title>
+  <link rel="stylesheet" href="LoanForm.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="Logo.png" alt="Insta Finance Logo">
+      <a href="index.html"></a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="AdminLogin.html">Admin Login</a></li>
+    </ul>
+  </header>
+
+  <section class="loan-application">
+    <div class="form-container">
+      <h2 id="top-title">INSTA FINANCE</h2>
+      <h1>Loan Application Form</h1>
+      <form id="loanForm" onsubmit="return validateForm()">
+        <h2>Personal Details</h2>
+        <div class="form-group">
+          <label for="name">Full Name <span class="required-symbol">*</span></label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group form-group-dob">
+          <label for="dob">Date of Birth <span class="required-symbol">*</span></label>
+          <input type="date" id="dob" name="dob">
+          <small id="dob-error" class="error-message">You must be at least 18 years old.</small>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender <span class="required-symbol">*</span></label>
+          <select id="gender" name="gender"  required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="phone">Contact Number <span class="required-symbol">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your contact number" required maxlength="10">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address <span class="required-symbol">*</span></label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        </div>
+        <div class="form-group">
+          <label for="ownership">Address Ownership <span class="required-symbol">*</span></label>
+          <select id="ownership" name="ownership" required>
+            <option value="" disabled selected>Select ownership</option>
+            <option value="owned">Owned</option>
+            <option value="rented">Rented</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="address">Address <span class="required-symbol">*</span></label>
+          <textarea id="address" name="address" rows="4" placeholder="Enter your address" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="pan">Pan Number <span class="required-symbol">*</span></label>
+          <input type="text" id="pan" name="pan" placeholder="Enter your Pan number" maxlength="10" required>
+        </div>
+        <div class="form-group">
+          <label for="pan">Aadhar Number <span class="required-symbol">*</span></label>
+          <input type="text" id="aadhar" name="aadhar" placeholder="Enter your Aadhar number" maxlength="12" required>
+        </div>
+        <div class="form-group">
+          <label for="state">State <span class="required-symbol">*</span></label>
+          <select id="state" name="state" class="dropdown" required>
+            <option value="" disabled selected>Select State</option>
+            <!-- <option value="andhra-pradesh">Andhra Pradesh</option>
+            <option value="arunachal-pradesh">Arunachal Pradesh</option>
+            <option value="assam">Assam</option>
+            <option value="bihar">Bihar</option>
+            <option value="chhattisgarh">Chhattisgarh</option>
+            <option value="goa">Goa</option>
+            <option value="gujarat">Gujarat</option>
+            <option value="haryana">Haryana</option>
+            <option value="himachal-pradesh">Himachal Pradesh</option>
+            <option value="jharkhand">Jharkhand</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="kerala">Kerala</option>
+            <option value="madhya-pradesh">Madhya Pradesh</option> -->
+            <option value="maharashtra">Maharashtra</option>
+            <!-- <option value="manipur">Manipur</option>
+            <option value="meghalaya">Meghalaya</option>
+            <option value="mizoram">Mizoram</option>
+            <option value="nagaland">Nagaland</option>
+            <option value="odisha">Odisha</option>
+            <option value="punjab">Punjab</option>
+            <option value="rajasthan">Rajasthan</option>
+            <option value="sikkim">Sikkim</option>
+            <option value="tamil-nadu">Tamil Nadu</option>
+            <option value="telangana">Telangana</option>
+            <option value="tripura">Tripura</option>
+            <option value="uttar-pradesh">Uttar Pradesh</option>
+            <option value="uttarakhand">Uttarakhand</option>
+            <option value="west-bengal">West Bengal</option> -->
+          </select>
+        </div>
+      <!-- District Dropdown -->
+    <div class="form-group">
+      <label for="district">Select District <span class="required-symbol">*</span></label>
+      <select id="district" onchange="populateTowns()">
+          <option value="" disabled selected>--Select District--</option>
+          <option value="Ahmednagar">Ahmednagar</option>
+          <option value="Akola">Akola</option>
+          <option value="Amravati">Amravati</option>
+          <option value="Aurangabad">Aurangabad</option>
+          <option value="Beed">Beed</option>
+          <option value="Bhandara">Bhandara</option>
+          <option value="Buldhana">Buldhana</option>
+          <option value="Chandrapur">Chandrapur</option>
+          <option value="Dhule">Dhule</option>
+          <option value="Gadchiroli">Gadchiroli</option>
+          <option value="Gondia">Gondia</option>
+          <option value="Hingoli">Hingoli</option>
+          <option value="Jalgaon">Jalgaon</option>
+          <option value="Jalna">Jalna</option>
+          <option value="Kolhapur">Kolhapur</option>
+          <option value="Latur">Latur</option>
+          <option value="Mumbai City">Mumbai City</option>
+          <option value="Mumbai Suburban">Mumbai Suburban</option>
+          <option value="Nagpur">Nagpur</option>
+          <option value="Nanded">Nanded</option>
+          <option value="Nandurbar">Nandurbar</option>
+          <option value="Nashik">Nashik</option>
+          <option value="Osmanabad">Osmanabad</option>
+          <option value="Palghar">Palghar</option>
+          <option value="Parbhani">Parbhani</option>
+          <option value="Pune">Pune</option>
+          <option value="Raigad">Raigad</option>
+          <option value="Ratnagiri">Ratnagiri</option>
+          <option value="Sangli">Sangli</option>
+          <option value="Satara">Satara</option>
+          <option value="Sindhudurg">Sindhudurg</option>
+          <option value="Solapur">Solapur</option>
+          <option value="Thane">Thane</option>
+          <option value="Wardha">Wardha</option>
+          <option value="Washim">Washim</option>
+          <option value="Yavatmal">Yavatmal</option>
+      </select>
+  </div>
+
+  <!-- Town Dropdown -->
+  <div class="form-group">
+      <label for="town">Select Taluka <span class="required-symbol">*</span></label>
+      <select id="town">
+          <option value="" disabled selected>--Select Taluka--</option>
+      </select>
+  </div>
+
+        <!-- <div class="form-group">
+          <label for="nationality">Nationality <span class="required-symbol">*</span></label>
+          <select id="nationality" name="nationality" class="dropdown" required>
+            <option value="" disabled selected>Select Nationality</option>
+            <option value="afghan">Afghan</option>
+            <option value="algerian">Algerian</option>
+            <option value="american">American</option>
+            <option value="argentine">Argentine</option>
+            <option value="australian">Australian</option>
+            <option value="austrian">Austrian</option>
+            <option value="bangladeshi">Bangladeshi</option>
+            <option value="belgian">Belgian</option>
+            <option value="brazilian">Brazilian</option>
+            <option value="british">British</option>
+            <option value="canadian">Canadian</option>
+            <option value="chilean">Chilean</option>
+            <option value="chinese">Chinese</option>
+            <option value="colombian">Colombian</option>
+            <option value="cuban">Cuban</option>
+            <option value="cypriot">Cypriot</option>
+            <option value="danish">Danish</option>
+            <option value="egyptian">Egyptian</option>
+            <option value="french">French</option>
+            <option value="german">German</option>
+            <option value="greek">Greek</option>
+            <option value="indian">Indian</option>
+            <option value="indonesian">Indonesian</option>
+            <option value="iranian">Iranian</option>
+            <option value="iraqi">Iraqi</option>
+            <option value="irish">Irish</option>
+            <option value="israeli">Israeli</option>
+            <option value="italian">Italian</option>
+            <option value="japanese">Japanese</option>
+            <option value="kenyan">Kenyan</option>
+            <option value="kuwaiti">Kuwaiti</option>
+            <option value="lebanese">Lebanese</option>
+            <option value="malaysian">Malaysian</option>
+            <option value="mexican">Mexican</option>
+            <option value="moroccan">Moroccan</option>
+            <option value="nigerian">Nigerian</option>
+            <option value="pakistani">Pakistani</option>
+            <option value="peruvian">Peruvian</option>
+            <option value="philippine">Philippine</option>
+            <option value="polish">Polish</option>
+            <option value="portuguese">Portuguese</option>
+            <option value="qatari">Qatari</option>
+            <option value="romanian">Romanian</option>
+            <option value="russian">Russian</option>
+            <option value="saudi-arabian">Saudi Arabian</option>
+            <option value="south-african">South African</option>
+            <option value="spanish">Spanish</option>
+            <option value="sri-lankan">Sri Lankan</option>
+            <option value="swedish">Swedish</option>
+            <option value="swiss">Swiss</option>
+            <option value="turkish">Turkish</option>
+            <option value="ukrainian">Ukrainian</option>
+            <option value="vietnamese">Vietnamese</option>
+            <option value="yemeni">Yemeni</option>
+          </select>
+        </div> -->
+
+        <h2>Loan Details</h2>
+        <div class="form-group">
+          <label for="loanAmount">Loan Amount (₹) <span class="required-symbol">*</span></label>
+          <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter loan amount" min="10000" max="1000000" step="1000" required>
+          <span id="loanAmountError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="tenure">Loan Tenure (in months) <span class="required-symbol">*</span></label>
+          <input type="number" id="tenure" name="tenure" placeholder="Enter loan tenure" required>
+          <span id="tenureError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="emiSchedule">Preferred EMI Schedule <span class="required-symbol">*</span></label>
+          <select id="emiSchedule" name="emiSchedule" required>
+            <option value="" disabled selected>Select EMI Schedule</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+          <span id="emiScheduleError" class="error"></span>
+        </div>
+
+        <h2>Guarantor</h2>
+        <div class="form-group">
+          <label for="refName1">Guarantor Name <span class="required-symbol">*</span></label>
+          <input type="text" id="refName1" name="refName1" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+          <label for="refRelationship1">Relationship <span class="required-symbol">*</span></label>
+          <input type="text" id="refRelationship1" name="refRelationship1" placeholder="Enter relationship">
+        </div>
+        <div class="form-group">
+          <label for="refContact1">Contact Number <span class="required-symbol">*</span></label>
+          <input type="tel" id="refContact1" name="refContact1" placeholder="Enter contact number" maxlength="10">
+        </div>
+        <div class="form-group">
+          <label for="address">Address <span class="required-symbol">*</span></label>
+          <textarea id="address" name="address" rows="4" placeholder="Enter guarantor address" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="pan">Pan Number <span class="required-symbol">*</span></label>
+          <input type="text" id="pan" name="pan" placeholder="Enter guarantor Pan number" maxlength="10" required>
+        </div>
+        <div class="form-group">
+          <label for="pan">Aadhar Number <span class="required-symbol">*</span></label>
+          <input type="text" id="aadhar" name="aadhar" placeholder="Enter guarantor Aadhar number" maxlength="12" required>
+        </div>
+        <div class="doc">
+        <div class="form-group">
+          <label for="photoUpload">Upload Photo <span class="required-symbol">*</span></label>
+          <input type="file" id="photoUpload" name="photoUpload" accept=".png, .jpg, .jpeg" required>
+        </div>
+        <div class="form-group">
+          <label for="aadharUpload">Upload Aadhar <span class="required-symbol">*</span></label>
+          <input type="file" id="aadharUpload" name="aadharUpload" accept=".png, .jpg, .jpeg" required>
+        </div>
+        <div class="form-group">
+          <label for="panUpload">Upload Pan <span class="required-symbol">*</span></label>
+          <input type="file" id="panUpload" name="panUpload" accept=".png, .jpg, .jpeg" required>
+        </div>
+        <div class="form-group">
+          <label for="residentialProof">Upload Residential Proof <span class="required-symbol">*</span></label>
+          <input type="file" id="residentialProof" name="residentialProof" accept=".png, .jpg, .jpeg" required>
+        </div>
+        </div>
+        <div class="doc">
+        <h2>Documents Upload</h2>
+        <div class="form-group">
+          <label for="photoUpload2">Upload Photo <span class="required-symbol">*</span></label>
+          <input type="file" id="photoUpload2" name="photoUpload2" accept=".png, .jpg, .jpeg" required>
+        </div>
+        <div class="form-group">
+          <label for="aadharUpload2">Upload Aadhar <span class="required-symbol">*</span></label>
+          <input type="file" id="aadharUpload2" name="aadharUpload2" accept=".png, .jpg, .jpeg" required>
+        </div>
+        <div class="form-group">
+          <label for="panUpload2">Upload Pan <span class="required-symbol">*</span></label>
+          <input type="file" id="panUpload2" name="panUpload2" accept=".png, .jpg, .jpeg" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="incomeProof">Upload Income Proof <span class="required-symbol">*</span></label>
+          <input type="file" id="incomeProof" name="incomeProof" accept=".png, .jpg, .jpeg" required>
+        </div>
+        <div class="form-group">
+          <label for="residentialProof">Upload Residential Proof <span class="required-symbol">*</span></label>
+          <input type="file" id="residentialProof" name="residentialProof" accept=".png, .jpg, .jpeg" required>
+        </div>
+     <!-- Signature Upload Section -->
+     <div class="form-group sign-modal">
+      <label for="signature">Upload Signature <span class="required-symbol">*</span></label>
+      <input type="text" id="signature" name="signature" class="dropdown" readonly placeholder="Click to Sign" onclick="openSignatureBox()" required>
+      <p id="signature-error" style="color: red; display: none;">Please provide a signature before saving.</p>
+  </div>
+  
+  <!-- Signature Pad Modal -->
+  <div id="signature-modal" class="modal">
+      <div class="modal-content">
+          <h3>Signature</h3>
+          <div class="color-options">
+              <button type="button" data-color="black" onclick="changePenColor('black')"></button>
+              <button type="button" data-color="red" onclick="changePenColor('red')"></button>
+              <button type="button" data-color="green" onclick="changePenColor('green')"></button>
+              <button type="button" data-color="blue" onclick="changePenColor('blue')"></button>
+          </div>
+          <canvas id="signature-pad" width="300" height="150"></canvas>
+          <div class="file-input-container">
+              <label for="signature-file">Add Signature from File</label>
+              <input type="file" id="signature-file" accept="image/*" onchange="loadSignatureFromFile(event)">
+          </div>
+          <div class="modal-actions">
+              <button type="button" onclick="saveSignature()">Save</button>
+              <button type="button" onclick="cancelSignature()">Cancel</button>
+              <button type="button" onclick="resetSignature()">Reset</button>
+          </div>
+      </div>
+  </div>
+  
+  <!-- Hidden input field to store the signature data -->
+  <input type="hidden" id="signature-data" name="signature-data">
+  
+  
+
+      
+
+        <h2>Declaration and Consent</h2>
+        <div class="form-group declare">
+          <div class="checkbox-group">
+            <input type="checkbox" id="agree" name="agree" required>
+            <label for="agree">I Agree</label>
+            <p id="agree-error" class="error-message" style="display: none; color: red;">You must accept the declaration and consent to proceed.</p>
+          </div>
+          <p>I hereby declare that the information provided is accurate to the best of my knowledge.</p>
+          <p>I consent to the processing of my personal and financial information for loan evaluation purposes.</p>  
+        </div>
+        <button type="submit" class="submit-btn">Submit Application</button>
+        <br>
+        <br>
+        <button type="print"  id="printButton"  class="printButton">Print Application</button>
+
+        <!-- onclick="window.print()" -->
+      </form>
+    </div>
+
+  </section>
+
+
+
+  <footer>
+    <div class="footer-container">
+      <div class="company-details">
+        <h3>Cybromatech Technology Private Limited</h3>
+        <p>Smart solutions for all your loan management needs.</p>
+      </div>
+      <div class="contact-info">
+        <h4>Contact Us</h4>
+        <p>Marisoft IT Park, Kalyani Nagar,<br>Pune, Maharashtra, 411014</p>
+        <p>Phone: <a href="tel:+919422295192">+91 94222 95192</a>, <a href="tel:+919730972384">+91 97309 72384</a></p>
+        <p>Email: <a href="mailto:cybromatechpvtltd.info@gmail.com">cybromatechpvtltd.info@gmail.com</a></p>
+      </div>
+      <div class="social-icons">
+        <h4>Follow Us</h4>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Cybromatech Technology Pvt. Ltd. All Rights Reserved.</p>
+    </div>
+  </footer>
+  <script src="LoanForm.js"></script>
+</body>
+</html>

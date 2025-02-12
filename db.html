@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insta Finance Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: #ffffff;
+            padding-top: 20px;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .sidebar-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sidebar-logo img {
+            width: 120px;
+        }
+        .nav-link {
+            color: #ffffff;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #495057;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <img src="Logo.png" alt="Insta Finance Logo">
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="totalEnquiries">
+                        <i class="fas fa-chart-bar"></i> Total Enquiries
+                    </a>
+                </li>
+                <!-- Add more sidebar items as needed -->
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div id="dashboardContent">
+                <h2 class="mb-4">Dashboard</h2>
+                <!-- Add your dashboard content here -->
+            </div>
+
+            <div id="totalEnquiriesContent" style="display: none;">
+                <h2 class="mb-4">Total Enquiries</h2>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Loan Amount</th>
+                                <th>Loan Tenure</th>
+                                <th>EMI Schedule</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="enquiriesTableBody">
+                            <!-- Table rows will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar .nav-link');
+            const dashboardContent = document.getElementById('dashboardContent');
+            const totalEnquiriesContent = document.getElementById('totalEnquiriesContent');
+
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (this.dataset.section === 'dashboard') {
+                        dashboardContent.style.display = 'block';
+                        totalEnquiriesContent.style.display = 'none';
+                    } else if (this.dataset.section === 'totalEnquiries') {
+                        dashboardContent.style.display = 'none';
+                        totalEnquiriesContent.style.display = 'block';
+                        updateEnquiriesTable();
+                    }
+                });
+            });
+
+            function updateEnquiriesTable() {
+                const enquiriesTableBody = document.getElementById('enquiriesTableBody');
+                enquiriesTableBody.innerHTML = '';
+                let loanApplications = JSON.parse(localStorage.getItem('loanApplications')) || [];
+            
+                loanApplications.forEach((application, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${application.name}</td>
+                        <td>${application.email}</td>
+                        <td>${application.phone}</td>
+                        <td>₹${application.loanAmount}</td>
+                        <td>${application.tenure} months</td>
+                        <td>${application.emiSchedule}</td>
+                        <td>${application.status}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary view-application" data-index="${index}">View</button>
+                            <button class="btn btn-sm btn-danger delete-application" data-index="${index}">Delete</button>
+                            <button class="btn btn-sm btn-success approve-application" data-index="${index}">Approve</button>
+                        </td>
+                    `;
+                    enquiriesTableBody.appendChild(row);
+                });
+            
+                // Add event listeners to buttons
+                document.querySelectorAll('.view-application').forEach(btn => {
+                    btn.addEventListener('click', viewApplication);
+                });
+                document.querySelectorAll('.delete-application').forEach(btn => {
+                    btn.addEventListener('click', deleteApplication);
+                });
+                document.querySelectorAll('.approve-application').forEach(btn => {
+                    btn.addEventListener('click', approveApplication);
+                });
+            }
+
+            function viewApplication(e) {
+                const index = e.target.dataset.index;
+                const application = JSON.parse(localStorage.getItem('loanApplications'))[index];
+                
+                const modalContent = `
+                    <div class="modal fade" id="applicationModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Application Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Name:</strong> ${application.name}</p>
+                                            <p><strong>Email:</strong> ${application.email}</p>
+                                            <p><strong>Phone:</strong> ${application.phone}</p>
+                                            <p><strong>Date of Birth:</strong> ${application.dob}</p>
+                                            <p><strong>Gender:</strong> ${application.gender}</p>
+                                            <p><strong>Address:</strong> ${application.address}</p>
+                                            <p><strong>PAN:</strong> ${application.pan}</p>
+                                            <p><strong>Aadhar:</strong> ${application.aadhar}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>State:</strong> ${application.state}</p>
+                                            <p><strong>District:</strong> ${application.district}</p>
+                                            <p><strong>Town:</strong> ${application.town}</p>
+                                            <p><strong>Loan Amount:</strong> ₹${application.loanAmount}</p>
+                                            <p><strong>Loan Tenure:</strong> ${application.tenure} months</p>
+                                            <p><strong>EMI Schedule:</strong> ${application.emiSchedule}</p>
+                                            <p><strong>Status:</strong> ${application.status}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <h6>Photo</h6>
+                                            <img src="${application.photoUpload}" alt="Photo" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6>Aadhar</h6>
+                                            <img src="${application.aadharUpload}" alt="Aadhar" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6>PAN</h6>
+                                            <img src="${application.panUpload}" alt="PAN" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                document.body.insertAdjacentHTML('beforeend', modalContent);
+                const modal = new bootstrap.Modal(document.getElementById('applicationModal'));
+                modal.show();
+
+                document.getElementById('applicationModal').addEventListener('hidden.bs.modal', function () {
+                    this.remove();
+                });
+            }
+
+            function deleteApplication(e) {
+                const index = e.target.dataset.index;
+                if (confirm('Are you sure you want to delete this application?')) {
+                    let loanApplications = JSON.parse(localStorage.getItem('loanApplications'));
+                    loanApplications.splice(index, 1);
+                    localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
+                    updateEnquiriesTable();
+                }
+            }
+
+            function approveApplication(e) {
+                const index = e.target.dataset.index;
+                if (confirm('Are you sure you want to approve this application?')) {
+                    let loanApplications = JSON.parse(localStorage.getItem('loanApplications'));
+                    loanApplications[index].status = 'Approved';
+                    localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
+                    updateEnquiriesTable();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

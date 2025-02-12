@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 80px;
+        }
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .form-container h1 {
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .required-symbol {
+            color: red;
+        }
+        .submit-btn {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #ffffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="text-center">Loan Application Form</h1>
+            <form id="loanForm" onsubmit="return submitLoanApplication(event)">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email">Email <span class="required-symbol">*</span></label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="phone">Phone <span class="required-symbol">*</span></label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="dob">Date of Birth <span class="required-symbol">*</span></label>
+                            <input type="date" class="form-control" id="dob" name="dob" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="gender">Gender <span class="required-symbol">*</span></label>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="address">Address <span class="required-symbol">*</span></label>
+                            <textarea class="form-control" id="address" name="address" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="pan">PAN <span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="pan" name="pan" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="aadhar">Aadhar <span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="aadhar" name="aadhar" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="state">State <span class="required-symbol">*</span></label>
+                            <select class="form-control" id="state" name="state" required>
+                                <option value="">Select State</option>
+                                <option value="maharashtra">Maharashtra</option>
+                                <!-- Add more states as needed -->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="district">District <span class="required-symbol">*</span></label>
+                            <select class="form-control" id="district" name="district" required>
+                                <option value="">Select District</option>
+                                <option value="Ahmednagar">Ahmednagar</option>
+          <option value="Akola">Akola</option>
+          <option value="Amravati">Amravati</option>
+          <option value="Aurangabad">Aurangabad</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="town">Town <span class="required-symbol">*</span></label>
+                            <select class="form-control" id="town" name="town" required>
+                                <option value="">Select Town</option>
+                                <option value="Amravati">Amravati</option>
+                                <option value="Aurangabad">Aurangabad</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="loanAmount">Loan Amount (₹) <span class="required-symbol">*</span></label>
+                            <input type="number" class="form-control" id="loanAmount" name="loanAmount" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="tenure">Loan Tenure (months) <span class="required-symbol">*</span></label>
+                            <input type="number" class="form-control" id="tenure" name="tenure" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="emiSchedule">EMI Schedule <span class="required-symbol">*</span></label>
+                            <select class="form-control" id="emiSchedule" name="emiSchedule" required>
+                                <option value="">Select EMI Schedule</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="mt-4">Guarantor Information</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="guarantorName">Guarantor Name <span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="guarantorName" name="guarantorName" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="guarantorRelation">Relation <span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="guarantorRelation" name="guarantorRelation" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="guarantorContact">Contact Number <span class="required-symbol">*</span></label>
+                            <input type="tel" class="form-control" id="guarantorContact" name="guarantorContact" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="guarantorAddress">Address <span class="required-symbol">*</span></label>
+                            <textarea class="form-control" id="guarantorAddress" name="guarantorAddress" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="guarantorPan">PAN <span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="guarantorPan" name="guarantorPan" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="guarantorAadhar">Aadhar <span class="required-symbol">*</span></label>
+                            <input type="text" class="form-control" id="guarantorAadhar" name="guarantorAadhar" required>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="mt-4">Document Upload</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="photoUpload">Photo <span class="required-symbol">*</span></label>
+                            <input type="file" class="form-control" id="photoUpload" name="photoUpload" accept="image/*" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="aadharUpload">Aadhar <span class="required-symbol">*</span></label>
+                            <input type="file" class="form-control" id="aadharUpload" name="aadharUpload" accept="image/*" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="panUpload">PAN <span class="required-symbol">*</span></label>
+                            <input type="file" class="form-control" id="panUpload" name="panUpload" accept="image/*" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function submitLoanApplication(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const applicationData = {};
+
+            for (let [key, value] of formData.entries()) {
+                if (key === 'photoUpload' || key === 'aadharUpload' || key === 'panUpload') {
+                    applicationData[key] = URL.createObjectURL(value);
+                } else {
+                    applicationData[key] = value;
+                }
+            }
+
+            applicationData.status = 'Pending';
+
+            let loanApplications = JSON.parse(localStorage.getItem('loanApplications')) || [];
+            loanApplications.push(applicationData);
+            localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
+
+            alert("Your loan application has been successfully submitted!");
+            event.target.reset();
+        }
+
+           // Data for towns or Talukas of each  districts
+      const townsData = {
+          "Ahmednagar": ["Ahmednagar", "Shirdi", "Sangamner", "Kopargaon", "Rahata", "Shrirampur", "Pathardi", "Rahuri", "Shrigonda", "Jamkhed", "Newasa", "Karjat", "Akole", "Parner", "Shevgaon", "Nagar", "Bhingar", "Miri", "Puntamba", "Kolhar", "Takali Dhokeshwar", "Wadgaon Gupta"],
+
+          "Akola": ["Akola","Akot","Balapur","Patur","Murtijapur","Telhara","Barshitakli"],
+
+  "Amravati": ["Amravati", "Achalpur", "Daryapur", "Warud", "Chandur", "Anjangaon", "Morshi", "Chikhaldara", "Nandgaon Khandeshwar", "Teosa"],
+
+  "SambhajiNagar": ["SambhajiNagar", "Paithan", "Khuldabad", "Vaijapur", "Kannad", "Sillod", "Phulambri", "Soegaon", "Gangapur"],
+
+  "Beed": ["Beed", "Majalgaon", "Georai", "Patoda", "Kaij", "Wadwani", "Dharur", "Ambajogai", "Ashti", "Parli"],
+
+  "Bhandara": ["Bhandara", "Tumsar", "Sakoli", "Lakhani", "Mohadi", "Pauni", "Lakhandur"],
+
+  "Buldhana": ["Buldhana", "Chikhli", "Khamgaon", "Shegaon", "Deulgaon Raja", "Mehkar", "Nandura", "Sangrampur", "Jalgaon Jamod", "Malkapur", "Motala"],
+
+  "Chandrapur": ["Chandrapur", "Ballarpur", "Warora", "Rajura", "Brahmapuri", "Mul", "Chimur", "Pombhurna", "Korpana", "Gondpipri", "Sawali"],
+
+  "Dhule": ["Dhule", "Sakri", "Shirpur", "Dondaicha", "Shindkheda"],
+
+  "Gadchiroli": ["Gadchiroli", "Aheri", "Armori", "Chamorshi", "Mulchera", "Etapalli", "Bhamragad", "Kurkheda", "Dhanora", "Sironcha"],
+
+  "Gondia": ["Gondia", "Tirora", "Amgaon", "Deori", "Sadak Arjuni", "Salekasa", "Goregaon"],
+
+  "Hingoli": ["Hingoli", "Sengaon", "Basmath", "Kalamnuri", "Aundha Nagnath"],
+
+  "Jalgaon": ["Jalgaon", "Bhusawal", "Chopda", "Erandol", "Yawal", "Amalner", "Parola","Bhadgaon","Pachora", "Dharangaon", "Jamner", "Raver", "Bodwad"],
+
+  "Jalna": ["Jalna", "Ambad", "Badnapur", "Partur", "Mantha", "Ghansawangi", "Bhokardan", "Jafrabad"],
+
+  "Kolhapur": ["Kolhapur", "Ichalkaranji", "Gadhinglaj", "Kagal", "Shahuwadi", "Panhala", "Hatkanangale", "Karvir", "Radhanagari", "Ajra", "Chandgad", "Bhudargad"],
+
+  "Latur": ["Latur", "Udgir", "Ausa", "Nilanga", "Renapur", "Chakur", "Deoni", "Jalkot"],
+
+  "Mumbai City": ["Marine Lines", "Cuffe Parade", "Malabar Hill", "Fort", "Byculla", "Girgaon", "Tardeo"],
+
+  "Mumbai Suburban": ["Borivali", "Andheri", "Bandra", "Goregaon", "Malad", "Kandivali", "Dahisar", "Kurla", "Ghatkopar", "Powai", "Mulund"],
+
+  "Nagpur": ["Nagpur", "Hingna", "Kamptee", "Katol", "Kalameshwar", "Umred", "Mouda", "Saoner", "Ramtek", "Bhiwapur", "Parseoni", "Nagpur Rural"],
+
+  "Nanded": ["Nanded", "Biloli", "Degloor", "Hadgaon", "Mudkhed", "Ardhapur", "Himayatnagar", "Kinwat", "Kandhar", "Mahur", "Mukhed", "Loha"],
+
+  "Nandurbar": ["Nandurbar", "Shahada", "Taloda", "Akkalkuwa", "Akrani (Dhadgaon)", "Navapur"],
+  "Nashik": ["Nashik", "Malegaon", "Manmad", "Sinnar", "Igatpuri", "Kalwan", "Niphad", "Chandwad", "Trimbak", "Yeola", "Dindori", "Baglan (Satana)"],
+
+  "Osmanabad": ["Osmanabad", "Tuljapur", "Omerga", "Paranda", "Kalamb", "Bhoom", "Washi", "Lohara"],
+
+  "Palghar": ["Palghar", "Vasai", "Dahanu", "Boisar", "Jawhar", "Talasari", "Mokhada", "Vikramgad", "Wada"],
+
+  "Parbhani": ["Parbhani", "Pathri", "Purna", "Manwath", "Selu", "Jintur", "Sonpeth", "Gangakhed"],
+
+  "Pune": ["Pune", "Baramati", "Junnar", "Shirur", "Haveli", "Bhor", "Daund", "Indapur", "Khed", "Maval", "Mulshi", "Ambegaon", "Velhe"],
+
+  "Raigad": ["Raigad", "Alibag", "Panvel", "Uran", "Murud", "Khalapur", "Pen", "Karjat", "Roha", "Mangaon", "Mahad", "Shrivardhan", "Sudhagad (Pali)"],
+
+  "Ratnagiri": ["Ratnagiri", "Chiplun", "Dapoli", "Guhagar", "Sangameshwar", "Rajapur", "Khed", "Mandangad", "Lanja"],
+
+  "Sangli": ["Sangli", "Tasgaon", "Vita", "Islampur", "Miraj", "Kadegaon", "Jat", "Palus", "Khanapur", "Shirala", "Atpadi"],
+
+  "Satara": ["Satara", "Karad", "Mahabaleshwar", "Phaltan", "Wai", "Koregaon", "Khandala", "Patan", "Jaoli", "Man"],
+
+  "Sindhudurg": ["Sindhudurg", "Malvan", "Kudal", "Sawantwadi", "Vengurla", "Devgad", "Dodamarg", "Kankavli"],
+
+  "Solapur": ["Solapur", "Pandharpur", "Barshi", "Mangalwedha", "Akkalkot", "Sangole", "Karmala", "Madha", "Malshiras"],
+
+  "Thane": ["Thane", "Ulhasnagar", "Kalyan", "Bhiwandi", "Murbad", "Shahapur", "Ambernath", "Dombivli"],
+
+  "Wardha": ["Wardha", "Arvi", "Hinganghat", "Pulgaon", "Deoli", "Seloo", "Ashti", "Karanja"],
+
+  "Washim": ["Washim", "Risod", "Mangrulpir", "Karanja", "Malegaon", "Manora"],
+  
+  "Yavatmal": ["Yavatmal", "Pusad", "Darwha", "Digras", "Arni", "Ghatanji", "Ralegaon", "Wani", "Pandharkawada (Kelapur)", "Umarkhed", "Zari Jamni", "Ner"]
+      
+};
+
+      // Populate towns based on the selected district
+      function populateTowns() {
+          const districtSelect = document.getElementById('district');
+          const townSelect = document.getElementById('town');
+
+          // Clear existing options
+          townSelect.innerHTML = '<option value="" disabled selected>--Select Taluka--</option>';
+
+          const selectedDistrict = districtSelect.value;
+          if (selectedDistrict && townsData[selectedDistrict]) {
+              townsData[selectedDistrict].forEach(town => {
+                  const option = document.createElement('option');
+                  option.value = town;
+                  option.textContent = town;
+                  townSelect.appendChild(option);
+              });
+          }
+      }
+    </script>
+</body>
+</html>
