@@ -358,7 +358,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td>₹${application.loanAmount}</td>
                 <td>${application.tenure} months</td>
                 <td>${application.emiSchedule}</td>
+                <td>${application.address}</td>
+                <td>${application.state}</td>
+                <td>${application.district}</td>
+                <td>${application.town}</td>
+                <td>${application.pan}</td>
+                <td>${application.refName1}</td>
+                <td>${application.guarantorAadhar}</td>
+                <td>${application.refContact1}</td>
+                <td>${application.guarantorAddress}</td>
+                <td>${application.guarantorguarantorPan}</td>
+                
+                
                 <td>${application.status}</td>
+                
                 <td>
                     <button class="btn btn-sm btn-primary view-application" data-index="${index}">View</button>
                     <button class="btn btn-sm btn-danger delete-application" data-index="${index}">Delete</button>
