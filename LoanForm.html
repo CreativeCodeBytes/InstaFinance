@@ -153,7 +153,7 @@
       left: 0;
       width: 100%;
       height: 90%;
-      background: url('Logo.png'), url('Logo.png'), url('Logo.png');
+      background: url('Images/Logo.png'), url('Images/Logo.png'), url('Images/Logo.png');
       background-repeat: no-repeat;
       background-position: center top, center center, center bottom;
       background-size: contain;
@@ -526,7 +526,7 @@
   <header>
     <div class="logo">
       <a href="index.html">
-        <img src="Logo.png" alt="Logo"></a>
+        <img src="Images/Logo.png" alt="Logo"></a>
     </div>
   
     <!-- Navbar Links -->
@@ -549,16 +549,16 @@
       <form id="loanForm" onsubmit="return submitLoanApplication(event)">
         <h2>Personal Details</h2>
         <div class="form-group">
-          <label for="name">Full Name <span class="required-symbol">*</span></label>
+          <label for="name">Full Name <span class="required-symbol"> *</span></label>
           <input type="text" id="name" name="name" placeholder="Enter your full name" required>
         </div>
         <div class="form-group form-group-dob">
-          <label for="dob">Date of Birth <span class="required-symbol">*</span></label>
+          <label for="dob">Date of Birth <span class="required-symbol"> *</span></label>
           <input type="date" id="dob" name="dob">
           <small id="dob-error" class="error-message">You must be at least 18 years old.</small>
         </div>
         <div class="form-group">
-          <label for="gender">Gender <span class="required-symbol">*</span></label>
+          <label for="gender">Gender <span class="required-symbol"> *</span></label>
           <select id="gender" name="gender"  required>
             <option value="select gender">Select Gender</option>
             <option value="male">Male</option>
@@ -573,6 +573,14 @@
         <div class="form-group">
           <label for="email">Email Address <span class="required-symbol">*</span></label>
           <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        </div>
+        <div class="form-group">
+          <label for="ownership">Address Ownership <span class="required-symbol">*</span></label>
+          <select id="ownership" name="ownership" required>
+            <option value="" disabled selected>Select ownership</option>
+            <option value="owned">Owned</option>
+            <option value="rented">Rented</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="address">Address <span class="required-symbol">*</span></label>
@@ -595,7 +603,7 @@
         </div>
         <!-- District Dropdown -->
         <div class="form-group">
-          <label for="district">Select District<span class="required-symbol">*</span></label>
+          <label for="district">Select District<span class="required-symbol"> *</span></label>
           <select id="district" onchange="populateTowns()">
               <option value="" disabled selected>--Select District--</option>
               <option value="Ahmednagar">Ahmednagar</option>
@@ -639,7 +647,7 @@
 
         <!-- Town Dropdown -->
         <div class="form-group">
-          <label for="town">Select Taluka<span class="required-symbol">*</span></label>
+          <label for="town">Select Taluka<span class="required-symbol"> *</span></label>
           <select id="town">
               <option value="" disabled selected>--Select Taluka--</option>
           </select>
@@ -647,17 +655,17 @@
 
         <h2>Loan Details</h2>
         <div class="form-group">
-          <label for="loanAmount">Loan Amount (₹)<span class="required-symbol">*</span></label>
+          <label for="loanAmount">Loan Amount (₹)<span class="required-symbol"> *</span></label>
           <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter loan amount" required>
           <span id="loanAmountError" class="error"></span>
         </div>
         <div class="form-group">
-          <label for="tenure">Loan Tenure (in months)<span class="required-symbol">*</span></label>
+          <label for="tenure">Loan Tenure (in months)<span class="required-symbol"> *</span></label>
           <input type="number" id="tenure" name="tenure" placeholder="Enter loan tenure" required>
           <span id="tenureError" class="error"></span>
         </div>
         <div class="form-group">
-          <label for="emiSchedule">Preferred EMI Schedule<span class="required-symbol">*</span></label>
+          <label for="emiSchedule">Preferred EMI Schedule<span class="required-symbol"> *</span></label>
           <select id="emiSchedule" name="emiSchedule" required>
             <option value="" disabled selected>Select EMI Schedule</option>
             <option value="daily">Daily</option>
@@ -669,68 +677,84 @@
 
         <h2>Guarantor</h2>
         <div class="form-group">
-          <label for="refName1">Guarantor Name<span class="required-symbol">*</span></label>
+          <label for="refName1">Guarantor Name<span class="required-symbol"> *</span></label>
           <input type="text" id="refName1" name="refName1" placeholder="Enter name">
         </div>
         <div class="form-group">
-          <label for="refRelationship1">Relationship<span class="required-symbol">*</span></label>
+          <label for="refRelationship1">Relationship<span class="required-symbol"> *</span></label>
           <input type="text" id="refRelationship1" name="refRelationship1" placeholder="Enter relationship">
         </div>
         <div class="form-group">
-          <label for="refContact1">Contact Number<span class="required-symbol">*</span></label>
+          <label for="refContact1">Contact Number<span class="required-symbol"> *</span></label>
           <input type="tel" id="refContact1" name="refContact1" placeholder="Enter contact number" maxlength="10">
         </div>
         <div class="form-group">
-          <label for="guarantorAddress">Address <span class="required-symbol">*</span></label>
+          <label for="ownership">Address Ownership <span class="required-symbol"> *</span></label>
+          <select id="gownership" name="gownership" required>
+            <option value="" disabled selected>Select ownership</option>
+            <option value="owned">Owned</option>
+            <option value="rented">Rented</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="guarantorAddress">Address <span class="required-symbol"> *</span></label>
           <textarea id="guarantorAddress" name="guarantorAddress" rows="4" placeholder="Enter guarantor address" required></textarea>
         </div>
         <div class="form-group">
-          <label for="guarantorPan">Pan Number <span class="required-symbol">*</span></label>
+          <label for="guarantorPan">Pan Number <span class="required-symbol"> *</span></label>
           <input type="text" id="guarantorPan" name="guarantorPan" placeholder="Enter guarantor Pan number" maxlength="10" required>
         </div>
         <div class="form-group">
-          <label for="guarantorAadhar">Aadhar Number <span class="required-symbol">*</span></label>
+          <label for="guarantorAadhar">Aadhar Number <span class="required-symbol"> *</span></label>
           <input type="text" id="guarantorAadhar" name="guarantorAadhar" placeholder="Enter guarantor Aadhar number" maxlength="12" required>
         </div>
     
         <div class="form-group">
-          <label for="photoUpload">Upload Photo <span class="required-symbol">*</span></label>
+          <label for="photoUpload">Upload Photo <span class="required-symbol"> *</span></label>
           <input type="file" id="photoUpload" name="photoUpload" accept=".png, .jpg, .jpeg" required>
         </div>
         <div class="form-group">
-          <label for="aadharUpload">Upload Aadhar <span class="required-symbol">*</span></label>
+          <label for="aadharUpload">Upload Aadhar <span class="required-symbol"> *</span></label>
           <input type="file" id="aadharUpload" name="aadharUpload" accept=".png, .jpg, .jpeg" required>
         </div>
         <div class="form-group">
-          <label for="panUpload">Upload Pan <span class="required-symbol">*</span></label>
+          <label for="panUpload">Upload Pan <span class="required-symbol"> *</span></label>
           <input type="file" id="panUpload" name="panUpload" accept=".png, .jpg, .jpeg" required>
+        </div>
+        <div class="form-group">
+          <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
+          <input type="file" id="gincomeProof" name="gincomeProof" accept=".png, .jpg, .jpeg" required>
+        </div>
+        <div class="form-group">
+          <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
+          <input type="file" id="gresidentialProof" name="gresidentialProof" accept=".png, .jpg, .jpeg" required>
         </div>
         
         <h2>Documents Upload</h2>
         <div class="form-group">
-          <label for="photoUpload2">Upload Photo <span class="required-symbol">*</span></label>
+          <label for="photoUpload2">Upload Photo <span class="required-symbol"> *</span></label>
           <input type="file" id="photoUpload2" name="photoUpload2" accept=".png, .jpg, .jpeg" required>
         </div>
         <div class="form-group">
-          <label for="aadharUpload2">Upload Aadhar <span class="required-symbol">*</span></label>
+          <label for="aadharUpload2">Upload Aadhar <span class="required-symbol"> *</span></label>
           <input type="file" id="aadharUpload2" name="aadharUpload2" accept=".png, .jpg, .jpeg" required>
         </div>
         <div class="form-group">
-          <label for="panUpload2">Upload Pan <span class="required-symbol">*</span></label>
+          <label for="panUpload2">Upload Pan <span class="required-symbol"> *</span></label>
           <input type="file" id="panUpload2" name="panUpload2" accept=".png, .jpg, .jpeg" required>
         </div>
         
         <div class="form-group">
-          <label for="incomeProof">Upload Income Proof <span class="required-symbol">*</span></label>
+          <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
           <input type="file" id="incomeProof" name="incomeProof" accept=".png, .jpg, .jpeg" required>
         </div>
         <div class="form-group">
-          <label for="residentialProof">Upload Residential Proof <span class="required-symbol">*</span></label>
+          <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
           <input type="file" id="residentialProof" name="residentialProof" accept=".png, .jpg, .jpeg" required>
         </div>
         <!-- Signature Upload Section -->
         <div class="form-group">
-          <label for="signature">Upload Signature <span class="required-symbol">*</span></label>
+          <label for="signature">Upload Signature <span class="required-symbol"> *</span></label>
           <input type="text" id="signature" name="signature" class="dropdown" readonly placeholder="Click to Sign" onclick="openSignatureBox()" required>
         </div>
 
@@ -1077,6 +1101,18 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    //script for loan amount
+document.getElementById("loanAmount").addEventListener("input", function () {
+  const loanAmount = this.value;
+  const errorElement = document.getElementById("loanAmountError");
+
+  if (loanAmount < 10000 || loanAmount > 1000000) {
+    errorElement.textContent = "Loan amount must be between ₹10,000 and ₹10,00,000.";
+  } else {
+    errorElement.textContent = ""; // Clear error message
+  }
+});
+
     document.getElementById("dob").addEventListener("change", function () {
       const dob = new Date(this.value);
       const today = new Date();
@@ -1111,8 +1147,10 @@ document.addEventListener('DOMContentLoaded', function() {
         phone: document.getElementById('phone').value,
         dob: document.getElementById('dob').value,
         gender: document.getElementById('gender').value,
+        ownership: document.getElementById('ownership').value,
         address: document.getElementById('address').value,
         pan: document.getElementById('pan').value,
+        aadhar: document.getElementById('aadhar').value,
         state: document.getElementById('state').value,
         district: document.getElementById('district').value,
         town: document.getElementById('town').value,
@@ -1122,6 +1160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         refName1: document.getElementById('refName1').value,
         refRelationship1: document.getElementById('refRelationship1').value,
         refContact1: document.getElementById('refContact1').value,
+        gownership: document.getElementById('gownership').value,
         guarantorAddress: document.getElementById('guarantorAddress').value,
         guarantorPan: document.getElementById('guarantorPan').value,
         guarantorAadhar: document.getElementById('guarantorAadhar').value,

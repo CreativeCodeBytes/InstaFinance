@@ -511,6 +511,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                                 <div class="col-md-6">
                                     <h6 class="text-primary">Address & Documents</h6>
+                                    <p><strong>Address Ownership:</strong> ${application.ownership}</p>
                                     <p><strong>Address:</strong> ${application.address}</p>
                                     <p><strong>PAN:</strong> ${application.pan}</p>
                                     <p><strong>Aadhar:</strong> ${application.aadhar}</p>
@@ -530,6 +531,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <h4 class="text-warning text-center">Guarantor Details</h4>
                                     <p><strong>Guarantor Name:</strong> ${application.refName1}</p>
                                     <p><strong>Contact:</strong> ${application.refContact1}</p>
+                                    <p><strong>Address Ownership:</strong> ${application.gownership}</p>
                                     <p><strong>Address:</strong> ${application.guarantorAddress}</p>
                                     <p><strong>PAN:</strong> ${application.guarantorPan}</p>
                                     <p><strong>Aadhar:</strong> ${application.guarantorAadhar}</p>
@@ -552,6 +554,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                      <h6>PAN</h6>
                                      <img src="${application.panUpload}" alt="PAN" class="img-fluid">
                                  </div>
+                                 <div class="col-md-4">
+                                     <h6>Income Proof</h6>
+                                     <img src="${application.incomeProof}" alt="Income" class="img-fluid">
+                                 </div>
+                                 <div class="col-md-4">
+                                     <h6>Residential Proof</h6>
+                                     <img src="${application.residentialProof}" alt="Residential" class="img-fluid">
+                                 </div>
                                     </div>
                                 </div>
 
@@ -572,11 +582,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                  </div>
                                  <div class="col-md-4">
                                      <h6>Income Proof</h6>
-                                     <img src="${application.incomeProof}" alt="PAN" class="img-fluid">
+                                     <img src="${application.gincomeProof}" alt="Income" class="img-fluid">
                                  </div>
                                  <div class="col-md-4">
                                      <h6>Residential Proof Proof</h6>
-                                     <img src="${application.residentialProof}" alt="PAN" class="img-fluid">
+                                     <img src="${application.gresidentialProof}" alt="Residential" class="img-fluid">
                                  </div>
                                     </div>
                                 </div>
