@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insta Finance Dashboard</title>
+    <title>Insta Finance Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="AdminDashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
         <div class="sidebar">
             <div class="sidebar-logo"> 
-                <a href="Dashboard.html">   
+                <a href="AdminDashboard.html">   
                 <img src="Images/Logo.png" alt="Insta Finance Logo" class="logo"></a>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="#" data-section="dashboard">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <i class="fas fa-tachometer-alt"></i>Admin  Dashboard
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="#" data-section="form">
                         <i class="fas fa-file-alt"></i> Form
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-section="penalty">
                         <i class="fa-solid fa-circle-info"></i> Penalty
@@ -39,7 +39,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-section="download">
-                        <i class="fa-solid fa-file-arrow-down"></i> Download
+                        <i class="fa-solid fa-file-arrow-down"></i> Sanction Letter
                     </a>
                 </li>
                 <li class="nav-item">
@@ -75,7 +75,7 @@
 
             <main class="main-content">
                 <div id="dashboardContent">
-                    <h2 class="mb-4">Dashboard</h2>
+                    <h1 class="mb-4 text-center">Admin Dashboard</h1>
                     <div class="row mb-4">
                         <div class="col-md-4">
                             <h4 class="text-center">Daily</h4>
@@ -126,7 +126,7 @@
 
                 <div id="formContent" style="display: none;">
                     <h2 class="mb-4">EMI Form</h2>
-                    <form id="emiForm" class="mb-3">
+                    <!-- <form id="emiForm" class="mb-3">
                         <div class="mb-3">
                             <label for="name" class="form-label"><b>Name</b></label>
                             <input type="text" class="form-control" id="name" required>
@@ -171,13 +171,13 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Save
                         </button>
-                    </form>
+                    </form> -->
                 </div>
 
                 <div id="penaltyContent" style="display: none;">
                     <h2 class="mb-4">Penalty Rules Management</h2>
                     <div class="card mb-4">
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <h3 class="card-title">Add/Edit Penalty Rule</h3>
                             <form id="penaltyRuleForm">
                                 <div class="mb-3">
@@ -211,7 +211,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary" id="submitBtn">Save Rule</button>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="card">
@@ -353,7 +353,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="Dashboard.js"></script>
+    <script src="AdminDashboard.js"></script>
 </body>
 </html>
 
