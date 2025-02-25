@@ -10,6 +10,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
         body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             font-family: 'Poppins', sans-serif;
             /* background-image: url("2.jpg"); */
             /* background-blend-mode: overlay; */
@@ -48,11 +49,11 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
         }
-        .texture {
+        /* .texture {
            
 
             background-image: url('Images/5.jpg ');
-        }
+        } */
     </style>
 </head>
 
@@ -63,7 +64,16 @@
         <div class="text-center mb-8">
             <img src="Images/Logo.png" alt="Insta Finance Logo" class="company-logo mx-auto mb-4 rounded-full">
             <h1 class="text-4xl font-bold text-yellow-600">Insta Finance</h1>
-            <p class="text-white-600">Admin Login</p>
+            <div class="mb-3">
+                <label for="role" class="form-label">Select Role</label>
+                <select class="form-select" id="role" required>
+                    <option value="">Choose...</option>
+                    <option value="admin">Admin</option>
+                    <option value="super-admin">Super Admin</option>
+                    <option value="employee">Employee</option>
+                </select>
+                <div class="invalid-feedback">Please select a role.</div>
+            </div>
         </div>
         <form id="loginForm" class="space-y-6">
             <div class="relative">

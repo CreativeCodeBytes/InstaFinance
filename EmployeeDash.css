@@ -1,0 +1,334 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+}
+
+body {
+    background: #f8f9fa;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+}
+
+.dashboard {
+    display: none;
+    position: relative;
+}
+
+.dashboard-watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.03;
+    z-index: -1;
+    width: 600px;
+    height: 600px;
+    background-image: url('/Images/Logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.loan-status-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    background: white;
+}
+
+.loan-status-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #efa984;
+}
+
+.logo {
+    width: 80px;
+    height: 50px;
+}
+
+.welcome-text {
+    color: white;
+    margin: 0;
+    font-weight: 500;
+}
+
+.status-badge {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.reason-text {
+    font-size: 0.95rem;
+    color: #555;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.reason-text i {
+    margin-right: 8px;
+    color: var(--accent-color);
+}
+
+.btn-custom {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    transform: translateY(-2px);
+}
+
+.btn-logout {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.btn-logout:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.form-control {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.login-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.8rem;
+    color: #efa984;
+}
+
+.login-logo {
+    width: 200px;
+    height: 150px;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin: 10px 0;
+}
+
+.quick-stat {
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    margin-bottom: 20px;
+}
+
+.loan-details-card {
+    background: linear-gradient(135deg, #fff, #f8f9fa);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+}
+
+.loan-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.loan-info-item {
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.info-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.emi-schedule {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.emi-schedule::-webkit-scrollbar {
+    width: 8px;
+}
+
+.emi-schedule::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.emi-schedule::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.emi-row {
+    transition: all 0.3s ease;
+}
+
+.emi-row:hover {
+    background-color: #f8f9fa;
+}
+
+.notification-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-panel {
+    position: fixed;
+    right: 20px;
+    top: 80px;
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+}
+
+.notification-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.notification-item:hover {
+    background: #f8f9fa;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.payment-modal .modal-content {
+    border-radius: 15px;
+    border: none;
+}
+
+.payment-option {
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-option:hover {
+    border-color: var(--secondary-color);
+    background: #f8f9fa;
+}
+
+.payment-option.selected {
+    border-color: var(--secondary-color);
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.due-soon {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.paid {
+    color: #2ecc71;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .loan-info {
+        grid-template-columns: 1fr;
+    }
+
+    .notification-panel {
+        width: calc(100% - 40px);
+        right: 20px;
+    }
+
+    .login-container {
+        margin: 40px 20px;
+    }
+}

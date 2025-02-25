@@ -487,8 +487,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // just
 
     function viewApplication(e) {
-        const index = e.target.dataset.index;
-        const application = JSON.parse(localStorage.getItem('loanApplications'))[index];
+        const index = e.target.dataset.index
+        const application = JSON.parse(localStorage.getItem("loanApplications"))[index]
     
         const modalContent = `
             <div class="modal fade" id="applicationModal" tabindex="-1" aria-hidden="true">
@@ -500,117 +500,115 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         <div class="modal-body">
                             <div class="row g-3">
-                                <!-- Personal Details -->
-                                <div class="col-md-6">
-                                    <h6 class="text-primary">Personal Details</h6>
-                                    <p><strong>Name:</strong> ${application.name}</p>
-                                    <p><strong>Email:</strong> ${application.email}</p>
-                                    <p><strong>Phone:</strong> ${application.phone}</p>
-                                    <p><strong>Date of Birth:</strong> ${application.dob}</p>
-                                    <p><strong>Gender:</strong> ${application.gender}</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <h6 class="text-primary">Address & Documents</h6>
-                                    <p><strong>Address Ownership:</strong> ${application.ownership}</p>
-                                    <p><strong>Address:</strong> ${application.address}</p>
-                                    <p><strong>PAN:</strong> ${application.pan}</p>
-                                    <p><strong>Aadhar:</strong> ${application.aadhar}</p>
-                                </div>
-                                
-                                <!-- Loan Details -->
-                                <div class="col-md-12">
-                                    <h6 class="text-success">Loan Information</h6>
-                                    <p><strong>Loan Amount:</strong> ₹${application.loanAmount}</p>
-                                    <p><strong>Loan Tenure:</strong> ${application.tenure} months</p>
-                                    <p><strong>EMI Schedule:</strong> ${application.emiSchedule}</p>
-                                    <p><strong>Status:</strong> <span class="badge bg-${application.status === 'Approved' ? 'success' : 'danger'}">${application.status}</span></p>
-                                </div>
+                                    <!-- Personal Details -->
+                                    <div class="col-md-6">
+                                        <h6 class="text-primary">Personal Details</h6>
+                                        <p><strong>Name:</strong> ${application.name}</p>
+                                        <p><strong>Email:</strong> ${application.email}</p>
+                                        <p><strong>Phone:</strong> ${application.phone}</p>
+                                        <p><strong>Date of Birth:</strong> ${application.dob}</p>
+                                        <p><strong>Gender:</strong> ${application.gender}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="text-primary">Address & Documents</h6>
+                                        <p><strong>Address Ownership:</strong> ${application.ownership}</p>
+                                        <p><strong>Address:</strong> ${application.address}</p>
+                                        <p><strong>PAN:</strong> ${application.pan}</p>
+                                        <p><strong>Aadhar:</strong> ${application.aadhar}</p>
+                                    </div>
+                                    
+                                    <!-- Loan Details -->
+                                    <div class="col-md-12">
+                                        <h6 class="text-success">Loan Information</h6>
+                                        <p><strong>Loan Amount:</strong> ₹${application.loanAmount}</p>
+                                        <p><strong>Loan Tenure:</strong> ${application.tenure} months</p>
+                                        <p><strong>EMI Schedule:</strong> ${application.emiSchedule}</p>
+                                        <p><strong>Status:</strong> <span class="badge bg-${application.status === "Approved" ? "success" : "danger"}">${application.status}</span></p>
+                                    </div>
+        
+                                    <!-- Guarantor Details -->
+                                    <div class="col-md-12">
+                                        <h4 class="text-warning text-center">Guarantor Details</h4>
+                                        <p><strong>Guarantor Name:</strong> ${application.refName1}</p>
+                                        <p><strong>Contact:</strong> ${application.refContact1}</p>
+                                        <p><strong>Address Ownership:</strong> ${application.gownership}</p>
+                                        <p><strong>Address:</strong> ${application.guarantorAddress}</p>
+                                        <p><strong>PAN:</strong> ${application.guarantorPan}</p>
+                                        <p><strong>Aadhar:</strong> ${application.guarantorAadhar}</p>
+                                    </div>
+        
+                                    <!-- Uploaded Documents -->
+                                    <div class="col-md-12">
+                                        <h4 class="text-info text-center">Uploaded Documents</h4>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h6>Photo</h6>
+                                                <img src="${application.photoUpload}" alt="Photo" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6>Aadhar</h6>
+                                                <img src="${application.aadharUpload}" alt="Aadhar" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6>PAN</h6>
+                                                <img src="${application.panUpload}" alt="PAN" class="img-fluid">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <h6>Income Proof</h6>
+                                                <img src="${application.incomeProof}" alt="Income Proof" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6>Residential Proof</h6>
+                                                <img src="${application.residentialProof}" alt="Residential Proof" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
     
-                                <!-- Guarantor Details -->
-                                <div class="col-md-12">
-                                    <h4 class="text-warning text-center">Guarantor Details</h4>
-                                    <p><strong>Guarantor Name:</strong> ${application.refName1}</p>
-                                    <p><strong>Contact:</strong> ${application.refContact1}</p>
-                                    <p><strong>Address Ownership:</strong> ${application.gownership}</p>
-                                    <p><strong>Address:</strong> ${application.guarantorAddress}</p>
-                                    <p><strong>PAN:</strong> ${application.guarantorPan}</p>
-                                    <p><strong>Aadhar:</strong> ${application.guarantorAadhar}</p>
-                                </div>
-    
-                                <!-- Uploaded Documents -->
-                                <div class="col-md-12 ">
-                                <div class="text-center">
-                                    <h4 class="text-info">Uploaded Documents</h4>
-                                    <div class="row text-center">
-                                        <div class="col-md-4">
-                                     <h6>Photo</h6>
-                                     <img src="${application.photoUpload}" alt="Photo" class="img-fluid">
-                                 </div>
-                                 <div class="col-md-4">
-                                     <h6>Aadhar</h6>
-                                     <img src="${application.aadharUpload}" alt="Aadhar" class="img-fluid">
-                                 </div>
-                                 <div class="col-md-4">
-                                     <h6>PAN</h6>
-                                     <img src="${application.panUpload}" alt="PAN" class="img-fluid">
-                                 </div>
-                                 <div class="col-md-4">
-                                     <h6>Income Proof</h6>
-                                     <img src="${application.incomeProof}" alt="Income" class="img-fluid">
-                                 </div>
-                                 <div class="col-md-4">
-                                     <h6>Residential Proof</h6>
-                                     <img src="${application.residentialProof}" alt="Residential" class="img-fluid">
-                                 </div>
+                                    <!-- Guarantor Documents -->
+                                    <div class="col-md-12 mt-4">
+                                        <h4 class="text-info text-center">Guarantor Documents</h4>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h6>Photo</h6>
+                                                <img src="${application.photoUpload2}" alt="Guarantor Photo" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6>Aadhar</h6>
+                                                <img src="${application.aadharUpload2}" alt="Guarantor Aadhar" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6>PAN</h6>
+                                                <img src="${application.panUpload2}" alt="Guarantor PAN" class="img-fluid">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <h6>Income Proof</h6>
+                                                <img src="${application.gincomeProof}" alt="Guarantor Income Proof" class="img-fluid">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6>Residential Proof</h6>
+                                                <img src="${application.gresidentialProof}" alt="Guarantor Residential Proof" class="img-fluid">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                            <div class="text-center">
-                                    <h4 class="text-info">Guarentor Uploaded Documents</h4>
-                                    <div class="row text-center">
-                                       <div class="col-md-4">
-                                    <h6>Photo</h6>
-                                  <img src="${application.photoUpload2}" alt="Photo" class="img-fluid">
-                                 </div>
-                                 <div class="col-md-4">
-                                    <h6>Aadhar</h6>
-                                     <img src="${application.aadharUpload2}" alt="Aadhar" class="img-fluid">
-                                 </div>
-                                 <div class="col-md-4">
-                                     <h6>PAN</h6>
-                                     <img src="${application.panUpload2}" alt="PAN" class="img-fluid">
-                                 </div>
-                                 <div class="col-md-4">
-                                     <h6>Income Proof</h6>
-                                     <img src="${application.gincomeProof}" alt="Income" class="img-fluid">
-                                 </div>
-                                 <div class="col-md-4">
-                                     <h6>Residential Proof Proof</h6>
-                                     <img src="${application.gresidentialProof}" alt="Residential" class="img-fluid">
-                                 </div>
-                                    </div>
-                                </div>
-    
-                                <!-- Signature -->
-                                <div class="col-md-12 text-center">
-                                    <h4>Applicant Signature</h4>
-                                    <img src="${application.signatureUpload}" alt="Signature" class="img-fluid w-50">
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        `;
+        `
     
-        document.body.insertAdjacentHTML('beforeend', modalContent);
-        const modal = new bootstrap.Modal(document.getElementById('applicationModal'));
-        modal.show();
+        document.body.insertAdjacentHTML("beforeend", modalContent)
+        const modal = new bootstrap.Modal(document.getElementById("applicationModal"))
+        modal.show()
     
-        document.getElementById('applicationModal').addEventListener('hidden.bs.modal', function () {
-            this.remove();
-        });
-    }
+        document.getElementById("applicationModal").addEventListener("hidden.bs.modal", function () {
+          this.remove()
+        })
+      }
     
     // Function to create clickable image section
     function generateImageSection(title, imgSrc) {
