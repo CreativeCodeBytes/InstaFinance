@@ -1,0 +1,400 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.navbar {
+    background-color: #ffffff !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification {
+    position: relative;
+    cursor: pointer;
+    margin-right: 15px;
+}
+.notification i {
+    font-size: 22px;
+}
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 3px 7px;
+    border-radius: 50%;
+}
+.dropdown-menu {
+    width: 250px;
+}
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.dropdown-menu ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+.dropdown-menu ul li:hover {
+    background: #f2f2f2;
+}
+.logo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+
+/* 🔵 Dropdown Styling */
+.dropdown-menu {
+    width: 280px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px 0;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    display: none; /* Hide by default */
+    z-index: 100;
+    border: 2px solid #007bff;
+}
+
+/* Show dropdown when active */
+.show {
+    display: block;
+}
+
+/* 📜 List Item Styling */
+.dropdown-menu li {
+    list-style: none;
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 🟦 Add Notification Icons */
+.dropdown-menu li::before {
+    content: "\f0f3"; /* Bell icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #007bff;
+}
+
+/* Last Item Border Remove */
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+/* ✨ Hover Effect */
+.dropdown-menu li:hover {
+    background: #007bff;
+    color: white;
+    transform: scale(1.02);
+}
+
+/* 🔴 Badge for Notification Count */
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
+}
+
+/* 🔔 Notification Bell Icon */
+.notification {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.notification:hover {
+    transform: scale(1.1);
+}
+
+.notification i {
+    font-size: 24px;
+    color: #007bff;
+    transition: color 0.3s ease-in-out;
+}
+
+/* 🔵 Notification Bell Hover Effect */
+.notification:hover i {
+    color: #0056b3;
+}
+
+.dropdown-menu li:hover::before {
+    color: white;
+}
+
+
+
+
+
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    padding: 20px;
+    color: #ecf0f1;
+    transition: all 0.3s ease;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .nav-link {
+    color: #ecf0f1;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: #34495e;
+    color: #ffffff;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+}
+
+.main-wrapper {
+    flex: 1;
+    margin-left: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px;
+}
+
+.btn-group .btn {
+    border-radius: 20px;
+}
+
+.table {
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+#emiForm {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+    }
+
+    .main-content {
+        margin: 0;
+        border-radius: 0;
+    }
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+.btn-danger {
+    background-color: #e25b5f;
+    border-color: #e25b5f;
+}
+btn-danger:hover,
+.btn-danger:focus {
+    background-color: #ef3838;
+    border-color: #ef3838;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* Styles for pie charts */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Styles for Penalty Rules Management section */
+#penaltyContent {
+    padding: 20px;
+}
+
+#penaltyContent .card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#penaltyContent .card-title {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+#penaltyRuleForm .form-label {
+    font-weight: 600;
+}
+
+#penaltyRulesTable {
+    width: 100%;
+}
+
+#penaltyRulesTable th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.action-buttons .btn {
+    margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+    #penaltyContent .card {
+        margin-bottom: 15px;
+    }
+
+    #penaltyRulesTable {
+        font-size: 0.9em;
+    }
+}
+/* Styles for Download Content */
+#loanSaction {
+    padding: 20px;
+}
+
+
+#loanSanction .card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#loanSanction .card-title {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+
+
+#loanDetailsTable {
+    width: 100%;
+}
+
+#loanDetailsTable th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.loan-actions .btn {
+    margin-right: 5px;
+}
+
+.loan-view-btn {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.loan-approve-btn {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.loan-send-btn {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.loan-view-btn:hover {
+    background-color: #2980b9;
+}
+
+.loan-approve-btn:hover {
+    background-color: #218838;
+}
+
+.loan-send-btn:hover {
+    background-color: #c82333;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

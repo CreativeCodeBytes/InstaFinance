@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add/Edit Penalty Rule</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 500px; margin: auto; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .form-group { margin-bottom: 10px; }
+        label { font-weight: bold; display: block; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; }
+        button { padding: 10px 15px; background: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Add/Edit Penalty Rule</h2>
+        <form id="penaltyRuleForm">
+            <div class="form-group">
+                <label for="custName">Customer Name</label>
+                <input type="text" id="custName" required>
+            </div>
+            <div class="form-group">
+                <label for="ruleName">Rule Name</label>
+                <input type="text" id="ruleName" required>
+            </div>
+            <div class="form-group">
+                <label for="loanType">Loan Type</label>
+                <select id="loanType" required>
+                    <option value="">Select Loan Type</option>
+                    <option value="personal">Personal Loan</option>
+                    <option value="business">Business Loan</option>
+                    <option value="mortgage">Mortgage</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="gracePeriod">Grace Period (days)</label>
+                <input type="number" id="gracePeriod" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="penaltyRate">Penalty Rate (%)</label>
+                <input type="number" id="penaltyRate" min="0" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="maxPenalty">Max Penalty Amount (₹)</label>
+                <input type="number" id="maxPenalty" min="0" step="1" required>
+            </div>
+            <button type="submit">Save Rule</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('penaltyRuleForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const rule = {
+                custName: document.getElementById('custName').value,
+                ruleName: document.getElementById('ruleName').value,
+                loanType: document.getElementById('loanType').value,
+                gracePeriod: document.getElementById('gracePeriod').value,
+                penaltyRate: document.getElementById('penaltyRate').value,
+                maxPenalty: document.getElementById('maxPenalty').value,
+                id: Date.now()
+            };
+
+            let penaltyRules = JSON.parse(localStorage.getItem('penaltyRules')) || [];
+            penaltyRules.push(rule);
+            localStorage.setItem('penaltyRules', JSON.stringify(penaltyRules));
+
+            alert('Penalty rule saved successfully!');
+            document.getElementById('penaltyRuleForm').reset();
+        });
+    </script>
+
+</body>
+</html>

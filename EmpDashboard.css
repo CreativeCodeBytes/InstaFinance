@@ -238,3 +238,28 @@ canvas {
 .button-container .btn {
     min-width: 120px;
 }
+
+
+.card {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.center-content table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.center-content th, .center-content td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.modal-dialog {
+    max-width: 800px;
+}
+
+.btn-sm {
+    margin-right: 5px;
+}

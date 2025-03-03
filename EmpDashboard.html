@@ -6,6 +6,8 @@
     <title>Insta Finance Employee Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="EmpDashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -39,7 +41,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-section="download">
-                        <i class="fa-solid fa-file-arrow-down"></i> Download
+                        <i class="fa-solid fa-file-arrow-down"></i> Sanction Letter
                     </a>
                 </li>
                 <li class="nav-item">
@@ -236,7 +238,7 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="penaltyRulesTable">
                                         <!-- Table rows will be dynamically added here -->
                                     </tbody>
                                 </table>
@@ -276,52 +278,124 @@
                 </div>
 
                 <!-- Download Section -->
-                <div id="downloadContent" style="display: none;">
+<div id="downloadContent" style="display: none;">
+    <!-- Loan Sanction Letter Form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3>Generate Loan Sanction Letter</h3>
+            <form id="sanctionLetterForm">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="loanAccNo" class="form-label">Loan Account Number</label>
+                        <input type="text" class="form-control" id="loanAccNo" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="applicantName" class="form-label">Applicant Name</label>
+                        <input type="text" class="form-control" id="applicantName" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="sanctionDate" class="form-label">Sanction Date</label>
+                        <input type="date" class="form-control" id="sanctionDate" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="loanAmount" class="form-label">Loan Amount</label>
+                        <input type="number" class="form-control" id="loanAmount" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="emiAmount" class="form-label">EMI Amount</label>
+                        <input type="number" class="form-control" id="emiAmount" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="loanType" class="form-label">Loan Type</label>
+                        <select class="form-select" id="loanType" required>
+                            <option value="Personal">Personal Loan</option>
+                            <option value="Business">Business Loan</option>
+                            <option value="Home">Home Loan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="tenure" class="form-label">Tenure (Years)</label>
+                        <input type="number" class="form-control" id="tenure" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="interestRate" class="form-label">Interest Rate (%)</label>
+                        <input type="number" class="form-control" id="interestRate" step="0.1" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Generate Sanction Letter</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loan Sanction Letters Table -->
+    <div class="card">
+        <div class="card-body">
+            <h3>Generated Sanction Letters</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sr. No</th>
+                            <th>Loan Acc No</th>
+                            <th>Name</th>
+                            <th>Sanctioned Amount</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sanctionLettersTable">
+                        <!-- Sample row, will be dynamic in actual implementation -->
+                        <tr>
+                            <td>1</td>
+                            <td>LA001</td>
+                            <td>Vishal Patil</td>
+                            <td>₹5,00,000</td>
+                            <td>10/01/2025</td>
+                            <td>
+                                <button class="btn btn-sm btn-info view-letter">View</button>
+                                <button class="btn btn-sm btn-primary download-letter">Download</button>
+                                <button class="btn btn-sm btn-success send-letter">Send</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loan Sanction Letter Preview Modal -->
+    <div class="modal fade" id="letterPreviewModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Loan Sanction Letter</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
                     <div id="loanSanction">
                         <div class="center-content">
                             <h1>Loan Sanction Letter</h1>
                             <table>
-                                <tr>
-                                    <th>Loan Approved By</th>
-                                    <td>INSTA FINANCE</td>
-                                </tr>
-                                <tr>
-                                    <th>Applicant Name</th>
-                                    <td>Vishal Patil</td>
-                                </tr>
-                                <tr>
-                                    <th>Sanction Date</th>
-                                    <td>10/01/2025</td>
-                                </tr>
-                                <tr>
-                                    <th>Loan Amount</th>
-                                    <td>&#8377;5,00,000</td>
-                                </tr>
-                                <tr>
-                                    <th>EMI Structure</th>
-                                    <td>&#8377;10,500/month</td>
-                                </tr>
-                                <tr>
-                                    <th>Loan Type</th>
-                                    <td>Monthly</td>
-                                </tr>
-                                <tr>
-                                    <th>Tenure</th>
-                                    <td>5 years</td>
-                                </tr>
-                                <tr>
-                                    <th>Interest Rate</th>
-                                    <td>7.5% per annum</td>
-                                </tr>
+                                <!-- ... existing table content ... -->
                             </table>
                         </div>
                     </div>
-                    <div class="button-container">
-                        <button id="download" class="btn btn-primary">Download</button>
-                        <button id="whatsApp" class="btn btn-success">WhatsApp</button>
-                    </div>
                 </div>
-                <!-- Download Section End -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="downloadPreview">Download</button>
+                    <button type="button" class="btn btn-success" id="whatsAppPreview">WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <!-- Notification Section -->
                 <div id="notificationContent" style="display: none;">
@@ -360,6 +434,247 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="EmpDashboard.js"></script>
+    <script>
+       
+// Store generated letters data
+// let sanctionLetters = [];
+
+// // Handle form submission
+// document.getElementById('sanctionLetterForm').addEventListener('submit', function(e) {
+//     e.preventDefault();
+    
+//     // Collect form data and generate letter
+//     const formData = {
+//         loanAccNo: document.getElementById('loanAccNo').value,
+//         applicantName: document.getElementById('applicantName').value,
+//         loanAmount: document.getElementById('loanAmount').value,
+//         interestRate: document.getElementById('interestRate').value,
+//         tenure: document.getElementById('tenure').value,
+//         emiAmount: document.getElementById('emiAmount').value,
+//         loanType: document.getElementById('loanType').options[document.getElementById('loanType').selectedIndex].text,
+//         sanctionDate: document.getElementById('sanctionDate').value
+//     };
+
+//     console.log("Form Data:", formData); // Debug log
+    
+//     // Add to letters array
+//     sanctionLetters.push(formData);
+    
+//     // Add to table
+//     addLetterToTable(formData, sanctionLetters.length);
+    
+//     // Reset form
+//     this.reset();
+// });
+
+// function addLetterToTable(data, index) {
+//     const table = document.getElementById('sanctionLettersTable');
+//     const row = table.insertRow(-1); // Add at the end
+//     row.innerHTML = `
+//         <td>${index}</td>
+//         <td>${data.loanAccNo}</td>
+//         <td>${data.applicantName}</td>
+//         <td>₹${Number(data.loanAmount).toLocaleString('en-IN')}</td>
+//         <td>${formatDate(data.sanctionDate)}</td>
+//         <td>
+//             <button class="btn btn-sm btn-info view-letter" data-index="${index-1}">View</button>
+//             <button class="btn btn-sm btn-primary download-letter" data-index="${index-1}">Download</button>
+//             <button class="btn btn-sm btn-success send-letter" data-index="${index-1}">Send</button>
+//         </td>
+//     `;
+// }
+
+// function formatDate(dateString) {
+//     const date = new Date(dateString);
+//     return date.toLocaleDateString('en-IN');
+// }
+
+// // Handle view button clicks
+// document.addEventListener('click', function(e) {
+//     if (e.target.classList.contains('view-letter')) {
+//         const index = parseInt(e.target.getAttribute('data-index'));
+//         const letterData = sanctionLetters[index];
+//         console.log("View Letter Data:", letterData); // Debug log
+//         showLetterPreview(letterData);
+//     }
+// });
+
+// // Handle download button clicks
+// document.addEventListener('click', function(e) {
+//     if (e.target.classList.contains('download-letter')) {
+//         const index = parseInt(e.target.getAttribute('data-index'));
+//         const letterData = sanctionLetters[index];
+//         console.log("Download Letter Data:", letterData); // Debug log
+//         downloadSanctionLetter(letterData);
+//     }
+// });
+
+// function showLetterPreview(data) {
+//     if (!data) {
+//         console.error("No data provided for preview");
+//         return;
+//     }
+
+//     const modal = new bootstrap.Modal(document.getElementById('letterPreviewModal'));
+//     const modalBody = document.querySelector('#letterPreviewModal .modal-body');
+    
+//     modalBody.innerHTML = `
+//         <div id="loanSanction">
+//             <div class="center-content">
+//                 <h1 class="text-center mb-4">Loan Sanction Letter</h1>
+//                 <table class="table table-bordered">
+//                     <tr>
+//                         <th>Loan Approved By</th>
+//                         <td>INSTA FINANCE</td>
+//                     </tr>
+//                     <tr>
+//                         <th>Applicant Name</th>
+//                         <td>${data.applicantName}</td>
+//                     </tr>
+//                     <tr>
+//                         <th>Loan Account Number</th>
+//                         <td>${data.loanAccNo}</td>
+//                     </tr>
+//                     <tr>
+//                         <th>Sanction Date</th>
+//                         <td>${formatDate(data.sanctionDate)}</td>
+//                     </tr>
+//                     <tr>
+//                         <th>Loan Amount</th>
+//                         <td>₹${Number(data.loanAmount).toLocaleString('en-IN')}</td>
+//                     </tr>
+//                     <tr>
+//                         <th>EMI Structure</th>
+//                         <td>₹${Number(data.emiAmount).toLocaleString('en-IN')}/month</td>
+//                     </tr>
+//                     <tr>
+//                         <th>Loan Type</th>
+//                         <td>${data.loanType}</td>
+//                     </tr>
+//                     <tr>
+//                         <th>Tenure</th>
+//                         <td>${data.tenure} years</td>
+//                     </tr>
+//                     <tr>
+//                         <th>Interest Rate</th>
+//                         <td>${data.interestRate}% per annum</td>
+//                     </tr>
+//                 </table>
+//             </div>
+//         </div>
+//     `;
+    
+//     modal.show();
+// }
+
+// function downloadSanctionLetter(data) {
+//     if (!data) {
+//         console.error("No data provided for PDF generation");
+//         return;
+//     }
+
+//     const { jsPDF } = window.jspdf;
+//     const doc = new jsPDF({
+//         orientation: 'portrait',
+//         unit: 'mm',
+//         format: 'a4'
+//     });
+
+//     // Add watermark
+//     doc.setTextColor(230, 230, 230);
+//     doc.setFontSize(60);
+//     doc.setFont('helvetica', 'bold');
+//     doc.save();
+//     doc.translate(150, 150);
+//     doc.rotate(45);
+//     doc.text("INSTA FINANCE", -50, 0);
+//     doc.restore();
+
+//     // Reset text color and add content
+//     doc.setTextColor(0, 0, 0);
+//     doc.setFontSize(22);
+//     doc.setFont('helvetica', 'bold');
+//     doc.text('LOAN SANCTION LETTER', 105, 30, { align: 'center' });
+
+//     // Company header
+//     doc.setFontSize(16);
+//     doc.text('INSTA FINANCE', 105, 45, { align: 'center' });
+    
+//     doc.setFontSize(10);
+//     doc.setFont('helvetica', 'normal');
+//     doc.text('123 Finance Street, City - 400001', 105, 52, { align: 'center' });
+//     doc.text('Tel: +91 1234567890 | Email: contact@instafinance.com', 105, 57, { align: 'center' });
+
+//     // Letter content
+//     doc.setFontSize(11);
+//     doc.text(`Date: ${formatDate(data.sanctionDate)}`, 20, 70);
+//     doc.text(`Ref No: ${data.loanAccNo}`, 20, 77);
+
+//     doc.text('To,', 20, 90);
+//     doc.text(data.applicantName, 20, 97);
+    
+//     doc.setFont('helvetica', 'bold');
+//     doc.text('Subject: Sanction of Loan', 20, 110);
+    
+//     doc.setFont('helvetica', 'normal');
+//     doc.text('Dear Sir/Madam,', 20, 125);
+    
+//     const letterBody = 'With reference to your loan application, we are pleased to inform you that your loan has been sanctioned with the following terms and conditions:';
+//     doc.text(letterBody, 20, 135, { maxWidth: 170 });
+
+//     // Loan details
+//     let yPos = 150;
+//     const details = [
+//         ['Loan Account Number', `: ${data.loanAccNo}`],
+//         ['Applicant Name', `: ${data.applicantName}`],
+//         ['Sanctioned Amount', `: ₹${Number(data.loanAmount).toLocaleString('en-IN')}`],
+//         ['Interest Rate', `: ${data.interestRate}% per annum`],
+//         ['Loan Tenure', `: ${data.tenure} years`],
+//         ['EMI Amount', `: ₹${Number(data.emiAmount).toLocaleString('en-IN')}`],
+//         ['Loan Type', `: ${data.loanType}`],
+//         ['Sanction Date', `: ${formatDate(data.sanctionDate)}`]
+//     ];
+
+//     details.forEach(row => {
+//         doc.text(row[0], 20, yPos);
+//         doc.text(row[1], 70, yPos);
+//         yPos += 8;
+//     });
+
+//     // Terms and conditions
+//     yPos += 10;
+//     doc.setFont('helvetica', 'bold');
+//     doc.text('Terms and Conditions:', 20, yPos);
+//     doc.setFont('helvetica', 'normal');
+//     yPos += 8;
+
+//     const terms = [
+//         '1. The loan amount will be disbursed after completion of all documentation.',
+//         '2. EMI will be deducted on the specified date of every month.',
+//         '3. Delay in EMI payment will attract penalty charges.',
+//         '4. Prepayment charges may apply as per bank norms.',
+//         '5. The bank reserves the right to recall the loan in case of default.'
+//     ];
+
+//     terms.forEach(term => {
+//         doc.text(term, 20, yPos, { maxWidth: 170 });
+//         yPos += 8;
+//     });
+
+//     // Signature
+//     yPos += 15;
+//     doc.text('For INSTA FINANCE', 20, yPos);
+//     yPos += 20;
+//     doc.text('Authorized Signatory', 20, yPos);
+
+//     // Footer
+//     doc.setFontSize(8);
+//     doc.text('This is a computer generated document and does not require physical signature.', 105, 285, { align: 'center' });
+
+//     // Save the PDF
+//     doc.save(`Loan_Sanction_Letter_${data.loanAccNo}.pdf`);
+// }
+    </script>
 </body>
 </html>
 

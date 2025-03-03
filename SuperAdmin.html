@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insta Finance Employee Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="SuperAdmin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-logo"> 
+                <a href="SuperAdmin.html">   
+                <img src="Images/Logo.png" alt="Insta Finance Logo" class="logo"></a>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>SuperAdmin Dashboard
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="form">
+                        <i class="fas fa-file-alt"></i> Form
+                    </a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="penalty">
+                        <i class="fa-solid fa-circle-info"></i> Penalty
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="download">
+                        <i class="fa-solid fa-file-arrow-down"></i> Sanction Letter
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="LoanForm.html" data-section="totalEnquiries">
+                        <i class="fas fa-chart-bar"></i> Total Enquiries
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+
+        <div class="main-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                             <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <!-- Notification Bell -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link notification" href="#" id="notificationDropdown" role="button">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge" id="notificationCount">3</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="notificationDropdown" id="notificationList">
+                                    <li class="notification-item">Vikas Patil Submitted Loan Form</li>
+                                    <li class="notification-item">Ameet Shah Submitted Loan Form</li>
+                                    <li class="notification-item">Radhika Bhosle Submitted Loan Form</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-primary me-2" id="homeBtn">
+                                    <i class="fas fa-home"></i> Home
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-danger" id="logoutBtn" >
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="main-content">
+                <div id="dashboardContent">
+                    
+                    <h1 class="mb-4 text-center">SuperAdmin Dashboard</h1>
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h4 class="text-center">Daily</h4>
+                            <div class="chart-container">
+                                <canvas id="dailySuperAdminChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-center">Weekly</h4>
+                            <div class="chart-container">
+                                <canvas id="weeklySuperAdminChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-center">Monthly</h4>
+                            <div class="chart-container">
+                                <canvas id="monthlySuperAdminChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group mb-3" role="group" aria-label="Time period">
+                        <button type="button" class="btn btn-primary active" data-period="daily">Daily</button>
+                        <button type="button" class="btn btn-primary" data-period="weekly">Weekly</button>
+                        <button type="button" class="btn btn-primary" data-period="monthly">Monthly</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <!-- <th>Loan Acc. No.</th> -->
+                                    <th>Name</th>
+                                    <th>Amount Sanctioned</th>
+                                    <th>Date of Sanctioned Amount</th>
+                                    <th>Repayment Amount</th>
+                                    <th>Repayment Date</th>
+                                    <th>Interest</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="superAdminTableBody">
+                                <!-- Table rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="formContent" style="display: none;">
+                    <h2 class="mb-4">EMI Form</h2>
+                    <form id="emiForm" class="mb-3">
+                        <div class="mb-3">
+                            <label for="name" class="form-label"><b>Name</b></label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label"><b>Amount Sanctioned</b></label>
+                            <input type="number" class="form-control" id="amount" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sanctionDate" class="form-label"><b>Date of Sanctioned Amount</b></label>
+                            <input type="date" class="form-control" id="sanctionDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="repaymentAmount" class="form-label"><b>Repayment Amount</b></label>
+                            <input type="number" class="form-control" id="repaymentAmount" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="repaymentDate" class="form-label">Repayment Date</label>
+                            <input type="date" class="form-control" id="repaymentDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="interest" class="form-label">Interest</label>
+                            <input type="number" class="form-control" id="interest" step="0.01" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="emiSchedule" class="form-label">Preferred EMI Schedule</label>
+                            <select class="form-select" id="emiSchedule" required>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" id="status" required>
+                                <option value="EMI Pending">EMI Pending</option>
+                                <option value="EMI Paid">EMI Paid</option>
+                                <option value="Total Amount Paid">Total Amount Paid</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                    </form>
+                </div>
+
+                <div id="penaltyContent" style="display: none;">
+                    <h2 class="mb-4">Penalty Rules Management</h2>
+                    <div class="card mb-4">
+                        <!-- <div class="card-body">
+                            <h3 class="card-title">Add/Edit Penalty Rule</h3>
+                            <form id="penaltyRuleForm">
+                                <div class="mb-3">
+                                    <label for="custName" class="form-label">Customer Name</label>
+                                    <input type="text" class="form-control" id="custName" name="custName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ruleName" class="form-label">Rule Name</label>
+                                    <input type="text" class="form-control" id="ruleName" name="ruleName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loanType" class="form-label">Loan Type</label>
+                                    <select class="form-select" id="loanType" name="loanType" required>
+                                        <option value="">Select Loan Type</option>
+                                        <option value="personal">Personal Loan</option>
+                                        <option value="business">Business Loan</option>
+                                        <option value="mortgage">Mortgage</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="gracePeriod" class="form-label">Grace Period (days)</label>
+                                    <input type="number" class="form-control" id="gracePeriod" name="gracePeriod" min="0" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="penaltyRate" class="form-label">Penalty Rate (%)</label>
+                                    <input type="number" class="form-control" id="penaltyRate" name="penaltyRate" min="0" step="0.01" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="maxPenalty" class="form-label">Max Penalty Amount (₹)</label>
+                                    <input type="number" class="form-control" id="maxPenalty" name="maxPenalty" min="0" step="1" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="submitBtn">Save Rule</button>
+                            </form>
+                        </div> -->
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Existing Penalty Rules</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="penaltyRulesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <th>Rule Name</th>
+                                            <th>Loan Type</th>
+                                            <th>Grace Period</th>
+                                            <th>Penalty Rate</th>
+                                            <th>Max Penalty</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="superAdminPenaltyTable">
+                                        <!-- Table rows will be dynamically added here -->
+                                    </tbody >
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="totalEnquiriesContent" style="display: none;">
+                    <h2 class="mb-4">Total Enquiries</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Loan Amount</th>
+                                    <th>Loan Tenure</th>
+                                    <th>EMI Schedule</th>
+                                    <th>Address</th>
+                                    <th>State</th>
+                                    <th>District</th>
+                                    <th>Town</th>
+                                    
+                                    <!-- <th>Uploaded Documents</th> -->
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody id="enquiriesTableBody">
+                                <!-- Table rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Download Section -->
+                <div id="downloadContent" style="display: none;">
+                    <div id="loanSanction">
+                        <div class="card" id="loanDetailsCard">
+                            <div class="card-body">
+                                <h3 class="card-title">Loan Sanction Details Management</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="loanDetailsTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Loan Account Number</th>
+                                                <th>Name</th>
+                                                <th>Sanction Date</th>
+                                                <th>Loan Sanction Amount</th>
+                                                <th>Payment Date</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="loanDetailsTableBody">
+                                            <!-- Table rows will be dynamically added here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                <!-- Download Section End -->
+
+                <!-- Notification Section -->
+                <div id="notificationContent" style="display: none;">
+                    <h2>Notification Management</h2>
+
+                    <form id="notificationForm">
+                        <div class="mb-3">
+                            <label for="employeeName" class="form-label">Name of Employee</label>
+                            <input type="text" class="form-control" id="employeeName" placeholder="Enter Employee Name">
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="templateType" class="form-label">Select Type</label>
+                            <select class="form-select" id="templateType">
+                                <option value="paymentReminder">EMI Reminder</option>
+                                <option value="paymentAcknowledgment">Successful Payment Acknowledgment</option>
+                                <option value="penaltyAlert">Penalty Alert</option>
+                            </select>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="templateContent" class="form-label">Message</label>
+                            <textarea class="form-control" id="templateContent" rows="4"></textarea>
+                        </div>
+                    
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-primary" id="saveTemplateBtn">Save And Send</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Notification Section End -->
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="SuperAdmin.js"></script>
+</body>
+</html>
+
