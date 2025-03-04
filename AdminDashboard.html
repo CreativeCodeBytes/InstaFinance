@@ -272,47 +272,67 @@
                 <!-- Download Section -->
                 <div id="downloadContent" style="display: none;">
                     <div id="loanSanction">
-                        <div class="center-content">
-                            <h1>Loan Sanction Letter</h1>
-                            <table>
-                                <tr>
-                                    <th>Loan Approved By</th>
-                                    <td>INSTA FINANCE</td>
-                                </tr>
-                                <tr>
-                                    <th>Applicant Name</th>
-                                    <td>Vishal Patil</td>
-                                </tr>
-                                <tr>
-                                    <th>Sanction Date</th>
-                                    <td>10/01/2025</td>
-                                </tr>
-                                <tr>
-                                    <th>Loan Amount</th>
-                                    <td>&#8377;5,00,000</td>
-                                </tr>
-                                <tr>
-                                    <th>EMI Structure</th>
-                                    <td>&#8377;10,500/month</td>
-                                </tr>
-                                <tr>
-                                    <th>Loan Type</th>
-                                    <td>Monthly</td>
-                                </tr>
-                                <tr>
-                                    <th>Tenure</th>
-                                    <td>5 years</td>
-                                </tr>
-                                <tr>
-                                    <th>Interest Rate</th>
-                                    <td>7.5% per annum</td>
-                                </tr>
-                            </table>
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Generated Sanction Letters</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr. No</th>
+                                                <th>Loan Acc No</th>
+                                                <th>Name</th>
+                                                <th>Sanctioned Amount</th>
+                                                <th>Date</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="sanctionLettersTable">
+                                            <!-- Sample row, will be dynamic in actual implementation -->
+                                            <tr>
+                                                <td>1</td>
+                                                <td>LA001</td>
+                                                <td>Vishal Patil</td>
+                                                <td>₹5,00,000</td>
+                                                <td>10/01/2025</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-info view-letter">View</button>
+                                                    <button class="btn btn-sm btn-primary download-letter">Download</button>
+                                                    <button class="btn btn-sm btn-success send-letter">Send</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="button-container">
-                        <button id="download" class="btn btn-primary">Download</button>
-                        <button id="whatsApp" class="btn btn-success">WhatsApp</button>
+                    
+                        <!-- Loan Sanction Letter Preview Modal -->
+                        <div class="modal fade" id="letterPreviewModal" tabindex="-1">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Loan Sanction Letter</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="loanSanction">
+                                            <div class="center-content">
+                                                <h1>Loan Sanction Letter</h1>
+                                                <table>
+                                                    <!-- ... existing table content ... -->
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" id="downloadPreview">Download</button>
+                                        <button type="button" class="btn btn-success" id="whatsAppPreview">WhatsApp</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Download Section End -->

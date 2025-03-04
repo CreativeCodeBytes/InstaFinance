@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let charts = {};
     let penaltyRules = [];
     let loanApplications = [];
+    
 
     function loadLoanApplications() {
         return JSON.parse(localStorage.getItem('loanApplications')) || [];
