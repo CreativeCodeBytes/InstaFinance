@@ -13,11 +13,146 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.notification {
+    position: relative;
+    cursor: pointer;
+    margin-right: 15px;
+}
+.notification i {
+    font-size: 22px;
+}
+/* .badge-noti {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
+  } */
+.dropdown-menu {
+    width: 250px;
+}
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.dropdown-menu ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+.dropdown-menu ul li:hover {
+    background: #f2f2f2;
+}
 .logo {
     max-width: 100%;
     height: auto;
     margin-bottom: 10px;
 }
+
+
+/* 🔵 Dropdown Styling */
+.dropdown-menu {
+    width: 280px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px 0;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    display: none; /* Hide by default */
+    z-index: 100;
+    border: 2px solid #007bff;
+}
+
+/* Show dropdown when active */
+.show {
+    display: block;
+}
+
+/* 📜 List Item Styling */
+.dropdown-menu li {
+    list-style: none;
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 🟦 Add Notification Icons */
+.dropdown-menu li::before {
+    content: "\f0f3"; /* Bell icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #007bff;
+}
+
+/* Last Item Border Remove */
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+/* ✨ Hover Effect */
+.dropdown-menu li:hover {
+    background: #007bff;
+    color: white;
+    transform: scale(1.02);
+}
+
+/* 🔴 Badge for Notification Count */
+.badge-noti {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
+}
+
+/* 🔔 Notification Bell Icon */
+.notification {
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.notification:hover {
+    transform: scale(1.1);
+}
+
+.notification i {
+    font-size: 24px;
+    color: #007bff;
+    transition: color 0.3s ease-in-out;
+}
+
+/* 🔵 Notification Bell Hover Effect */
+.notification:hover i {
+    color: #0056b3;
+}
+
+.dropdown-menu li:hover::before {
+    color: white;
+}
+
+
+
+
 
 .sidebar {
     width: 250px;
@@ -193,48 +328,75 @@ canvas {
     }
 }
 /* Styles for Download Content */
-#downloadContent {
-    max-width: 800px;
-    margin: 0 auto;
+#loanSaction {
     padding: 20px;
 }
 
-#loanSanction {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+
+#loanSanction .card {
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#loanSanction h1 {
-    text-align: center;
+#loanSanction .card-title {
     color: #2c3e50;
-    margin-bottom: 20px;
-}
-
-#loanSanction table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-#loanSanction th, #loanSanction td {
-    padding: 10px;
-    border: 1px solid #ddd;
-}
-
-#loanSanction th {
-    background-color: #f8f9fa;
     font-weight: bold;
-    text-align: left;
 }
 
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+
+
+#loanDetailsTable {
+    width: 100%;
 }
 
-.button-container .btn {
-    min-width: 120px;
+#loanDetailsTable th {
+    background-color: #f8f9fa;
+    font-weight: 600;
 }
+
+.loan-actions .btn {
+    margin-right: 5px;
+}
+
+.loan-view-btn {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.loan-approve-btn {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.loan-send-btn {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.loan-view-btn:hover {
+    background-color: #2980b9;
+}
+
+.loan-approve-btn:hover {
+    background-color: #218838;
+}
+
+.loan-send-btn:hover {
+    background-color: #c82333;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

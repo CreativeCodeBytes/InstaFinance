@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insta Finance Employee Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="EmpDashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-logo"> 
+                <a href="EmpDashboard.html">   
+                <img src="Images/Logo.png" alt="Insta Finance Logo" class="logo"></a>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>Employee Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="form">
+                        <i class="fas fa-file-alt"></i> Form
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="penalty">
+                        <i class="fa-solid fa-circle-info"></i> Penalty
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="notification">
+                        <i class="fa-regular fa-bell"></i> Reminder 
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="download">
+                        <i class="fa-solid fa-file-arrow-down"></i> Sanction Letter
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-section="totalEnquiries">
+                        <i class="fas fa-chart-bar"></i> Total Enquiries
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                             <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <button class="btn btn-outline-primary me-2" id="homeBtn">
+                                    <i class="fas fa-home"></i> Home
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-outline-danger" id="logoutBtn" >
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="main-content">
+                <div id="dashboardContent">
+                    <h1 class="mb-4 text-center">Loan Application Form</h1>
+                    <div class="loan-application-form">
+                        <!-- Imported Loan Form from LoanForm.html -->
+                        <form id="loanForm" onsubmit="return submitLoanApplication(event)">
+                            <h2>Personal Details</h2>
+                            <div class="form-group">
+                                <label for="name">Full Name <span class="required-symbol"> *</span></label>
+                                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                            </div>
+                            <div class="form-group form-group-dob">
+                                <label for="dob">Date of Birth <span class="required-symbol"> *</span></label>
+                                <input type="date" id="dob" name="dob">
+                                <small id="dob-error" class="error-message">You must be at least 18 years old.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender <span class="required-symbol"> *</span></label>
+                                <select id="gender" name="gender" required>
+                                    <option value="select gender">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Contact Number <span class="required-symbol">*</span></label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your contact number" required maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required-symbol">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ownership">Address Ownership <span class="required-symbol">*</span></label>
+                                <select id="ownership" name="ownership" required>
+                                    <option value="" disabled selected>Select ownership</option>
+                                    <option value="owned">Owned</option>
+                                    <option value="rented">Rented</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address <span class="required-symbol">*</span></label>
+                                <textarea id="address" name="address" rows="4" placeholder="Enter your address" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="pan">Pan Number <span class="required-symbol">*</span></label>
+                                <input type="text" id="pan" name="pan" placeholder="Enter your Pan number" maxlength="10" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="aadhar">Aadhar Number <span class="required-symbol">*</span></label>
+                                <input type="text" id="aadhar" name="aadhar" placeholder="Enter your Aadhar number" maxlength="12" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State <span class="required-symbol">*</span></label>
+                                <select id="state" name="state" class="dropdown" required>
+                                    <option value="" disabled selected>Select State</option>
+                                    <option value="maharashtra">Maharashtra</option>
+                                </select>
+                            </div>
+                            <!-- District Dropdown -->
+                            <div class="form-group">
+                                <label for="district">Select District<span class="required-symbol"> *</span></label>
+                                <select id="district" onchange="populateTowns()">
+                                    <option value="" disabled selected>--Select District--</option>
+                                    <option value="Ahmednagar">Ahmednagar</option>
+                                    <option value="Akola">Akola</option>
+                                    <option value="Amravati">Amravati</option>
+                                    <option value="SambhajiNagar">SambhajiNagar</option>
+                                    <option value="Beed">Beed</option>
+                                    <option value="Bhandara">Bhandara</option>
+                                    <option value="Buldhana">Buldhana</option>
+                                    <option value="Chandrapur">Chandrapur</option>
+                                    <option value="Dhule">Dhule</option>
+                                    <option value="Gadchiroli">Gadchiroli</option>
+                                    <option value="Gondia">Gondia</option>
+                                    <option value="Hingoli">Hingoli</option>
+                                    <option value="Jalgaon">Jalgaon</option>
+                                    <option value="Jalna">Jalna</option>
+                                    <option value="Kolhapur">Kolhapur</option>
+                                    <option value="Latur">Latur</option>
+                                    <option value="Mumbai City">Mumbai City</option>
+                                    <option value="Mumbai Suburban">Mumbai Suburban</option>
+                                    <option value="Nagpur">Nagpur</option>
+                                    <option value="Nanded">Nanded</option>
+                                    <option value="Nandurbar">Nandurbar</option>
+                                    <option value="Nashik">Nashik</option>
+                                    <option value="Osmanabad">Osmanabad</option>
+                                    <option value="Palghar">Palghar</option>
+                                    <option value="Parbhani">Parbhani</option>
+                                    <option value="Pune">Pune</option>
+                                    <option value="Raigad">Raigad</option>
+                                    <option value="Ratnagiri">Ratnagiri</option>
+                                    <option value="Sangli">Sangli</option>
+                                    <option value="Satara">Satara</option>
+                                    <option value="Sindhudurg">Sindhudurg</option>
+                                    <option value="Solapur">Solapur</option>
+                                    <option value="Thane">Thane</option>
+                                    <option value="Wardha">Wardha</option>
+                                    <option value="Washim">Washim</option>
+                                    <option value="Yavatmal">Yavatmal</option>
+                                </select>
+                            </div>
+
+                            <!-- Town Dropdown -->
+                            <div class="form-group">
+                                <label for="town">Select Taluka<span class="required-symbol"> *</span></label>
+                                <select id="town">
+                                    <option value="" disabled selected>--Select Taluka--</option>
+                                </select>
+                            </div>
+
+                            <h2>Loan Details</h2>
+                            <div class="form-group">
+                                <label for="loanAmount">Loan Amount (₹)<span class="required-symbol"> *</span></label>
+                                <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter loan amount" required>
+                                <span id="loanAmountError" class="error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="tenure">Loan Tenure (in months)<span class="required-symbol"> *</span></label>
+                                <input type="number" id="tenure" name="tenure" placeholder="Enter loan tenure" required>
+                                <span id="tenureError" class="error"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="emiSchedule">Preferred EMI Schedule<span class="required-symbol"> *</span></label>
+                                <select id="emiSchedule" name="emiSchedule" required>
+                                    <option value="" disabled selected>Select EMI Schedule</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                </select>
+                                <span id="emiScheduleError" class="error"></span>
+                            </div>
+
+                            <h2>Guarantor</h2>
+                            <div class="form-group">
+                                <label for="refName1">Guarantor Name<span class="required-symbol"> *</span></label>
+                                <input type="text" id="refName1" name="refName1" placeholder="Enter name">
+                            </div>
+                            <div class="form-group">
+                                <label for="refRelationship1">Relationship<span class="required-symbol"> *</span></label>
+                                <input type="text" id="refRelationship1" name="refRelationship1" placeholder="Enter relationship">
+                            </div>
+                            <div class="form-group">
+                                <label for="refContact1">Contact Number<span class="required-symbol"> *</span></label>
+                                <input type="tel" id="refContact1" name="refContact1" placeholder="Enter contact number" maxlength="10">
+                            </div>
+                            <div class="form-group">
+                                <label for="gownership">Address Ownership <span class="required-symbol"> *</span></label>
+                                <select id="gownership" name="gownership" required>
+                                    <option value="" disabled selected>Select ownership</option>
+                                    <option value="owned">Owned</option>
+                                    <option value="rented">Rented</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="guarantorAddress">Address <span class="required-symbol"> *</span></label>
+                                <textarea id="guarantorAddress" name="guarantorAddress" rows="4" placeholder="Enter guarantor address" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="guarantorPan">Pan Number <span class="required-symbol"> *</span></label>
+                                <input type="text" id="guarantorPan" name="guarantorPan" placeholder="Enter guarantor Pan number" maxlength="10" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guarantorAadhar">Aadhar Number <span class="required-symbol"> *</span></label>
+                                <input type="text" id="guarantorAadhar" name="guarantorAadhar" placeholder="Enter guarantor Aadhar number" maxlength="12" required>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label for="photoUpload">Upload Photo <span class="required-symbol"> *</span></label>
+                                <input type="file" id="photoUpload" name="photoUpload" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="aadharUpload">Upload Aadhar <span class="required-symbol"> *</span></label>
+                                <input type="file" id="aadharUpload" name="aadharUpload" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="panUpload">Upload Pan <span class="required-symbol"> *</span></label>
+                                <input type="file" id="panUpload" name="panUpload" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
+                                <input type="file" id="gincomeProof" name="gincomeProof" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
+                                <input type="file" id="gresidentialProof" name="gresidentialProof" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            
+                            <h2>Documents Upload</h2>
+                            <div class="form-group">
+                                <label for="photoUpload2">Upload Photo <span class="required-symbol"> *</span></label>
+                                <input type="file" id="photoUpload2" name="photoUpload2" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="aadharUpload2">Upload Aadhar <span class="required-symbol"> *</span></label>
+                                <input type="file" id="aadharUpload2" name="aadharUpload2" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="panUpload2">Upload Pan <span class="required-symbol"> *</span></label>
+                                <input type="file" id="panUpload2" name="panUpload2" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
+                                <input type="file" id="incomeProof" name="incomeProof" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
+                                <input type="file" id="residentialProof" name="residentialProof" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            
+                            <!-- Signature Upload Section -->
+                            <div class="form-group">
+                                <label for="signature">Upload Signature <span class="required-symbol"> *</span></label>
+                                <input type="text" id="signature" name="signature" class="dropdown" readonly placeholder="Click to Sign" onclick="openSignatureBox()" required>
+                            </div>
+
+                            <!-- Signature Pad Modal -->
+                            <div id="signature-modal" class="modal">
+                                <div class="modal-content">
+                                    <h3>Signature</h3>
+                                    <div class="color-options">
+                                        <button type="button" data-color="black" onclick="changePenColor('black')"></button>
+                                        <button type="button" data-color="red" onclick="changePenColor('red')"></button>
+                                        <button type="button" data-color="green" onclick="changePenColor('green')"></button>
+                                        <button type="button" data-color="blue" onclick="changePenColor('blue')"></button>
+                                    </div>
+                                    <canvas id="signature-pad" width="300" height="150"></canvas>
+                                    <div class="file-input-container">
+                                        <label for="signature-file">Add Signature from File</label>
+                                        <input type="file" id="signature-file" accept="image/*" onchange="loadSignatureFromFile(event)">
+                                    </div>
+                                    <div class="modal-actions">
+                                        <button type="button" onclick="saveSignature()">Save</button>
+                                        <button type="button" onclick="cancelSignature()">Cancel</button>
+                                        <button type="button" onclick="resetSignature()">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>Declaration and Consent</h2>
+                            <div class="form-group declare">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="agree" name="agree" required>
+                                    <label for="agree">I Agree</label>
+                                </div>
+                                <p>I hereby declare that the information provided is accurate to the best of my knowledge.</p>
+                                <p>I consent to the processing of my personal and financial information for loan evaluation purposes.</p>  
+                            </div>
+                            <button type="submit" class="submit-btn">Submit Application</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="formContent" style="display: none;">
+                    <h2 class="mb-4">EMI Form</h2>
+                    <div class="btn-group mb-3" role="group" aria-label="Time period">
+                        <button type="button" class="btn btn-primary active" data-period="daily">Daily</button>
+                        <button type="button" class="btn btn-primary" data-period="weekly">Weekly</button>
+                        <button type="button" class="btn btn-primary" data-period="monthly">Monthly</button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <!-- <th>Loan Acc. No.</th> -->
+                                    <th>Name</th>
+                                    <th>Amount Sanctioned</th>
+                                    <th>Date of Sanctioned Amount</th>
+                                    <th>Repayment Amount</th>
+                                    <th>Repayment Date</th>
+                                    <th>Interest</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Table rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="penaltyContent" style="display: none;">
+                    <h2 class="mb-4">Penalty Rules Management</h2>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title">Add/Edit Penalty Rule</h3>
+                            <form id="penaltyRuleForm">
+                                <div class="mb-3">
+                                    <label for="custName" class="form-label">Customer Name</label>
+                                    <input type="text" class="form-control" id="custName" name="custName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="ruleName" class="form-label">Rule Name</label>
+                                    <input type="text" class="form-control" id="ruleName" name="ruleName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loanType" class="form-label">Loan Type</label>
+                                    <select class="form-select" id="loanType" name="loanType" required>
+                                        <option value="">Select Loan Type</option>
+                                        <option value="personal">Personal Loan</option>
+                                        <option value="business">Business Loan</option>
+                                        <option value="mortgage">Mortgage</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="gracePeriod" class="form-label">Grace Period (days)</label>
+                                    <input type="number" class="form-control" id="gracePeriod" name="gracePeriod" min="0" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="penaltyRate" class="form-label">Penalty Rate (%)</label>
+                                    <input type="number" class="form-control" id="penaltyRate" name="penaltyRate" min="0" step="0.01" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="maxPenalty" class="form-label">Max Penalty Amount (₹)</label>
+                                    <input type="number" class="form-control" id="maxPenalty" name="maxPenalty" min="0" step="1" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary" id="submitBtn">Save Rule</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Existing Penalty Rules</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="penaltyRulesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <th>Rule Name</th>
+                                            <th>Loan Type</th>
+                                            <th>Grace Period</th>
+                                            <th>Penalty Rate</th>
+                                            <th>Max Penalty</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Table rows will be dynamically added here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="totalEnquiriesContent" style="display: none;">
+                    <h2 class="mb-4">Total Enquiries</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Loan Amount</th>
+                                    <th>Loan Tenure</th>
+                                    <th>EMI Schedule</th>
+                                    <th>Address</th>
+                                    <th>State</th>
+                                    <th>District</th>
+                                    <th>Town</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="enquiriesTableBody">
+                                <!-- Table rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="downloadContent" style="display: none;">
+                    <!-- Loan Sanction Letter Form -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3>Generate Loan Sanction Letter</h3>
+                            <form id="sanctionLetterForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="loanAccNo" class="form-label">Loan Account Number</label>
+                                        <input type="text" class="form-control" id="loanAccNo" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="applicantName" class="form-label">Applicant Name</label>
+                                        <input type="text" class="form-control" id="applicantName" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="sanctionDate" class="form-label">Sanction Date</label>
+                                        <input type="date" class="form-control" id="sanctionDate" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="loanAmount" class="form-label">Loan Amount</label>
+                                        <input type="number" class="form-control" id="loanAmount" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="emiAmount" class="form-label">EMI Amount</label>
+                                        <input type="number" class="form-control" id="emiAmount" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="loanType" class="form-label">Loan Type</label>
+                                        <select class="form-select" id="loanType" required>
+                                            <option value="Personal">Daily</option>
+                                            <option value="Business">Weekly</option>
+                                            <option value="Home">Monthly</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="tenure" class="form-label">Tenure (Years)</label>
+                                        <input type="number" class="form-control" id="tenure" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="interestRate" class="form-label">Interest Rate (%)</label>
+                                        <input type="number" class="form-control" id="interestRate" step="0.1" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Generate Sanction Letter</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Loan Sanction Letters Table -->
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>Generated Sanction Letters</h3>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr. No</th>
+                                            <th>Loan Acc No</th>
+                                            <th>Name</th>
+                                            <th>Sanctioned Amount</th>
+                                            <th>Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sanctionLettersTable">
+                                        <!-- Table rows will be dynamically added here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loan Sanction Letter Preview Modal -->
+                    <div class="modal fade" id="letterPreviewModal" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Loan Sanction Letter</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="loanSanction">
+                                        <div class="center-content">
+                                            <h1>Loan Sanction Letter</h1>
+                                            <table>
+                                                <!-- Table content will be dynamically added here -->
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="downloadPreview">Download</button>
+                                    <button type="button" class="btn btn-success" id="whatsAppPreview">WhatsApp</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="notificationContent" style="display: none;">
+                    <h2>Reminder</h2>
+                    <form id="notificationForm">
+                        <div class="mb-3">
+                            <label for="employeeName" class="form-label">Name of Employee</label>
+                            <input type="text" class="form-control" id="employeeName" placeholder="Enter Employee Name">
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="templateType" class="form-label">Select Type</label>
+                            <select class="form-select" id="templateType">
+                                <option value="paymentReminder">EMI Reminder</option>
+                                <option value="paymentAcknowledgment">Successful Payment Acknowledgment</option>
+                                <option value="penaltyAlert">Penalty Alert</option>
+                            </select>
+                        </div>
+                    
+                        <div class="mb-3">
+                            <label for="templateContent" class="form-label">Message</label>
+                            <textarea class="form-control" id="templateContent" rows="4"></textarea>
+                        </div>
+                    
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button type="button" class="btn btn-primary" id="saveTemplateBtn">Save And Send</button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="EmpDashboard.js"></script>
+</body>
+</html>
+
