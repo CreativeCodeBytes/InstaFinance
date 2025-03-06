@@ -5,152 +5,465 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loan Application Form</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="LoanForm.css">
+  <style>
+    /* Resetting some basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body and General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      padding-top: 80px; /* Add padding to account for fixed header */
+    }
+
+    /* Header */
+    header {
+      background: #1a202c;
+      padding: 15px 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      height: 50px;
+      margin-right: 15px;
+    }
+
+    header .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    header .nav-links li {
+      margin-left: 20px;
+    }
+
+    header .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    header .nav-links a:hover {
+      color: #fbbf24;
+    }
+
+    /* Loan Application Form */
+    .loan-application {
+      background: url('topview.jpg') no-repeat center center/cover;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: calc(100vh - 80px); /* Adjust for header height */
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 800px;
+      margin-top: 20px; /* Add some top margin */
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #004D40;
+      font-size: 32px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      padding: 5px;
+      color: #00796B;
+      text-align: center;
+      background-color: #f0f0f0;
+      border: 2px solid #ccc;
+      font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #949090;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    textarea {
+      height: 80px;
+      resize: vertical;
+    }
+
+    .error {
+      color: #D32F2F;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .dropdown {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #949090;
+      border-radius: 4px;
+    }
+
+    .submit-btn {
+      background-color: #004D40;
+      color: #fff;
+      padding: 12px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #00796B;
+    }
+
+    .info-box {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .required-symbol {
+      color: #D32F2F;
+    }
+
+    /* Custom alert box styles */
+    .custom-alert {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #004D40;
+      color: white;
+      border-radius: 5px;
+      font-size: 16px;
+      text-align: center;
+      z-index: 9999;
+    }
+
+    .custom-alert button {
+      margin-top: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .custom-alert button:hover {
+      background-color: #555;
+    }
+
+    /* Footer */
+    footer {
+      background: #1a202c;
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    footer .company-details {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    footer .contact-info {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    footer .contact-info a {
+      color: #fff;
+      text-decoration: none;
+      margin: 5px 0;
+      display: inline-block;
+      transition: color 0.3s ease;
+    }
+
+    footer .contact-info a:hover {
+      color: #fbbf24;
+    }
+
+    footer .social-icons {
+      margin-top: 15px;
+    }
+
+    footer .social-icons a {
+      margin: 0 10px;
+      color: #fff;
+      font-size: 24px;
+      transition: color 0.3s ease;
+    }
+
+    footer .social-icons a:hover {
+      color: #fbbf24;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 120px; /* Increase padding for mobile to account for stacked header */
+      }
+
+      header {
+        flex-direction: column;
+        padding: 10px;
+        height: auto;
+      }
+
+      header .logo {
+        margin-bottom: 10px;
+      }
+
+      header .logo img {
+        height: 40px;
+      }
+
+      header .nav-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      header .nav-links li {
+        margin: 5px 0;
+      }
+
+      .loan-application {
+        padding: 20px 10px;
+      }
+
+      .form-container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .submit-btn {
+        font-size: 16px;
+      }
+
+      footer .contact-info a {
+        display: block;
+        margin: 10px 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <a href="index.html">
-        <img src="Images/Logo.png" alt="Logo"></a>
+      <img src="Logo.png" alt="Insta Finance Logo">
+      <a href="index.html"></a>
     </div>
-  
-    <!-- Navbar Links -->
     <ul class="nav-links">
-      <li><a href="LoanForm.html">Apply for Loan</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="Login.html">Admin Login</a></li>
+      <li><a href="AdminLogin.html">Admin Login</a></li>
     </ul>
-  
-    <!-- Mobile Menu Button -->
-    <div class="menu-bar" id="menu-bar">
-      <i class="fas fa-bars"></i>
-    </div>
   </header>
 
   <section class="loan-application">
     <div class="form-container">
-      <h2 id="top-title">INSTA FINANCE</h2>
       <h1>Loan Application Form</h1>
-      <form id="loanForm" onsubmit="return submitLoanApplication(event)">
+      <form id="loanForm" onsubmit="return validateForm()">
         <h2>Personal Details</h2>
         <div class="form-group">
-          <label for="name">Full Name <span class="required-symbol"> *</span></label>
+          <label for="name">Full Name <span class="required-symbol">*</span></label>
           <input type="text" id="name" name="name" placeholder="Enter your full name" required>
         </div>
-        <div class="form-group form-group-dob">
-          <label for="dob">Date of Birth <span class="required-symbol"> *</span></label>
-          <input type="date" id="dob" name="dob">
-          <small id="dob-error" class="error-message">You must be at least 18 years old.</small>
+        <div class="form-group">
+          <label for="dob">Date of Birth <span class="required-symbol">*</span></label>
+          <input type="date" id="dob" name="dob" required>
         </div>
         <div class="form-group">
-          <label for="gender">Gender <span class="required-symbol"> *</span></label>
-          <select id="gender" name="gender"  required>
-            <option value="select gender">Select Gender</option>
+          <label for="gender">Gender <span class="required-symbol">*</span></label>
+          <select id="gender" name="gender" required>
+            <option value="">Select Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="phone">Contact Number <span class="required-symbol">*</span></label>
-          <input type="tel" id="phone" name="phone" placeholder="Enter your contact number" required maxlength="10">
+          <label for="phone">Phone Number <span class="required-symbol">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
         </div>
         <div class="form-group">
           <label for="email">Email Address <span class="required-symbol">*</span></label>
           <input type="email" id="email" name="email" placeholder="Enter your email address" required>
         </div>
         <div class="form-group">
-          <label for="ownership">Address Ownership <span class="required-symbol">*</span></label>
-          <select id="ownership" name="ownership" required>
-            <option value="" disabled selected>Select ownership</option>
-            <option value="owned">Owned</option>
-            <option value="rented">Rented</option>
-          </select>
-        </div>
-        <div class="form-group">
           <label for="address">Address <span class="required-symbol">*</span></label>
           <textarea id="address" name="address" rows="4" placeholder="Enter your address" required></textarea>
         </div>
         <div class="form-group">
-          <label for="pan">Pan Number <span class="required-symbol">*</span></label>
-          <input type="text" id="pan" name="pan" placeholder="Enter your Pan number" maxlength="10" required>
-        </div>
-        <div class="form-group">
-          <label for="aadhar">Aadhar Number <span class="required-symbol">*</span></label>
-          <input type="text" id="aadhar" name="aadhar" placeholder="Enter your Aadhar number" maxlength="12" required>
+          <label for="pan">PAN Number <span class="required-symbol">*</span></label>
+          <input type="text" id="pan" name="pan" placeholder="Enter your PAN number" maxlength="10" required>
         </div>
         <div class="form-group">
           <label for="state">State <span class="required-symbol">*</span></label>
           <select id="state" name="state" class="dropdown" required>
             <option value="" disabled selected>Select State</option>
+            <option value="andhra-pradesh">Andhra Pradesh</option>
+            <option value="arunachal-pradesh">Arunachal Pradesh</option>
+            <option value="assam">Assam</option>
+            <option value="bihar">Bihar</option>
+            <option value="chhattisgarh">Chhattisgarh</option>
+            <option value="goa">Goa</option>
+            <option value="gujarat">Gujarat</option>
+            <option value="haryana">Haryana</option>
+            <option value="himachal-pradesh">Himachal Pradesh</option>
+            <option value="jharkhand">Jharkhand</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="kerala">Kerala</option>
+            <option value="madhya-pradesh">Madhya Pradesh</option>
             <option value="maharashtra">Maharashtra</option>
+            <option value="manipur">Manipur</option>
+            <option value="meghalaya">Meghalaya</option>
+            <option value="mizoram">Mizoram</option>
+            <option value="nagaland">Nagaland</option>
+            <option value="odisha">Odisha</option>
+            <option value="punjab">Punjab</option>
+            <option value="rajasthan">Rajasthan</option>
+            <option value="sikkim">Sikkim</option>
+            <option value="tamil-nadu">Tamil Nadu</option>
+            <option value="telangana">Telangana</option>
+            <option value="tripura">Tripura</option>
+            <option value="uttar-pradesh">Uttar Pradesh</option>
+            <option value="uttarakhand">Uttarakhand</option>
+            <option value="west-bengal">West Bengal</option>
           </select>
         </div>
-        <!-- District Dropdown -->
         <div class="form-group">
-          <label for="district">Select District<span class="required-symbol"> *</span></label>
-          <select id="district" onchange="populateTowns()">
-              <option value="" disabled selected>--Select District--</option>
-              <option value="Ahmednagar">Ahmednagar</option>
-              <option value="Akola">Akola</option>
-              <option value="Amravati">Amravati</option>
-              <option value="Aurangabad">Aurangabad</option>
-              <option value="Beed">Beed</option>
-              <option value="Bhandara">Bhandara</option>
-              <option value="Buldhana">Buldhana</option>
-              <option value="Chandrapur">Chandrapur</option>
-              <option value="Dhule">Dhule</option>
-              <option value="Gadchiroli">Gadchiroli</option>
-              <option value="Gondia">Gondia</option>
-              <option value="Hingoli">Hingoli</option>
-              <option value="Jalgaon">Jalgaon</option>
-              <option value="Jalna">Jalna</option>
-              <option value="Kolhapur">Kolhapur</option>
-              <option value="Latur">Latur</option>
-              <option value="Mumbai City">Mumbai City</option>
-              <option value="Mumbai Suburban">Mumbai Suburban</option>
-              <option value="Nagpur">Nagpur</option>
-              <option value="Nanded">Nanded</option>
-              <option value="Nandurbar">Nandurbar</option>
-              <option value="Nashik">Nashik</option>
-              <option value="Osmanabad">Osmanabad</option>
-              <option value="Palghar">Palghar</option>
-              <option value="Parbhani">Parbhani</option>
-              <option value="Pune">Pune</option>
-              <option value="Raigad">Raigad</option>
-              <option value="Ratnagiri">Ratnagiri</option>
-              <option value="Sangli">Sangli</option>
-              <option value="Satara">Satara</option>
-              <option value="Sindhudurg">Sindhudurg</option>
-              <option value="Solapur">Solapur</option>
-              <option value="Thane">Thane</option>
-              <option value="Wardha">Wardha</option>
-              <option value="Washim">Washim</option>
-              <option value="Yavatmal">Yavatmal</option>
-          </select>
-        </div>
-
-        <!-- Town Dropdown -->
-        <div class="form-group">
-          <label for="town">Select Taluka<span class="required-symbol"> *</span></label>
-          <select id="town">
-              <option value="" disabled selected>--Select Taluka--</option>
+          <label for="nationality">Nationality <span class="required-symbol">*</span></label>
+          <select id="nationality" name="nationality" class="dropdown" required>
+            <option value="" disabled selected>Select Nationality</option>
+            <option value="afghan">Afghan</option>
+            <option value="algerian">Algerian</option>
+            <option value="american">American</option>
+            <option value="argentine">Argentine</option>
+            <option value="australian">Australian</option>
+            <option value="austrian">Austrian</option>
+            <option value="bangladeshi">Bangladeshi</option>
+            <option value="belgian">Belgian</option>
+            <option value="brazilian">Brazilian</option>
+            <option value="british">British</option>
+            <option value="canadian">Canadian</option>
+            <option value="chilean">Chilean</option>
+            <option value="chinese">Chinese</option>
+            <option value="colombian">Colombian</option>
+            <option value="cuban">Cuban</option>
+            <option value="cypriot">Cypriot</option>
+            <option value="danish">Danish</option>
+            <option value="egyptian">Egyptian</option>
+            <option value="french">French</option>
+            <option value="german">German</option>
+            <option value="greek">Greek</option>
+            <option value="indian">Indian</option>
+            <option value="indonesian">Indonesian</option>
+            <option value="iranian">Iranian</option>
+            <option value="iraqi">Iraqi</option>
+            <option value="irish">Irish</option>
+            <option value="israeli">Israeli</option>
+            <option value="italian">Italian</option>
+            <option value="japanese">Japanese</option>
+            <option value="kenyan">Kenyan</option>
+            <option value="kuwaiti">Kuwaiti</option>
+            <option value="lebanese">Lebanese</option>
+            <option value="malaysian">Malaysian</option>
+            <option value="mexican">Mexican</option>
+            <option value="moroccan">Moroccan</option>
+            <option value="nigerian">Nigerian</option>
+            <option value="pakistani">Pakistani</option>
+            <option value="peruvian">Peruvian</option>
+            <option value="philippine">Philippine</option>
+            <option value="polish">Polish</option>
+            <option value="portuguese">Portuguese</option>
+            <option value="qatari">Qatari</option>
+            <option value="romanian">Romanian</option>
+            <option value="russian">Russian</option>
+            <option value="saudi-arabian">Saudi Arabian</option>
+            <option value="south-african">South African</option>
+            <option value="spanish">Spanish</option>
+            <option value="sri-lankan">Sri Lankan</option>
+            <option value="swedish">Swedish</option>
+            <option value="swiss">Swiss</option>
+            <option value="turkish">Turkish</option>
+            <option value="ukrainian">Ukrainian</option>
+            <option value="vietnamese">Vietnamese</option>
+            <option value="yemeni">Yemeni</option>
           </select>
         </div>
 
         <h2>Loan Details</h2>
         <div class="form-group">
-          <label for="loanAmount">Loan Amount (₹)<span class="required-symbol"> *</span></label>
+          <label for="loanAmount">Loan Amount (₹)<span class="required-symbol">*</span></label>
           <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter loan amount" required>
           <span id="loanAmountError" class="error"></span>
         </div>
         <div class="form-group">
-          <label for="tenure">Loan Tenure (in months)<span class="required-symbol"> *</span></label>
+          <label for="tenure">Loan Tenure (in months)<span class="required-symbol">*</span></label>
           <input type="number" id="tenure" name="tenure" placeholder="Enter loan tenure" required>
           <span id="tenureError" class="error"></span>
         </div>
         <div class="form-group">
-          <label for="emiSchedule">Preferred EMI Schedule<span class="required-symbol"> *</span></label>
+          <label for="emiSchedule">Preferred EMI Schedule<span class="required-symbol">*</span></label>
           <select id="emiSchedule" name="emiSchedule" required>
             <option value="" disabled selected>Select EMI Schedule</option>
             <option value="daily">Daily</option>
@@ -160,155 +473,134 @@
           <span id="emiScheduleError" class="error"></span>
         </div>
 
-        <h2>Guarantor</h2>
+        <h2>References</h2>
         <div class="form-group">
-          <label for="refName1">Guarantor Name<span class="required-symbol"> *</span></label>
+          <label for="refName1">Reference Name</label>
           <input type="text" id="refName1" name="refName1" placeholder="Enter name">
         </div>
         <div class="form-group">
-          <label for="refRelationship1">Relationship<span class="required-symbol"> *</span></label>
+          <label for="refRelationship1">Relationship</label>
           <input type="text" id="refRelationship1" name="refRelationship1" placeholder="Enter relationship">
         </div>
         <div class="form-group">
-          <label for="refContact1">Contact Number<span class="required-symbol"> *</span></label>
-          <input type="tel" id="refContact1" name="refContact1" placeholder="Enter contact number" maxlength="10">
-        </div>
-        <div class="form-group">
-          <label for="ownership">Address Ownership <span class="required-symbol"> *</span></label>
-          <select id="gownership" name="gownership" required>
-            <option value="" disabled selected>Select ownership</option>
-            <option value="owned">Owned</option>
-            <option value="rented">Rented</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="guarantorAddress">Address <span class="required-symbol"> *</span></label>
-          <textarea id="guarantorAddress" name="guarantorAddress" rows="4" placeholder="Enter guarantor address" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="guarantorPan">Pan Number <span class="required-symbol"> *</span></label>
-          <input type="text" id="guarantorPan" name="guarantorPan" placeholder="Enter guarantor Pan number" maxlength="10" required>
-        </div>
-        <div class="form-group">
-          <label for="guarantorAadhar">Aadhar Number <span class="required-symbol"> *</span></label>
-          <input type="text" id="guarantorAadhar" name="guarantorAadhar" placeholder="Enter guarantor Aadhar number" maxlength="12" required>
-        </div>
-    
-        <div class="form-group">
-          <label for="photoUpload">Upload Photo <span class="required-symbol"> *</span></label>
-          <input type="file" id="photoUpload" name="photoUpload" accept=".png, .jpg, .jpeg" required>
-        </div>
-        <div class="form-group">
-          <label for="aadharUpload">Upload Aadhar <span class="required-symbol"> *</span></label>
-          <input type="file" id="aadharUpload" name="aadharUpload" accept=".png, .jpg, .jpeg" required>
-        </div>
-        <div class="form-group">
-          <label for="panUpload">Upload Pan <span class="required-symbol"> *</span></label>
-          <input type="file" id="panUpload" name="panUpload" accept=".png, .jpg, .jpeg" required>
-        </div>
-        <div class="form-group">
-          <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
-          <input type="file" id="gincomeProof" name="gincomeProof" accept=".png, .jpg, .jpeg" required>
-        </div>
-        <div class="form-group">
-          <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
-          <input type="file" id="gresidentialProof" name="gresidentialProof" accept=".png, .jpg, .jpeg" required>
-        </div>
-        
-        <h2>Documents Upload</h2>
-        <div class="form-group">
-          <label for="photoUpload2">Upload Photo <span class="required-symbol"> *</span></label>
-          <input type="file" id="photoUpload2" name="photoUpload2" accept=".png, .jpg, .jpeg" required>
-        </div>
-        <div class="form-group">
-          <label for="aadharUpload2">Upload Aadhar <span class="required-symbol"> *</span></label>
-          <input type="file" id="aadharUpload2" name="aadharUpload2" accept=".png, .jpg, .jpeg" required>
-        </div>
-        <div class="form-group">
-          <label for="panUpload2">Upload Pan <span class="required-symbol"> *</span></label>
-          <input type="file" id="panUpload2" name="panUpload2" accept=".png, .jpg, .jpeg" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
-          <input type="file" id="incomeProof" name="incomeProof" accept=".png, .jpg, .jpeg" required>
-        </div>
-        <div class="form-group">
-          <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
-          <input type="file" id="residentialProof" name="residentialProof" accept=".png, .jpg, .jpeg" required>
-        </div>
-        <!-- Signature Upload Section -->
-        <div class="form-group">
-          <label for="signature">Upload Signature <span class="required-symbol"> *</span></label>
-          <input type="text" id="signature" name="signature" class="dropdown" readonly placeholder="Click to Sign" onclick="openSignatureBox()" required>
+          <label for="refContact1">Contact Number</label>
+          <input type="tel" id="refContact1" name="refContact1" placeholder="Enter contact number">
         </div>
 
-        <!-- Signature Pad Modal -->
-        <div id="signature-modal" class="modal">
-          <div class="modal-content">
-            <h3>Signature</h3>
-            <div class="color-options">
-              <button type="button" data-color="black" onclick="changePenColor('black')"></button>
-              <button type="button" data-color="red" onclick="changePenColor('red')"></button>
-              <button type="button" data-color="green" onclick="changePenColor('green')"></button>
-              <button type="button" data-color="blue" onclick="changePenColor('blue')"></button>
-            </div>
-            <canvas id="signature-pad" width="300" height="150"></canvas>
-            <div class="file-input-container">
-              <label for="signature-file">Add Signature from File</label>
-              <input type="file" id="signature-file" accept="image/*" onchange="loadSignatureFromFile(event)">
-            </div>
-            <div class="modal-actions">
-              <button type="button" onclick="saveSignature()">Save</button>
-              <button type="button" onclick="cancelSignature()">Cancel</button>
-              <button type="button" onclick="resetSignature()">Reset</button>
-            </div>
-          </div>
+        <h2>Documents Upload</h2>
+        <div class="form-group">
+          <label for="idProof">Upload ID Proof <span class="required-symbol">*</span></label>
+          <input type="file" id="idProof" name="idProof" required>
+        </div>
+        <div class="form-group">
+          <label for="incomeProof">Upload Income Proof <span class="required-symbol">*</span></label>
+          <input type="file" id="incomeProof" name="incomeProof" required>
         </div>
 
         <h2>Declaration and Consent</h2>
-        <div class="form-group declare">
+        <div class="form-group">
+          <p>I hereby declare that the information provided is accurate to the best of my knowledge.</p>
+          <p>I consent to the processing of my personal and financial information for loan evaluation purposes.</p>
           <div class="checkbox-group">
             <input type="checkbox" id="agree" name="agree" required>
             <label for="agree">I Agree</label>
           </div>
-          <p>I hereby declare that the information provided is accurate to the best of my knowledge.</p>
-          <p>I consent to the processing of my personal and financial information for loan evaluation purposes.</p>  
         </div>
         <button type="submit" class="submit-btn">Submit Application</button>
-        <br>
-        <br>
-        <button type="button" onclick="window.print()" class="print-btn">Print Application</button>
       </form>
     </div>
   </section>
 
   <footer>
-    <div class="footer-container">
-      <div class="company-details">
-        <h3>Cybromatech Technology Private Limited</h3>
-        <p>Smart solutions for all your loan management needs.</p>
-      </div>
-      <div class="contact-info">
-        <h4>Contact Us</h4>
-        <p>Marisoft IT Park, Kalyani Nagar,<br>Pune, Maharashtra, 411014</p>
-        <p>Phone: <a href="tel:+919422295192">+91 94222 95192</a>, <a href="tel:+919730972384">+91 97309 72384</a></p>
-        <p>Email: <a href="/cdn-cgi/l/email-protection#dcbfa5beaeb3b1bda8b9bfb4acaaa8b0a8b8f2b5b2bab39cbbb1bdb5b0f2bfb3b1"><span class="__cf_email__" data-cfemail="0c6f756e7e63616d78696f647c7a786078682265626a634c6b616d6560226f6361">[email&#160;protected]</span></a></p>
-      </div>
-      <div class="social-icons">
-        <h4>Follow Us</h4>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
+    <div class="company-details">
+      <p><strong>Cybromatech Technologies</strong></p>
+      <p>Smart solutions for all your loan management needs.</p>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Cybromatech Technology Pvt. Ltd. All Rights Reserved.</p>
+    <div class="contact-info">
+      <a href="mailto:info@instafinance.com">info@instafinance.com</a>
+      <a href="tel:+919876543210">+91 98765 43210</a>
     </div>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>&copy; 2025 Insta Finance. All Rights Reserved.</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-  <script src="LoanForm.js"></script>
+  <script>
+    document.getElementById('loanForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        dob: document.getElementById('dob').value,
+        gender: document.getElementById('gender').value,
+        address: document.getElementById('address').value,
+        pan: document.getElementById('pan').value,
+        state: document.getElementById('state').value,
+        nationality: document.getElementById('nationality').value,
+        loanAmount: document.getElementById('loanAmount').value,
+        tenure: document.getElementById('tenure').value,
+        emiSchedule: document.getElementById('emiSchedule').value
+      };
+
+      // Store the form data in localStorage
+      let loanApplications = JSON.parse(localStorage.getItem('loanApplications')) || [];
+      loanApplications.push(formData);
+      localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
+
+      showAlert("Your loan application has been successfully submitted!");
+      this.reset();
+    });
+
+    function showAlert(message) {
+      const alertDiv = document.createElement('div');
+      alertDiv.className = 'custom-alert';
+      alertDiv.innerHTML = `
+        <p>${message}</p>
+        <button onclick="this.parentElement.style.display='none'">Close</button>
+      `;
+      document.body.appendChild(alertDiv);
+    }
+
+    function validateForm() {
+      let valid = true;
+
+      // Clear previous error messages
+      clearErrors();
+
+      // Validate Loan Amount
+      const loanAmount = document.getElementById('loanAmount').value;
+      if (loanAmount < 10000) {
+        document.getElementById('loanAmountError').innerText = "Loan amount must be at least ₹10,000.";
+        valid = false;
+      }
+
+      // Validate Loan Tenure
+      const tenure = document.getElementById('tenure').value;
+      if (tenure < 6 || tenure > 240) {
+        document.getElementById('tenureError').innerText = "Loan tenure should be between 6 months and 240 months.";
+        valid = false;
+      }
+
+      // Validate EMI Schedule
+      const emiSchedule = document.getElementById('emiSchedule').value;
+      if (!emiSchedule) {
+        document.getElementById('emiScheduleError').innerText = "Please select a preferred EMI schedule.";
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    function clearErrors() {
+      const errorElements = document.querySelectorAll('.error');
+      errorElements.forEach(element => {
+        element.innerText = '';
+      });
+    }
+  </script>
 </body>
 </html>
 

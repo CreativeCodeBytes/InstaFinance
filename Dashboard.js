@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let charts = {};
     let penaltyRules = [];
     let loanApplications = [];
-    
 
     function loadLoanApplications() {
         return JSON.parse(localStorage.getItem('loanApplications')) || [];
@@ -346,10 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateEnquiriesTable() {
-        const enquiriesTableBody = document.getElementById('enquiriesTableBody');
         enquiriesTableBody.innerHTML = '';
-        let loanApplications = JSON.parse(localStorage.getItem('loanApplications')) || [];
-    
         loanApplications.forEach((application, index) => {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -360,311 +356,52 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td>${application.tenure} months</td>
                 <td>${application.emiSchedule}</td>
                 <td>${application.address}</td>
+                <td>${application.nationality}</td>
                 <td>${application.state}</td>
-                <td>${application.district}</td>
-                <td>${application.town}</td>
-                
-                
-                
-                <td>${application.status}</td>
-                
-                <td>
-                    <button class="btn btn-sm btn-primary view-application" data-index="${index}">View</button>
-                    <button class="btn btn-sm btn-danger delete-application" data-index="${index}">Delete</button>
-                    <button class="btn btn-sm btn-success approve-application" data-index="${index}">Approve</button>
-                </td>
+                <td>${application.pan}</td>
+                <td><button class="btn btn-sm btn-primary view-application" data-index="${index}">View</button></td>
+                <td><button class="btn btn-sm btn-danger delete-application" data-index="${index}">Delete</button></td>
             `;
             enquiriesTableBody.appendChild(row);
         });
-    
-        // Add event listeners to buttons
+        
+
+        // Add event listeners to view buttons
         document.querySelectorAll('.view-application').forEach(btn => {
             btn.addEventListener('click', viewApplication);
         });
         document.querySelectorAll('.delete-application').forEach(btn => {
             btn.addEventListener('click', deleteApplication);
         });
-        document.querySelectorAll('.approve-application').forEach(btn => {
-            btn.addEventListener('click', approveApplication);
-        });
     }
-
-    // function viewApplication(e) {
-    //     const index = e.target.dataset.index;
-    //     const application = JSON.parse(localStorage.getItem('loanApplications'))[index];
-        
-    //     const modalContent = `
-    //         <div class="modal fade" id="applicationModal" tabindex="-1" aria-hidden="true">
-    //             <div class="modal-dialog modal-lg">
-    //                 <div class="modal-content">
-    //                     <div class="modal-header">
-    //                         <h5 class="modal-title">Application Details</h5>
-    //                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    //                     </div>
-    //                     <div class="modal-body">
-    //                         <div class="row">
-    //                             <div class="col-md-6">
-    //                                 <p><strong>Name:</strong> ${application.name}</p>
-    //                                 <p><strong>Email:</strong> ${application.email}</p>
-    //                                 <p><strong>Phone:</strong> ${application.phone}</p>
-    //                                 <p><strong>Date of Birth:</strong> ${application.dob}</p>
-    //                                 <p><strong>Gender:</strong> ${application.gender}</p>
-    //                                 <p><strong>Address:</strong> ${application.address}</p>
-    //                                 <p><strong>PAN:</strong> ${application.pan}</p>
-    //                                 <p><strong>Aadhar:</strong> ${application.aadhar}</p>
-    //                             </div>
-    //                             <div class="col-md-6">
-    //                                 <p><strong>State:</strong> ${application.state}</p>
-    //                                 <p><strong>District:</strong> ${application.district}</p>
-    //                                 <p><strong>Town:</strong> ${application.town}</p>
-    //                                 <p><strong>Loan Amount:</strong> ₹${application.loanAmount}</p>
-    //                                 <p><strong>Loan Tenure:</strong> ${application.tenure} months</p>
-    //                                 <p><strong>EMI Schedule:</strong> ${application.emiSchedule}</p>
-    //                                 <p><strong>Status:</strong> ${application.status}</p>
-    //                             </div>
-    //                         </div>
-    //                         <div class="row mt-3">
-    //                             <div class="col-md-4">
-    //                                 <h6>Photo</h6>
-    //                                 <img src="${application.photoUpload}" alt="Photo" class="img-fluid">
-    //                             </div>
-    //                             <div class="col-md-4">
-    //                                 <h6>Aadhar</h6>
-    //                                 <img src="${application.aadharUpload}" alt="Aadhar" class="img-fluid">
-    //                             </div>
-    //                             <div class="col-md-4">
-    //                                 <h6>PAN</h6>
-    //                                 <img src="${application.panUpload}" alt="PAN" class="img-fluid">
-    //                             </div>
-    //                         </div>
-    //                         <h5 style="text-center"> Guarentor Details </h5>
-    //                         <div class="row">
-    //                             <div class="col-md-6">
-    //                                 <p><strong>Guarantor Name:</strong> ${application.refName1}</p>
-    //                                 <p><strong>Guarantor Contact:</strong> ${application.refContact1}</p>
-    //                                 <p><strong>Guarantor Address:</strong> ${application.guarantorAddress}</p>
-    //                                 <p><strong>Guarantor Aadhar:</strong> ${application.guarantorAadhar}</p>
-    //                                 <p><strong>Guarantor PAN:</strong> ${application.guarantorguarantorPan}</p>
-    //                             </div>
-    //                         <div class="row mt-3">
-    //                             <div class="col-md-4">
-    //                                 <h6>Photo</h6>
-    //                                 <img src="${application.photoUpload2}" alt="Photo" class="img-fluid">
-    //                             </div>
-    //                             <div class="col-md-4">
-    //                                 <h6>Aadhar</h6>
-    //                                 <img src="${application.aadharUpload2}" alt="Aadhar" class="img-fluid">
-    //                             </div>
-    //                             <div class="col-md-4">
-    //                                 <h6>PAN</h6>
-    //                                 <img src="${application.panUpload2}" alt="PAN" class="img-fluid">
-    //                             </div>
-    //                             <div class="col-md-4">
-    //                                 <h6>Income Proof</h6>
-    //                                 <img src="${application.incomeProof}" alt="PAN" class="img-fluid">
-    //                             </div>
-    //                             <div class="col-md-4">
-    //                                 <h6>Residential Proof Proof</h6>
-    //                                 <img src="${application.residentialProof}" alt="PAN" class="img-fluid">
-    //                             </div>
-    //                             <h5> Applicant Signature </h5>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     `;
-
-    //     document.body.insertAdjacentHTML('beforeend', modalContent);
-    //     const modal = new bootstrap.Modal(document.getElementById('applicationModal'));
-    //     modal.show();
-
-    //     document.getElementById('applicationModal').addEventListener('hidden.bs.modal', function () {
-    //         this.remove();
-    //     });
-    // }
-
-
-    // just
 
     function viewApplication(e) {
-        const index = e.target.dataset.index
-        const application = JSON.parse(localStorage.getItem("loanApplications"))[index]
-    
-        const modalContent = `
-            <div class="modal fade" id="applicationModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content shadow-lg">
-                        <div class="modal-header bg-primary text-white">
-                            <h5 class="modal-title">Application Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row g-3">
-                                    <!-- Personal Details -->
-                                    <div class="col-md-6">
-                                        <h6 class="text-primary">Personal Details</h6>
-                                        <p><strong>Name:</strong> ${application.name}</p>
-                                        <p><strong>Email:</strong> ${application.email}</p>
-                                        <p><strong>Phone:</strong> ${application.phone}</p>
-                                        <p><strong>Date of Birth:</strong> ${application.dob}</p>
-                                        <p><strong>Gender:</strong> ${application.gender}</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h6 class="text-primary">Address & Documents</h6>
-                                        <p><strong>Address Ownership:</strong> ${application.ownership}</p>
-                                        <p><strong>Address:</strong> ${application.address}</p>
-                                        <p><strong>PAN:</strong> ${application.pan}</p>
-                                        <p><strong>Aadhar:</strong> ${application.aadhar}</p>
-                                    </div>
-                                    
-                                    <!-- Loan Details -->
-                                    <div class="col-md-12">
-                                        <h6 class="text-success">Loan Information</h6>
-                                        <p><strong>Loan Amount:</strong> ₹${application.loanAmount}</p>
-                                        <p><strong>Loan Tenure:</strong> ${application.tenure} months</p>
-                                        <p><strong>EMI Schedule:</strong> ${application.emiSchedule}</p>
-                                        <p><strong>Status:</strong> <span class="badge bg-${application.status === "Approved" ? "success" : "danger"}">${application.status}</span></p>
-                                    </div>
-        
-                                    <!-- Guarantor Details -->
-                                    <div class="col-md-12">
-                                        <h4 class="text-warning text-center">Guarantor Details</h4>
-                                        <p><strong>Guarantor Name:</strong> ${application.refName1}</p>
-                                        <p><strong>Contact:</strong> ${application.refContact1}</p>
-                                        <p><strong>Address Ownership:</strong> ${application.gownership}</p>
-                                        <p><strong>Address:</strong> ${application.guarantorAddress}</p>
-                                        <p><strong>PAN:</strong> ${application.guarantorPan}</p>
-                                        <p><strong>Aadhar:</strong> ${application.guarantorAadhar}</p>
-                                    </div>
-        
-                                    <!-- Uploaded Documents -->
-                                    <div class="col-md-12">
-                                        <h4 class="text-info text-center">Uploaded Documents</h4>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <h6>Photo</h6>
-                                                <img src="${application.photoUpload}" alt="Photo" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <h6>Aadhar</h6>
-                                                <img src="${application.aadharUpload}" alt="Aadhar" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <h6>PAN</h6>
-                                                <img src="${application.panUpload}" alt="PAN" class="img-fluid">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <h6>Income Proof</h6>
-                                                <img src="${application.incomeProof}" alt="Income Proof" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6>Residential Proof</h6>
-                                                <img src="${application.residentialProof}" alt="Residential Proof" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-    
-                                    <!-- Guarantor Documents -->
-                                    <div class="col-md-12 mt-4">
-                                        <h4 class="text-info text-center">Guarantor Documents</h4>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <h6>Photo</h6>
-                                                <img src="${application.photoUpload2}" alt="Guarantor Photo" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <h6>Aadhar</h6>
-                                                <img src="${application.aadharUpload2}" alt="Guarantor Aadhar" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <h6>PAN</h6>
-                                                <img src="${application.panUpload2}" alt="Guarantor PAN" class="img-fluid">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <h6>Income Proof</h6>
-                                                <img src="${application.gincomeProof}" alt="Guarantor Income Proof" class="img-fluid">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <h6>Residential Proof</h6>
-                                                <img src="${application.gresidentialProof}" alt="Guarantor Residential Proof" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
-    
-        document.body.insertAdjacentHTML("beforeend", modalContent)
-        const modal = new bootstrap.Modal(document.getElementById("applicationModal"))
-        modal.show()
-    
-        document.getElementById("applicationModal").addEventListener("hidden.bs.modal", function () {
-          this.remove()
-        })
-      }
-    
-    // Function to create clickable image section
-    function generateImageSection(title, imgSrc) {
-        return imgSrc ? `
-            <div class="col-md-4">
-                <h6>${title}</h6>
-                <img src="${imgSrc}" alt="${title}" class="img-thumbnail" onclick="showImage('${imgSrc}')">
-            </div>
-        ` : '';
+        const index = e.target.dataset.index;
+        const application = loanApplications[index];
+        alert(`
+            Name: ${application.name}
+            Email: ${application.email}
+            Phone: ${application.phone}
+            Date of Birth: ${application.dob}
+            Gender: ${application.gender}
+            Address: ${application.address}
+            PAN: ${application.pan}
+            State: ${application.state}
+            Nationality: ${application.nationality}
+            Loan Amount: ₹${application.loanAmount}
+            Loan Tenure: ${application.tenure} months
+            EMI Schedule: ${application.emiSchedule}
+        `);
     }
-    
-    // Function to display images in full screen
-    function showImage(src) {
-        const imageModal = document.createElement('div');
-        imageModal.innerHTML = `
-            <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body text-center">
-                            <img src="${src}" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(imageModal);
-        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-        modal.show();
-    
-        document.getElementById('imageModal').addEventListener('hidden.bs.modal', function () {
-            this.remove();
-        });
-    }
-    // just 
 
     function deleteApplication(e) {
         const index = e.target.dataset.index;
         if (confirm('Are you sure you want to delete this application?')) {
-            let loanApplications = JSON.parse(localStorage.getItem('loanApplications'));
             loanApplications.splice(index, 1);
-            localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
             updateEnquiriesTable();
-        }
-    }
-
-    function approveApplication(e) {
-        const index = e.target.dataset.index;
-        if (confirm('Are you sure you want to approve this application?')) {
-            let loanApplications = JSON.parse(localStorage.getItem('loanApplications'));
-            loanApplications[index].status = 'Approved';
+            // Save updated loanApplications to localStorage
             localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
-            updateEnquiriesTable();
+            showNotification('Application deleted successfully!', 'success');
         }
     }
 
