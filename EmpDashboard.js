@@ -663,9 +663,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Make the populateTowns function available globally
   window.populateTowns = populateTowns;
 
-  // Signature Pad Functions
-  const canvas = document.getElementById("signature-pad");
-  if (canvas) {
+    // Signature
+    const canvas = document.getElementById("signature-pad");
     const ctx = canvas.getContext("2d");
     let drawing = false;
     let penColor = "black"; // Default pen color
@@ -676,21 +675,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Resize canvas on load and resize
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+    window.onload = resizeCanvas;
+    window.onresize = resizeCanvas;
 
     // Drawing with mouse and touch
     function getEventPosition(e) {
       const rect = canvas.getBoundingClientRect();
       return {
         x: (e.touches ? e.touches[0].clientX : e.clientX) - rect.left,
-        y: (e.touches ? e.touches[0].clientY : e.clientY) - rect.top,
+        y: (e.touches ? e.touches[0].clientY : e.clientY) - rect.top
       };
     }
 
-    canvas.addEventListener("mousedown", (e) =>
-      startDrawing(getEventPosition(e))
-    );
+    canvas.addEventListener("mousedown", (e) => startDrawing(getEventPosition(e)));
     canvas.addEventListener("mousemove", (e) => draw(getEventPosition(e)));
     canvas.addEventListener("mouseup", stopDrawing);
 
@@ -721,45 +718,80 @@ document.addEventListener("DOMContentLoaded", () => {
       drawing = false;
     }
 
-    // Make signature functions available globally
-    window.changePenColor = (color) => {
+    function changePenColor(color) {
       penColor = color;
-    };
+    }
 
-    window.resetSignature = () => {
+    function resetSignature() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-    };
+    }
 
-    window.openSignatureBox = () => {
+    function openSignatureBox() {
       document.getElementById("signature-modal").style.display = "flex";
-    };
+    }
 
-    window.cancelSignature = () => {
+    function cancelSignature() {
       document.getElementById("signature-modal").style.display = "none";
-    };
+    }
 
-    window.saveSignature = () => {
+    function saveSignature() {
       const imageData = canvas.toDataURL("image/png");
       document.getElementById("signature").value = "Signature saved";
       document.getElementById("signature-modal").style.display = "none";
-    };
+    }
 
-    window.loadSignatureFromFile = (event) => {
+    function loadSignatureFromFile(event) {
       const file = event.target.files[0];
       if (file && file.type.startsWith("image/")) {
         const reader = new FileReader();
         reader.onload = (e) => {
           const img = new Image();
-          img.onload = () =>
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
           img.src = e.target.result;
         };
         reader.readAsDataURL(file);
       } else {
         alert("Please select a valid image file.");
       }
-    };
+    }
+
+    //new script to show an error for empty sign 
+    
+    // Select elements
+const signatureInput = document.getElementById("signature");
+const signatureError = document.createElement("div");
+signatureError.style.color = "red";
+signatureError.style.fontSize = "0.85rem";
+signatureError.style.marginTop = "5px";
+signatureError.style.display = "none";
+signatureInput.parentElement.appendChild(signatureError);
+
+// Check if the canvas is empty
+function isCanvasBlank(ctx) {
+  const pixelBuffer = new Uint32Array(ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer);
+  return !pixelBuffer.some(color => color !== 0);
+}
+
+// Save signature function with validation
+function saveSignature() {
+  if (isCanvasBlank(ctx)) {
+      signatureError.textContent = "Error: Please draw a signature before saving.";
+      signatureError.style.display = "block";
+      return;
   }
+  signatureInput.value = "Signature saved";
+  signatureError.style.display = "none"; // Hide error if valid
+  document.getElementById("signature-modal").style.display = "none";
+}
+
+// Hide error when user starts drawing
+canvas.addEventListener("mousedown", () => {
+  signatureError.style.display = "none";
+});
+canvas.addEventListener("touchstart", () => {
+  signatureError.style.display = "none";
+});
+
 
   // Loan Application Form Submission
   function submitLoanApplication(event) {
@@ -1540,3 +1572,389 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+   // Script for input validation 
+   document.addEventListener('DOMContentLoaded', () => {
+    const inputs = {
+      fullName: {
+        element: document.getElementById('name'),
+        regex: /^[A-Za-z\s]+$/,
+        errorMessage: "Invalid full name. Only alphabets and spaces are allowed.",
+        successMessage: "Valid full name.",
+      },
+      phone: {
+        element: document.getElementById('phone'),
+        regex: /^[6-9]\d{9}$/,
+        errorMessage: "Invalid phone number. Must be 10 digits starting with 6-9.",
+        successMessage: "Valid phone number.",
+      },
+      email: {
+        element: document.getElementById('email'),
+        regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        errorMessage: "Invalid email address format.",
+        successMessage: "Valid email address.",
+      },
+      pan: {
+        element: document.getElementById('pan'),
+        regex: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
+        errorMessage: "Invalid PAN format. Must be in format: ABCDE1234F.",
+        successMessage: "Valid PAN number.",
+      },
+      aadhar: {
+        element: document.getElementById('aadhar'),
+        regex: /^\d{12}$/,
+        errorMessage: "Invalid Aadhaar number. Must be exactly 12 digits.",
+        successMessage: "Valid Aadhaar number.",
+      },
+      guarantorPhone: {
+        element: document.getElementById('refContact1'),
+        regex: /^[6-9]\d{9}$/,
+        errorMessage: "Invalid guarantor phone number. Must be 10 digits starting with 6-9.",
+        successMessage: "Valid phone number.",
+      },
+      guarantorPan: {
+        element: document.getElementById('guarantorPan'),
+        regex: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
+        errorMessage: "Invalid guarantor PAN format. Must be in format: ABCDE1234F.",
+        successMessage: "Valid PAN number.",
+      },
+      guarantorAadhar: {
+        element: document.getElementById('guarantorAadhar'),
+        regex: /^\d{12}$/,
+        errorMessage: "Invalid guarantor Aadhaar number. Must be exactly 12 digits.",
+        successMessage: "Valid Aadhaar number.",
+      },
+      guarantorName: {
+        element: document.getElementById('refName1'),
+        regex: /^[A-Za-z\s]+$/,
+        errorMessage: "Invalid guarantor name. Only alphabets and spaces are allowed.",
+        successMessage: "Valid guarantor name.",
+      },
+      guarantorRelationship: {
+        element: document.getElementById('refRelationship1'),
+        regex: /^[A-Za-z\s]+$/,
+        errorMessage: "Invalid relationship. Only alphabets and spaces are allowed.",
+        successMessage: "Valid relationship.",
+      },
+    };
+
+    Object.values(inputs).forEach(({ element, regex, errorMessage, successMessage }) => {
+      const messageElement = document.createElement('div');
+      messageElement.className = 'validation-message';
+      element.parentElement.appendChild(messageElement);
+
+      element.addEventListener('input', () => {
+        if (!regex.test(element.value)) {
+          messageElement.style.color = 'red';
+          messageElement.textContent = errorMessage;
+        } else {
+          messageElement.style.color = 'green';
+          messageElement.textContent = successMessage;
+        }
+      });
+    });
+  });
+
+  // Signature
+  const canvas = document.getElementById("signature-pad");
+  const ctx = canvas.getContext("2d");
+  let drawing = false;
+  let penColor = "black"; // Default pen color
+
+  function resizeCanvas() {
+    canvas.width = Math.min(window.innerWidth * 0.9, 450);
+    canvas.height = Math.min(window.innerHeight * 0.3, 200);
+  }
+
+  // Resize canvas on load and resize
+  window.onload = resizeCanvas;
+  window.onresize = resizeCanvas;
+
+  // Drawing with mouse and touch
+  function getEventPosition(e) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: (e.touches ? e.touches[0].clientX : e.clientX) - rect.left,
+      y: (e.touches ? e.touches[0].clientY : e.clientY) - rect.top
+    };
+  }
+
+  canvas.addEventListener("mousedown", (e) => startDrawing(getEventPosition(e)));
+  canvas.addEventListener("mousemove", (e) => draw(getEventPosition(e)));
+  canvas.addEventListener("mouseup", stopDrawing);
+
+  canvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    startDrawing(getEventPosition(e));
+  });
+  canvas.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+    draw(getEventPosition(e));
+  });
+  canvas.addEventListener("touchend", stopDrawing);
+
+  function startDrawing({ x, y }) {
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
+
+  function draw({ x, y }) {
+    if (!drawing) return;
+    ctx.strokeStyle = penColor;
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  }
+
+  function stopDrawing() {
+    drawing = false;
+  }
+
+  function changePenColor(color) {
+    penColor = color;
+  }
+
+  function resetSignature() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function openSignatureBox() {
+    document.getElementById("signature-modal").style.display = "flex";
+  }
+
+  function cancelSignature() {
+    document.getElementById("signature-modal").style.display = "none";
+  }
+
+  function saveSignature() {
+    const imageData = canvas.toDataURL("image/png");
+    document.getElementById("signature").value = "Signature saved";
+    document.getElementById("signature-modal").style.display = "none";
+  }
+
+  function loadSignatureFromFile(event) {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      alert("Please select a valid image file.");
+    }
+  }
+
+  //new script to show an error for empty sign 
+  
+  // Select elements
+const signatureInput = document.getElementById("signature");
+const signatureError = document.createElement("div");
+signatureError.style.color = "red";
+signatureError.style.fontSize = "0.85rem";
+signatureError.style.marginTop = "5px";
+signatureError.style.display = "none";
+signatureInput.parentElement.appendChild(signatureError);
+
+// Check if the canvas is empty
+function isCanvasBlank(ctx) {
+const pixelBuffer = new Uint32Array(ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer);
+return !pixelBuffer.some(color => color !== 0);
+}
+
+// Save signature function with validation
+function saveSignature() {
+if (isCanvasBlank(ctx)) {
+    signatureError.textContent = "Error: Please draw a signature before saving.";
+    signatureError.style.display = "block";
+    return;
+}
+signatureInput.value = "Signature saved";
+signatureError.style.display = "none"; // Hide error if valid
+document.getElementById("signature-modal").style.display = "none";
+}
+
+// Hide error when user starts drawing
+canvas.addEventListener("mousedown", () => {
+signatureError.style.display = "none";
+});
+canvas.addEventListener("touchstart", () => {
+signatureError.style.display = "none";
+});
+
+
+  //script for loan amount
+document.getElementById("loanAmount").addEventListener("input", function () {
+const loanAmount = this.value;
+const errorElement = document.getElementById("loanAmountError");
+
+if (loanAmount < 10000 || loanAmount > 1000000) {
+  errorElement.textContent = "Loan amount must be between ₹10,000 and ₹10,00,000.";
+} else {
+  errorElement.textContent = ""; // Clear error message
+}
+});
+
+  document.getElementById("dob").addEventListener("change", function () {
+    const dob = new Date(this.value);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+    const dayDiff = today.getDate() - dob.getDate();
+
+    // Adjust age calculation if birthday has not occurred yet this year
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
+
+    const errorElement = document.getElementById("dob-error");
+
+    // Show or hide error based on strict age validation (must be over 18)
+    if (age <= 18) {
+      errorElement.style.display = "block"; // Show error message
+      this.setCustomValidity("You must be older than 18 years."); // Prevent form submission
+    } else {
+      errorElement.style.display = "none"; // Hide error message
+      this.setCustomValidity(""); // Allow form submission
+    }
+  });
+
+  function submitLoanApplication(event) {
+    event.preventDefault();
+    
+    // Collect form data
+    const formData = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      dob: document.getElementById('dob').value,
+      gender: document.getElementById('gender').value,
+      ownership: document.getElementById('ownership').value,
+      address: document.getElementById('address').value,
+      pan: document.getElementById('pan').value,
+      aadhar: document.getElementById('aadhar').value,
+      state: document.getElementById('state').value,
+      district: document.getElementById('district').value,
+      town: document.getElementById('town').value,
+      loanAmount: document.getElementById('loanAmount').value,
+      tenure: document.getElementById('tenure').value,
+      emiSchedule: document.getElementById('emiSchedule').value,
+      refName1: document.getElementById('refName1').value,
+      refRelationship1: document.getElementById('refRelationship1').value,
+      refContact1: document.getElementById('refContact1').value,
+      gownership: document.getElementById('gownership').value,
+      guarantorAddress: document.getElementById('guarantorAddress').value,
+      guarantorPan: document.getElementById('guarantorPan').value,
+      guarantorAadhar: document.getElementById('guarantorAadhar').value,
+      status: 'Pending',
+    };
+
+    // Get existing applications or initialize an empty array
+    let loanApplications = JSON.parse(localStorage.getItem('loanApplications')) || [];
+    
+    // Add the new application
+    loanApplications.push(formData);
+    
+    // Save updated applications back to localStorage
+    localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
+
+    alert("Your loan application has been successfully submitted!");
+    document.getElementById('loanForm').reset();
+  }
+
+  function validateForm() {
+    let valid = true;
+
+    // Clear previous error messages
+    clearErrors();
+
+    // Validate Loan Amount
+    const loanAmount = document.getElementById('loanAmount').value;
+    if (loanAmount < 10000) {
+      document.getElementById('loanAmountError').innerText = "Loan amount must be at least ₹10,000.";
+      valid = false;
+    }
+
+    // Validate Loan Tenure
+    const tenure = document.getElementById('tenure').value;
+    if (tenure < 6 || tenure > 240) {
+      document.getElementById('tenureError').innerText = "Loan tenure should be between 6 months and 240 months.";
+      valid = false;
+    }
+
+    // Validate EMI Schedule
+    const emiSchedule = document.getElementById('emiSchedule').value;
+    if (!emiSchedule) {
+      document.getElementById('emiScheduleError').innerText = "Please select a preferred EMI schedule.";
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  function clearErrors() {
+    const errorElements = document.querySelectorAll('.error');
+    errorElements.forEach(element => {
+      element.innerText = '';
+    });
+  }
+
+  document.getElementById('loanForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (validateForm()) {
+      submitLoanApplication(e);
+    }
+  });
+
+  function showAlert(message) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'custom-alert';
+    alertDiv.innerHTML = `
+      <p>${message}</p>
+      <button onclick="this.parentElement.style.display='none'">Close</button>
+    `;
+    document.body.appendChild(alertDiv);
+  }
+
+  //just added
+   // Function to convert image to base64
+  function getBase64(file) {
+          return new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onload = () => resolve(reader.result);
+              reader.onerror = error => reject(error);
+          });
+    }
+    // Process all file inputs
+    const fileInputs = ['photoUpload', 'aadharUpload', 'panUpload', 'incomeProof', 'residentialProof', 
+                          'photoUpload2', 'aadharUpload2', 'panUpload2', 'gincomeProof', 'gresidentialProof'];
+
+
+                          
+  // Convert image inputs to Base64 and store them
+  convertImageToBase64(document.getElementById('photoUpload'), function (photoBase64) {
+      formData.photo = photoBase64;
+
+      convertImageToBase64(document.getElementById('aadharUpload'), function (aadharBase64) {
+          formData.aadhar = aadharBase64;
+
+          convertImageToBase64(document.getElementById('panUpload'), function (panBase64) {
+              formData.panCard = panBase64;  
+
+              // Get existing applications or initialize an empty array
+              let loanApplications = JSON.parse(localStorage.getItem('loanApplications')) || [];
+              
+              // Add the new application
+              loanApplications.push(formData);
+              
+              // Save updated applications back to localStorage
+              localStorage.setItem('loanApplications', JSON.stringify(loanApplications));
+
+              alert("Your loan application has been successfully submitted!");
+              document.getElementById('loanForm').reset();
+          });
+      });
+  });
+// });

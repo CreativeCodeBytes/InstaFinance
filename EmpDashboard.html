@@ -81,252 +81,259 @@
                         <form id="loanForm" onsubmit="return submitLoanApplication(event)">
                             <h2>Personal Details</h2>
                             <div class="form-group">
-                                <label for="name">Full Name <span class="required-symbol"> *</span></label>
-                                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                              <label for="name">Full Name <span class="required-symbol"> *</span></label>
+                              <input type="text" id="name" name="name" placeholder="Enter your full name" required>
                             </div>
                             <div class="form-group form-group-dob">
-                                <label for="dob">Date of Birth <span class="required-symbol"> *</span></label>
-                                <input type="date" id="dob" name="dob">
-                                <small id="dob-error" class="error-message">You must be at least 18 years old.</small>
+                              <label for="dob">Date of Birth <span class="required-symbol"> *</span></label>
+                              <input type="date" id="dob" name="dob">
+                              <small id="dob-error" class="error-message">You must be at least 18 years old.</small>
                             </div>
                             <div class="form-group">
-                                <label for="gender">Gender <span class="required-symbol"> *</span></label>
-                                <select id="gender" name="gender" required>
-                                    <option value="select gender">Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                </select>
+                              <label for="gender">Gender <span class="required-symbol"> *</span></label>
+                              <select id="gender" name="gender"  required>
+                                <option value="" disabled>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                              </select>
                             </div>
                             <div class="form-group">
-                                <label for="phone">Contact Number <span class="required-symbol">*</span></label>
-                                <input type="tel" id="phone" name="phone" placeholder="Enter your contact number" required maxlength="10">
+                              <label for="phone">Contact Number <span class="required-symbol">*</span></label>
+                              <input type="tel" id="phone" name="phone" placeholder="Enter your contact number" required maxlength="10">
                             </div>
                             <div class="form-group">
-                                <label for="email">Email Address <span class="required-symbol">*</span></label>
-                                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                              <label for="email">Email Address <span class="required-symbol">*</span></label>
+                              <input type="email" id="email" name="email" placeholder="Enter your email address" required>
                             </div>
                             <div class="form-group">
-                                <label for="ownership">Address Ownership <span class="required-symbol">*</span></label>
-                                <select id="ownership" name="ownership" required>
-                                    <option value="" disabled selected>Select ownership</option>
-                                    <option value="owned">Owned</option>
-                                    <option value="rented">Rented</option>
-                                </select>
+                              <label for="ownership">Address Ownership <span class="required-symbol">*</span></label>
+                              <select id="ownership" name="ownership" required>
+                                <option value="" disabled selected>Select ownership</option>
+                                <option value="owned">Owned</option>
+                                <option value="rented">Rented</option>
+                              </select>
                             </div>
                             <div class="form-group">
-                                <label for="address">Address <span class="required-symbol">*</span></label>
-                                <textarea id="address" name="address" rows="4" placeholder="Enter your address" required></textarea>
+                              <label for="address">Address <span class="required-symbol">*</span></label>
+                              <textarea id="address" name="address" rows="4" placeholder="Enter your address" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="pan">Pan Number <span class="required-symbol">*</span></label>
-                                <input type="text" id="pan" name="pan" placeholder="Enter your Pan number" maxlength="10" required>
+                              <label for="pan">Pan Number <span class="required-symbol">*</span></label>
+                              <input type="text" id="pan" name="pan" placeholder="Enter your Pan number" maxlength="10" required>
                             </div>
                             <div class="form-group">
-                                <label for="aadhar">Aadhar Number <span class="required-symbol">*</span></label>
-                                <input type="text" id="aadhar" name="aadhar" placeholder="Enter your Aadhar number" maxlength="12" required>
+                              <label for="aadhar">Aadhar Number <span class="required-symbol">*</span></label>
+                              <input type="text" id="aadhar" name="aadhar" placeholder="Enter your Aadhar number" maxlength="12" required>
                             </div>
                             <div class="form-group">
-                                <label for="state">State <span class="required-symbol">*</span></label>
-                                <select id="state" name="state" class="dropdown" required>
-                                    <option value="" disabled selected>Select State</option>
-                                    <option value="maharashtra">Maharashtra</option>
-                                </select>
+                              <label for="state">State <span class="required-symbol">*</span></label>
+                              <select id="state" name="state" class="dropdown" required>
+                                <option value="" disabled selected>Select State</option>
+                                <option value="maharashtra">Maharashtra</option>
+                              </select>
                             </div>
                             <!-- District Dropdown -->
                             <div class="form-group">
-                                <label for="district">Select District<span class="required-symbol"> *</span></label>
-                                <select id="district" onchange="populateTowns()">
-                                    <option value="" disabled selected>--Select District--</option>
-                                    <option value="Ahmednagar">Ahmednagar</option>
-                                    <option value="Akola">Akola</option>
-                                    <option value="Amravati">Amravati</option>
-                                    <option value="SambhajiNagar">SambhajiNagar</option>
-                                    <option value="Beed">Beed</option>
-                                    <option value="Bhandara">Bhandara</option>
-                                    <option value="Buldhana">Buldhana</option>
-                                    <option value="Chandrapur">Chandrapur</option>
-                                    <option value="Dhule">Dhule</option>
-                                    <option value="Gadchiroli">Gadchiroli</option>
-                                    <option value="Gondia">Gondia</option>
-                                    <option value="Hingoli">Hingoli</option>
-                                    <option value="Jalgaon">Jalgaon</option>
-                                    <option value="Jalna">Jalna</option>
-                                    <option value="Kolhapur">Kolhapur</option>
-                                    <option value="Latur">Latur</option>
-                                    <option value="Mumbai City">Mumbai City</option>
-                                    <option value="Mumbai Suburban">Mumbai Suburban</option>
-                                    <option value="Nagpur">Nagpur</option>
-                                    <option value="Nanded">Nanded</option>
-                                    <option value="Nandurbar">Nandurbar</option>
-                                    <option value="Nashik">Nashik</option>
-                                    <option value="Osmanabad">Osmanabad</option>
-                                    <option value="Palghar">Palghar</option>
-                                    <option value="Parbhani">Parbhani</option>
-                                    <option value="Pune">Pune</option>
-                                    <option value="Raigad">Raigad</option>
-                                    <option value="Ratnagiri">Ratnagiri</option>
-                                    <option value="Sangli">Sangli</option>
-                                    <option value="Satara">Satara</option>
-                                    <option value="Sindhudurg">Sindhudurg</option>
-                                    <option value="Solapur">Solapur</option>
-                                    <option value="Thane">Thane</option>
-                                    <option value="Wardha">Wardha</option>
-                                    <option value="Washim">Washim</option>
-                                    <option value="Yavatmal">Yavatmal</option>
-                                </select>
+                              <label for="district">Select District<span class="required-symbol"> *</span></label>
+                              <select id="district" onchange="populateTowns()">
+                                  <option value="" disabled selected>--Select District--</option>
+                                  <option value="Ahmednagar">Ahmednagar</option>
+                                  <option value="Akola">Akola</option>
+                                  <option value="Amravati">Amravati</option>
+                                  <option value="Aurangabad">Aurangabad</option>
+                                  <option value="Beed">Beed</option>
+                                  <option value="Bhandara">Bhandara</option>
+                                  <option value="Buldhana">Buldhana</option>
+                                  <option value="Chandrapur">Chandrapur</option>
+                                  <option value="Dhule">Dhule</option>
+                                  <option value="Gadchiroli">Gadchiroli</option>
+                                  <option value="Gondia">Gondia</option>
+                                  <option value="Hingoli">Hingoli</option>
+                                  <option value="Jalgaon">Jalgaon</option>
+                                  <option value="Jalna">Jalna</option>
+                                  <option value="Kolhapur">Kolhapur</option>
+                                  <option value="Latur">Latur</option>
+                                  <option value="Mumbai City">Mumbai City</option>
+                                  <option value="Mumbai Suburban">Mumbai Suburban</option>
+                                  <option value="Nagpur">Nagpur</option>
+                                  <option value="Nanded">Nanded</option>
+                                  <option value="Nandurbar">Nandurbar</option>
+                                  <option value="Nashik">Nashik</option>
+                                  <option value="Osmanabad">Osmanabad</option>
+                                  <option value="Palghar">Palghar</option>
+                                  <option value="Parbhani">Parbhani</option>
+                                  <option value="Pune">Pune</option>
+                                  <option value="Raigad">Raigad</option>
+                                  <option value="Ratnagiri">Ratnagiri</option>
+                                  <option value="Sangli">Sangli</option>
+                                  <option value="Satara">Satara</option>
+                                  <option value="Sindhudurg">Sindhudurg</option>
+                                  <option value="Solapur">Solapur</option>
+                                  <option value="Thane">Thane</option>
+                                  <option value="Wardha">Wardha</option>
+                                  <option value="Washim">Washim</option>
+                                  <option value="Yavatmal">Yavatmal</option>
+                              </select>
                             </div>
-
+                    
                             <!-- Town Dropdown -->
                             <div class="form-group">
-                                <label for="town">Select Taluka<span class="required-symbol"> *</span></label>
-                                <select id="town">
-                                    <option value="" disabled selected>--Select Taluka--</option>
-                                </select>
+                              <label for="town">Select Taluka<span class="required-symbol"> *</span></label>
+                              <select id="town">
+                                  <option value="" disabled selected>--Select Taluka--</option>
+                              </select>
                             </div>
-
+                    
                             <h2>Loan Details</h2>
                             <div class="form-group">
-                                <label for="loanAmount">Loan Amount (₹)<span class="required-symbol"> *</span></label>
-                                <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter loan amount" required>
-                                <span id="loanAmountError" class="error"></span>
+                              <label for="loanAmount">Loan Amount (₹)<span class="required-symbol"> *</span></label>
+                              <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter loan amount" required>
+                              <span id="loanAmountError" class="error"></span>
                             </div>
                             <div class="form-group">
-                                <label for="tenure">Loan Tenure (in months)<span class="required-symbol"> *</span></label>
-                                <input type="number" id="tenure" name="tenure" placeholder="Enter loan tenure" required>
-                                <span id="tenureError" class="error"></span>
+                              <label for="tenure">Loan Tenure (in months)<span class="required-symbol"> *</span></label>
+                              <input type="number" id="tenure" name="tenure" placeholder="Enter loan tenure" required>
+                              <span id="tenureError" class="error"></span>
                             </div>
                             <div class="form-group">
-                                <label for="emiSchedule">Preferred EMI Schedule<span class="required-symbol"> *</span></label>
-                                <select id="emiSchedule" name="emiSchedule" required>
-                                    <option value="" disabled selected>Select EMI Schedule</option>
-                                    <option value="daily">Daily</option>
-                                    <option value="weekly">Weekly</option>
-                                    <option value="monthly">Monthly</option>
-                                </select>
-                                <span id="emiScheduleError" class="error"></span>
+                              <label for="emiSchedule">Preferred EMI Schedule<span class="required-symbol"> *</span></label>
+                              <select id="emiSchedule" name="emiSchedule" required>
+                                <option value="" disabled selected>Select EMI Schedule</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                              </select>
+                              <span id="emiScheduleError" class="error"></span>
                             </div>
-
+                    
                             <h2>Guarantor</h2>
                             <div class="form-group">
-                                <label for="refName1">Guarantor Name<span class="required-symbol"> *</span></label>
-                                <input type="text" id="refName1" name="refName1" placeholder="Enter name">
+                              <label for="refName1">Guarantor Name<span class="required-symbol"> *</span></label>
+                              <input type="text" id="refName1" name="refName1" placeholder="Enter name">
                             </div>
                             <div class="form-group">
-                                <label for="refRelationship1">Relationship<span class="required-symbol"> *</span></label>
-                                <input type="text" id="refRelationship1" name="refRelationship1" placeholder="Enter relationship">
+                              <label for="refRelationship1">Relationship<span class="required-symbol"> *</span></label>
+                              <input type="text" id="refRelationship1" name="refRelationship1" placeholder="Enter relationship">
                             </div>
                             <div class="form-group">
-                                <label for="refContact1">Contact Number<span class="required-symbol"> *</span></label>
-                                <input type="tel" id="refContact1" name="refContact1" placeholder="Enter contact number" maxlength="10">
+                              <label for="refContact1">Contact Number<span class="required-symbol"> *</span></label>
+                              <input type="tel" id="refContact1" name="refContact1" placeholder="Enter contact number" maxlength="10">
                             </div>
                             <div class="form-group">
-                                <label for="gownership">Address Ownership <span class="required-symbol"> *</span></label>
-                                <select id="gownership" name="gownership" required>
-                                    <option value="" disabled selected>Select ownership</option>
-                                    <option value="owned">Owned</option>
-                                    <option value="rented">Rented</option>
-                                </select>
+                              <label for="ownership">Address Ownership <span class="required-symbol"> *</span></label>
+                              <select id="gownership" name="gownership" required>
+                                <option value="" disabled selected>Select ownership</option>
+                                <option value="owned">Owned</option>
+                                <option value="rented">Rented</option>
+                              </select>
                             </div>
                             <div class="form-group">
-                                <label for="guarantorAddress">Address <span class="required-symbol"> *</span></label>
-                                <textarea id="guarantorAddress" name="guarantorAddress" rows="4" placeholder="Enter guarantor address" required></textarea>
+                              <label for="guarantorAddress">Address <span class="required-symbol"> *</span></label>
+                              <textarea id="guarantorAddress" name="guarantorAddress" rows="4" placeholder="Enter guarantor address" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="guarantorPan">Pan Number <span class="required-symbol"> *</span></label>
-                                <input type="text" id="guarantorPan" name="guarantorPan" placeholder="Enter guarantor Pan number" maxlength="10" required>
+                              <label for="guarantorPan">Pan Number <span class="required-symbol"> *</span></label>
+                              <input type="text" id="guarantorPan" name="guarantorPan" placeholder="Enter guarantor Pan number" maxlength="10" required>
                             </div>
                             <div class="form-group">
-                                <label for="guarantorAadhar">Aadhar Number <span class="required-symbol"> *</span></label>
-                                <input type="text" id="guarantorAadhar" name="guarantorAadhar" placeholder="Enter guarantor Aadhar number" maxlength="12" required>
+                              <label for="guarantorAadhar">Aadhar Number <span class="required-symbol"> *</span></label>
+                              <input type="text" id="guarantorAadhar" name="guarantorAadhar" placeholder="Enter guarantor Aadhar number" maxlength="12" required>
                             </div>
-                        
+                            <div class="doc">
                             <div class="form-group">
-                                <label for="photoUpload">Upload Photo <span class="required-symbol"> *</span></label>
-                                <input type="file" id="photoUpload" name="photoUpload" accept=".png, .jpg, .jpeg" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="aadharUpload">Upload Aadhar <span class="required-symbol"> *</span></label>
-                                <input type="file" id="aadharUpload" name="aadharUpload" accept=".png, .jpg, .jpeg" required>
+                              <label for="photoUpload">Upload Photo <span class="required-symbol"> *</span></label>
+                              <input type="file" id="photoUpload" name="photoUpload" accept=".png, .jpg, .jpeg" required>
                             </div>
                             <div class="form-group">
-                                <label for="panUpload">Upload Pan <span class="required-symbol"> *</span></label>
-                                <input type="file" id="panUpload" name="panUpload" accept=".png, .jpg, .jpeg" required>
+                              <label for="aadharUpload">Upload Aadhar <span class="required-symbol"> *</span></label>
+                              <input type="file" id="aadharUpload" name="aadharUpload" accept=".png, .jpg, .jpeg" required>
                             </div>
                             <div class="form-group">
-                                <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
-                                <input type="file" id="gincomeProof" name="gincomeProof" accept=".png, .jpg, .jpeg" required>
+                              <label for="panUpload">Upload Pan <span class="required-symbol"> *</span></label>
+                              <input type="file" id="panUpload" name="panUpload" accept=".png, .jpg, .jpeg" required>
                             </div>
                             <div class="form-group">
-                                <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
-                                <input type="file" id="gresidentialProof" name="gresidentialProof" accept=".png, .jpg, .jpeg" required>
+                              <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
+                              <input type="file" id="gincomeProof" name="gincomeProof" accept=".png, .jpg, .jpeg" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
+                              <input type="file" id="gresidentialProof" name="gresidentialProof" accept=".png, .jpg, .jpeg" required>
+                            </div>
                             </div>
                             
+                            <!-- documents upload section -->
+                            <div class="doc">
                             <h2>Documents Upload</h2>
                             <div class="form-group">
-                                <label for="photoUpload2">Upload Photo <span class="required-symbol"> *</span></label>
-                                <input type="file" id="photoUpload2" name="photoUpload2" accept=".png, .jpg, .jpeg" required>
+                              <label for="photoUpload2">Upload Photo <span class="required-symbol"> *</span></label>
+                              <input type="file" id="photoUpload2" name="photoUpload2" accept=".png, .jpg, .jpeg" required>
                             </div>
                             <div class="form-group">
-                                <label for="aadharUpload2">Upload Aadhar <span class="required-symbol"> *</span></label>
-                                <input type="file" id="aadharUpload2" name="aadharUpload2" accept=".png, .jpg, .jpeg" required>
+                              <label for="aadharUpload2">Upload Aadhar <span class="required-symbol"> *</span></label>
+                              <input type="file" id="aadharUpload2" name="aadharUpload2" accept=".png, .jpg, .jpeg" required>
                             </div>
                             <div class="form-group">
-                                <label for="panUpload2">Upload Pan <span class="required-symbol"> *</span></label>
-                                <input type="file" id="panUpload2" name="panUpload2" accept=".png, .jpg, .jpeg" required>
+                              <label for="panUpload2">Upload Pan <span class="required-symbol"> *</span></label>
+                              <input type="file" id="panUpload2" name="panUpload2" accept=".png, .jpg, .jpeg" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
-                                <input type="file" id="incomeProof" name="incomeProof" accept=".png, .jpg, .jpeg" required>
+                              <label for="incomeProof">Upload Income Proof <span class="required-symbol"> *</span></label>
+                              <input type="file" id="incomeProof" name="incomeProof" accept=".png, .jpg, .jpeg" required>
                             </div>
                             <div class="form-group">
-                                <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
-                                <input type="file" id="residentialProof" name="residentialProof" accept=".png, .jpg, .jpeg" required>
+                              <label for="residentialProof">Upload Residential Proof <span class="required-symbol"> *</span></label>
+                              <input type="file" id="residentialProof" name="residentialProof" accept=".png, .jpg, .jpeg" required>
                             </div>
-                            
                             <!-- Signature Upload Section -->
                             <div class="form-group">
-                                <label for="signature">Upload Signature <span class="required-symbol"> *</span></label>
-                                <input type="text" id="signature" name="signature" class="dropdown" readonly placeholder="Click to Sign" onclick="openSignatureBox()" required>
+                              <label for="signature">Upload Signature <span class="required-symbol"> *</span></label>
+                              <input type="text" id="signature" name="signature" class="dropdown" readonly placeholder="Click to Sign" onclick="openSignatureBox()" required>
                             </div>
-
+                    
                             <!-- Signature Pad Modal -->
                             <div id="signature-modal" class="modal">
-                                <div class="modal-content">
-                                    <h3>Signature</h3>
-                                    <div class="color-options">
-                                        <button type="button" data-color="black" onclick="changePenColor('black')"></button>
-                                        <button type="button" data-color="red" onclick="changePenColor('red')"></button>
-                                        <button type="button" data-color="green" onclick="changePenColor('green')"></button>
-                                        <button type="button" data-color="blue" onclick="changePenColor('blue')"></button>
-                                    </div>
-                                    <canvas id="signature-pad" width="300" height="150"></canvas>
-                                    <div class="file-input-container">
-                                        <label for="signature-file">Add Signature from File</label>
-                                        <input type="file" id="signature-file" accept="image/*" onchange="loadSignatureFromFile(event)">
-                                    </div>
-                                    <div class="modal-actions">
-                                        <button type="button" onclick="saveSignature()">Save</button>
-                                        <button type="button" onclick="cancelSignature()">Cancel</button>
-                                        <button type="button" onclick="resetSignature()">Reset</button>
-                                    </div>
+                              <div class="modal-content">
+                                <h3>Signature</h3>
+                                <div class="color-options">
+                                  <button type="button" data-color="black" onclick="changePenColor('black')"></button>
+                                  <button type="button" data-color="red" onclick="changePenColor('red')"></button>
+                                  <button type="button" data-color="green" onclick="changePenColor('green')"></button>
+                                  <button type="button" data-color="blue" onclick="changePenColor('blue')"></button>
                                 </div>
+                                <canvas id="signature-pad" width="300" height="150"></canvas>
+                                <div class="file-input-container">
+                                  <label for="signature-file">Add Signature from File</label>
+                                  <input type="file" id="signature-file" accept="image/*" onchange="loadSignatureFromFile(event)">
+                                </div>
+                                <div class="modal-actions">
+                                  <button type="button" onclick="saveSignature()">Save</button>
+                                  <button type="button" onclick="cancelSignature()">Cancel</button>
+                                  <button type="button" onclick="resetSignature()">Reset</button>
+                                </div>
+                              </div>
                             </div>
-
+                          </div>
+                    
                             <h2>Declaration and Consent</h2>
                             <div class="form-group declare">
-                                <div class="checkbox-group">
-                                    <input type="checkbox" id="agree" name="agree" required>
-                                    <label for="agree">I Agree</label>
-                                </div>
-                                <p>I hereby declare that the information provided is accurate to the best of my knowledge.</p>
-                                <p>I consent to the processing of my personal and financial information for loan evaluation purposes.</p>  
+                              <div class="checkbox-group">
+                                <input type="checkbox" id="agree" name="agree" required>
+                                <label for="agree">I Agree</label>
+                              </div>
+                              <p>I hereby declare that the information provided is accurate to the best of my knowledge.</p>
+                              <p>I consent to the processing of my personal and financial information for loan evaluation purposes.</p>  
                             </div>
                             <button type="submit" class="submit-btn">Submit Application</button>
-                        </form>
-                    </div>
-                </div>
+                            <br>
+                            <br>
+                            <button type="button" onclick="window.print()" class="print-btn">Print Application</button>
+                          </form>
+                        </div>
+                        </div>
+                      </section>
 
                 <div id="formContent" style="display: none;">
                     <h2 class="mb-4">EMI Form</h2>

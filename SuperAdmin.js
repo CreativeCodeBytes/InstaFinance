@@ -442,7 +442,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   <td>
                       <button class="btn btn-sm btn-primary view-application" data-index="${index}">View</button>
                       <button class="btn btn-sm btn-danger delete-application" data-index="${index}">Delete</button>
-                      <button class="btn btn-sm btn-success approve-application" data-index="${index}">Payment</button>
+                      <button class="btn btn-sm btn-success payment" data-index="${index}">Payment</button>
                   </td>
               `;
       enquiriesTableBody.appendChild(row);
@@ -455,9 +455,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".delete-application").forEach((btn) => {
       btn.addEventListener("click", deleteApplication);
     });
-    // document.querySelectorAll(".approve-application").forEach((btn) => {
-    //   btn.addEventListener("click", approveApplication);
-    // });
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".payment").forEach(button => {
+          button.addEventListener("click", function () {
+              window.location.href = "payment.html"; // Redirect to payment page
+          });
+      });
+  });
   }
 
   // View Application Details
